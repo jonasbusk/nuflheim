@@ -1,38 +1,113 @@
 .App {
+  background-color: #f9f9f9;
+}
+
+header {
+  background-color: black;
+  color: white;
+  height: 70px;
+  margin-bottom: 1em;
+}
+
+header #header {
+  font-size: 22pt;
+  font-weight: bold;
+  padding-top: 16px;
+}
+
+.team-table {
+
+}
+
+.team-table-1 td:nth-child(1) {
+  width: 100px;
+  white-space: nowrap;
+}
+
+.team-table-2 td:nth-child(1) {
+  white-space: nowrap;
+}
+
+.team-table-2 td:nth-child(2) {
+  width: 55px;
+}
+
+.team-table-2 td:nth-child(3) {
   text-align: center;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+.team-table-2 td:nth-child(4) {
+  width: 100px;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+.team-table-2 td:nth-child(5) {
+  width: 105px;
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
+.team-table td input.form-control-sm {
+  height: calc(1.1em + .5rem + 2px);
+  padding: .25rem .5rem;
+  font-size: .875rem;
+  line-height: 1.5;
+  border-radius: .2rem;
+}
+
+.team-table td input.form-control-plaintext {
+  height: calc(1.1em + .5rem + 2px);
+  padding: .25rem .5rem;
+  font-size: .875rem;
+  line-height: 1.5;
+  border-radius: .2rem;
+}
+
+.player-table {
+  border-color: black;
+  line-height: normal;
+}
+
+.player-table thead tr th  {
+  border-bottom: none;
+  border-color: inherit;
+  background-color: #900;
   color: white;
+  font-weight: normal;
+  text-align: center;
 }
 
-.App-link {
-  color: #61dafb;
+.player-table tbody tr td {
+  border-color: inherit;
+  font-size: .875rem;
+  padding: .2rem .3rem;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+td.player-number {
+  background-color: #900;
+  color: white;
+  text-align: center;
+}
+
+.player-table tbody tr td.player-name {
+  padding: 0px;
+}
+
+td.player-name input.form-control-plaintext {
+  height: calc(1.1em + .5rem + 0px);
+  padding: .1rem .5rem;
+  font-size: .875rem;
+}
+
+td.player-ma, td.player-st, td.player-ag, td.player-av {
+  text-align: center;
+  width: 40px;
+}
+
+td.player-value {
+  text-align: right;
+  width: 95px;
+}
+
+footer .row .col {
+  text-align: center;
+  padding: 50px;
+  font-size: .9rem;
 }
