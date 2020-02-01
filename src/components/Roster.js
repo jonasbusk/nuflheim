@@ -1,15 +1,20 @@
 import React, {Component} from 'react';
+
 import Container from 'react-bootstrap/Container'
 import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
+import Accordion from 'react-bootstrap/Accordion'
+import Card from 'react-bootstrap/Card'
 import Table from 'react-bootstrap/Table'
 import Form from 'react-bootstrap/Form'
+
 import races from '../data'
 
 
 class Roster extends Component {
 
   state = {
+    budget: 1000000,
     name: '',
     race: races[0],
     coach: '',
@@ -30,6 +35,10 @@ class Roster extends Component {
     return tv;
   }
 
+  getTreasury = () => {
+    return this.state.budget - this.getTeamValue();
+  }
+
   formatCost = (x) => {
     return `${x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")} GP`;
   }
@@ -38,8 +47,26 @@ class Roster extends Component {
     return (
       <Container>
         <Row>
+          <Col>
+            <Accordion>
+              <Card>
+                <Accordion.Toggle as={Card.Header} className="budget-header" eventKey="0">
+                  Budget
+                </Accordion.Toggle>
+                <Accordion.Collapse eventKey="0">
+                  <Card.Body>
+                    <Form inline>
+                      Budget: <Form.Control type="number" size="sm" className="text-right" value={this.state.budget} onChange={(e) => this.setState({budget: e.target.value})} />GP
+                    </Form>
+                  </Card.Body>
+                </Accordion.Collapse>
+              </Card>
+            </Accordion>
+          </Col>
+        </Row>
+        <Row>
           <Col md="5">
-            <Table borderless size="sm" className="team-table team-table-1">
+            <Table borderless size="sm" className="margin-zero team-table-1">
               <tbody>
                 <tr>
                   <td>Team Name:</td>
@@ -55,7 +82,7 @@ class Roster extends Component {
                 </tr>
                 <tr>
                   <td>Treasury:</td>
-                  <td><Form.Control type="text" size="sm" className="text-right" defaultValue="0 GP" readOnly /></td>
+                  <td><Form.Control type="text" size="sm" className="text-right" value={this.formatCost(this.getTreasury())} readOnly /></td>
                 </tr>
                 <tr>
                   <td>Team Value:</td>
@@ -65,7 +92,7 @@ class Roster extends Component {
             </Table>
           </Col>
           <Col md="7">
-            <Table borderless size="sm" className="team-table team-table-2">
+            <Table borderless size="sm" className="margin-zero team-table-2">
               <tbody>
                 <tr>
                   <td>Re-rolls:</td>

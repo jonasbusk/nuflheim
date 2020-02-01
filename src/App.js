@@ -11,13 +11,13 @@ function App() {
   return (
     <div className="App">
       <header>
-        <Container><Row><Col id="header">Team Roster</Col></Row></Container>
+        <Container><Row><Col id="header"><i>FF Roster</i></Col></Row></Container>
       </header>
       <main>
         <Roster />
       </main>
       <footer>
-        <Container><Row><Col>~ Team Roster ~</Col></Row></Container>
+        <Container><Row><Col>~ FF Roster ~</Col></Row></Container>
       </footer>
     </div>
   );

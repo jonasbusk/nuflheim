@@ -1,5 +1,5 @@
 .App {
-  background-color: #f9f9f9;
+  background-color: rgba(0,0,0,0.015);
 }
 
 header {
@@ -15,8 +15,30 @@ header #header {
   padding-top: 16px;
 }
 
-.team-table {
+.row {
+  margin-bottom: 1em;
+}
 
+.margin-zero {
+  margin: 0;
+}
+
+.budget-header {
+  padding: .55rem 1.25rem;
+  cursor: pointer;
+}
+
+.form-inline .form-control {
+  margin: 0 .5em;
+}
+
+.form-control-sm, .form-control-plaintext {
+  height: calc(1.1em + .5rem + 2px);
+  padding: .25rem .5rem;
+  font-size: .875rem;
+  line-height: 1.5;
+  border-radius: .2rem;
+  vertical-align: middle;
 }
 
 .team-table-1 td:nth-child(1) {
@@ -42,22 +64,6 @@ header #header {
 
 .team-table-2 td:nth-child(5) {
   width: 105px;
-}
-
-.team-table td input.form-control-sm {
-  height: calc(1.1em + .5rem + 2px);
-  padding: .25rem .5rem;
-  font-size: .875rem;
-  line-height: 1.5;
-  border-radius: .2rem;
-}
-
-.team-table td input.form-control-plaintext {
-  height: calc(1.1em + .5rem + 2px);
-  padding: .25rem .5rem;
-  font-size: .875rem;
-  line-height: 1.5;
-  border-radius: .2rem;
 }
 
 .player-table {
