@@ -4,17 +4,14 @@ import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
 import Table from 'react-bootstrap/Table'
 import Form from 'react-bootstrap/Form'
+import races from '../data'
 
 
 class Roster extends Component {
 
   state = {
     name: '',
-    race: {
-      name: 'Human',
-      reRollsCost: 50000,
-      apothecaryAllowed: true,
-    },
+    race: races[0],
     coach: '',
     reRolls: 0,
     fanFactor: 0,
@@ -40,7 +37,6 @@ class Roster extends Component {
   render() {
     return (
       <Container>
-
         <Row>
           <Col md="5">
             <Table borderless size="sm" className="team-table team-table-1">
@@ -68,7 +64,6 @@ class Roster extends Component {
               </tbody>
             </Table>
           </Col>
-
           <Col md="7">
             <Table borderless size="sm" className="team-table team-table-2">
               <tbody>
@@ -111,7 +106,6 @@ class Roster extends Component {
             </Table>
           </Col>
         </Row>
-
         <Row>
           <Col>
             <Table bordered hover size="sm" className="player-table">
