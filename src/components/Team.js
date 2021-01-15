@@ -8,27 +8,28 @@ import Card from 'react-bootstrap/Card'
 import Table from 'react-bootstrap/Table'
 import Form from 'react-bootstrap/Form'
 
-import races from '../data'
+import rosters from '../data'
 
 
-class Roster extends Component {
+class Team extends Component {
 
   state = {
     budget: 1000000,
     name: '',
-    race: races[0],
+    roster: rosters[0],
     coach: '',
     reRolls: 0,
-    fanFactor: 0,
+    dedicatedFans: 0,
     assistantCoaches: 0,
     cheerleaders: 0,
     apothecary: 0,
+    players: new Array(16).fill(null)
   }
 
   getTeamValue = () => {
     let tv = 0;
-    tv += this.state.reRolls * this.state.race.reRollsCost;
-    tv += this.state.fanFactor * 10000;
+    tv += this.state.reRolls * this.state.roster.reRollsCost;
+    tv += this.state.dedicatedFans * 10000;
     tv += this.state.assistantCoaches * 10000;
     tv += this.state.cheerleaders * 10000;
     tv += this.state.apothecary * 50000;
@@ -51,7 +52,7 @@ class Roster extends Component {
             <Accordion>
               <Card>
                 <Accordion.Toggle as={Card.Header} className="budget-header" eventKey="0">
-                  Budget
+                  Budget <span className="caret"></span>
                 </Accordion.Toggle>
                 <Accordion.Collapse eventKey="0">
                   <Card.Body>
@@ -73,8 +74,8 @@ class Roster extends Component {
                   <td><Form.Control type="text" size="sm" className="text-center" value={this.state.name} onChange={(e) => this.setState({name: e.target.value})} /></td>
                 </tr>
                 <tr>
-                  <td>Team Race:</td>
-                  <td><Form.Control type="text" size="sm" className="text-center" value={this.state.race.name} readOnly /></td>
+                  <td>Team Roster:</td>
+                  <td><Form.Control type="text" size="sm" className="text-center" value={this.state.roster.name} readOnly /></td>
                 </tr>
                 <tr>
                   <td>Coach:</td>
@@ -95,18 +96,18 @@ class Roster extends Component {
             <Table borderless size="sm" className="margin-zero team-table-2">
               <tbody>
                 <tr>
-                  <td>Re-rolls:</td>
+                  <td>Team re-rolls:</td>
                   <td><Form.Control type="number" size="sm" value={this.state.reRolls} onChange={(e) => this.setState({reRolls: Math.min(Math.max(parseInt(e.target.value) || 0, 0), 8)})} /></td>
                   <td>x</td>
-                  <td><Form.Control type="text" size="sm" className="text-right" value={this.formatCost(this.state.race.reRollsCost)} readOnly /></td>
-                  <td><Form.Control type="text" size="sm" className="text-right" value={this.formatCost(this.state.reRolls * this.state.race.reRollsCost)} readOnly /></td>
+                  <td><Form.Control type="text" size="sm" className="text-right" value={this.formatCost(this.state.roster.reRollsCost)} readOnly /></td>
+                  <td><Form.Control type="text" size="sm" className="text-right" value={this.formatCost(this.state.reRolls * this.state.roster.reRollsCost)} readOnly /></td>
                 </tr>
                 <tr>
-                  <td>Fan Factor:</td>
-                  <td><Form.Control type="number" size="sm" value={this.state.fanFactor} onChange={(e) => this.setState({fanFactor: Math.min(Math.max(parseInt(e.target.value) || 0, 0), 9)})} /></td>
+                  <td>Dedicated Fans:</td>
+                  <td><Form.Control type="number" size="sm" value={this.state.dedicatedFans} onChange={(e) => this.setState({dedicatedFans: Math.min(Math.max(parseInt(e.target.value) || 0, 0), 9)})} /></td>
                   <td>x</td>
                   <td><Form.Control type="text" size="sm" className="text-right" defaultValue={this.formatCost(10000)} plaintext readOnly /></td>
-                  <td><Form.Control type="text" size="sm" className="text-right" value={this.formatCost(this.state.fanFactor * 10000)} readOnly /></td>
+                  <td><Form.Control type="text" size="sm" className="text-right" value={this.formatCost(this.state.dedicatedFans * 10000)} readOnly /></td>
                 </tr>
                 <tr>
                   <td>Assistant Coaches:</td>
@@ -124,7 +125,7 @@ class Roster extends Component {
                 </tr>
                 <tr>
                   <td>Apothecary:</td>
-                  <td><Form.Control type="number" size="sm" value={this.state.apothecary} onChange={(e) => this.setState({apothecary: Math.min(Math.max(parseInt(e.target.value) || 0, 0), 1)})} readOnly={!this.state.race.apothecaryAllowed} /></td>
+                  <td><Form.Control type="number" size="sm" value={this.state.apothecary} onChange={(e) => this.setState({apothecary: Math.min(Math.max(parseInt(e.target.value) || 0, 0), 1)})} readOnly={!this.state.roster.apothecaryAllowed} /></td>
                   <td>x</td>
                   <td><Form.Control type="text" size="sm" className="text-right" defaultValue={this.formatCost(50000)} plaintext readOnly /></td>
                   <td><Form.Control type="text" size="sm" className="text-right" value={this.formatCost(this.state.apothecary * 50000)} readOnly /></td>
@@ -135,32 +136,34 @@ class Roster extends Component {
         </Row>
         <Row>
           <Col>
-            <Table bordered hover size="sm" className="player-table">
+            <Table bordered hover size="sm" className="player-table table-striped">
               <thead>
                 <tr>
                   <th>#</th>
-                  <th>Player Name</th>
+                  <th>Name</th>
                   <th>Position</th>
                   <th>MA</th>
                   <th>ST</th>
                   <th>AG</th>
+                  <th>PA</th>
                   <th>AV</th>
-                  <th>Starting Skills</th>
+                  <th>Skills</th>
                   <th>Improvements</th>
                   <th>Value</th>
                 </tr>
               </thead>
               <tbody>
-                {[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16].map((i) => {
-                  return (<tr key={i}>
-                    <td className="player-number">{i}</td>
+                {this.state.players.map((player, i) => {
+                  return (<tr key={i+1}>
+                    <td className="player-number">{i+1}</td>
                     <td className="player-name"><Form.Control type="text" plaintext /></td>
                     <td className="player-position"></td>
                     <td className="player-ma"></td>
                     <td className="player-st"></td>
                     <td className="player-ag"></td>
+                    <td className="player-pa"></td>
                     <td className="player-av"></td>
-                    <td className="player-starting-skills"></td>
+                    <td className="player-skills"></td>
                     <td className="player-improvements"></td>
                     <td className="player-value"></td>
                   </tr>)
@@ -174,4 +177,4 @@ class Roster extends Component {
   }
 }
 
-export default Roster;
+export default Team;

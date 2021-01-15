@@ -1,10 +1,10 @@
 .App {
-  background-color: rgba(0,0,0,0.015);
+  background-color: rgba(0,0,0,0.02);
 }
 
 header {
   background-color: black;
-  color: white;
+  color: orange;
   height: 70px;
   margin-bottom: 1em;
 }
@@ -12,6 +12,7 @@ header {
 header #header {
   font-size: 22pt;
   font-weight: bold;
+  font-style: italic;
   padding-top: 16px;
 }
 
@@ -67,27 +68,26 @@ header #header {
 }
 
 .player-table {
-  border-color: black;
   line-height: normal;
 }
 
 .player-table thead tr th  {
   border-bottom: none;
-  border-color: inherit;
-  background-color: #900;
+  border-color: black;
+  background-color: black;
   color: white;
   font-weight: normal;
   text-align: center;
 }
 
 .player-table tbody tr td {
-  border-color: inherit;
   font-size: .875rem;
   padding: .2rem .3rem;
 }
 
 td.player-number {
-  background-color: #900;
+  border-color: black;
+  background-color: black;
   color: white;
   text-align: center;
 }
@@ -102,7 +102,7 @@ td.player-name input.form-control-plaintext {
   font-size: .875rem;
 }
 
-td.player-ma, td.player-st, td.player-ag, td.player-av {
+td.player-ma, td.player-st, td.player-ag, td.player-pa, td.player-av {
   text-align: center;
   width: 40px;
 }
