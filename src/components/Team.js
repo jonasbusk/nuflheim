@@ -26,6 +26,18 @@ class Team extends Component {
     players: new Array(16).fill(null)
   }
 
+  setRoster = (index) => {
+    this.setState({
+      roster: rosters[index],
+      reRolls: 0,
+      dedicatedFans: 0,
+      assistantCoaches: 0,
+      cheerleaders: 0,
+      apothecary: 0,
+      players: new Array(16).fill(null)
+    });
+  }
+
   getTeamValue = () => {
     let tv = 0;
     tv += this.state.reRolls * this.state.roster.reRollsCost;
@@ -75,7 +87,11 @@ class Team extends Component {
                 </tr>
                 <tr>
                   <td>Team Roster:</td>
-                  <td><Form.Control type="text" size="sm" className="text-center" value={this.state.roster.name} readOnly /></td>
+                  <td>
+                    <Form.Control as="select" size="sm" onChange={(e) => this.setRoster(e.target.value)}>
+                     {rosters.map((roster, i) => {return <option key={i} value={i}>{roster.name}</option>})}
+                    </Form.Control>
+                  </td>
                 </tr>
                 <tr>
                   <td>Coach:</td>
@@ -104,7 +120,7 @@ class Team extends Component {
                 </tr>
                 <tr>
                   <td>Dedicated Fans:</td>
-                  <td><Form.Control type="number" size="sm" value={this.state.dedicatedFans} onChange={(e) => this.setState({dedicatedFans: Math.min(Math.max(parseInt(e.target.value) || 0, 0), 9)})} /></td>
+                  <td><Form.Control type="number" size="sm" value={this.state.dedicatedFans} onChange={(e) => this.setState({dedicatedFans: Math.max(parseInt(e.target.value) || 0, 0)})} /></td>
                   <td>x</td>
                   <td><Form.Control type="text" size="sm" className="text-right" defaultValue={this.formatCost(10000)} plaintext readOnly /></td>
                   <td><Form.Control type="text" size="sm" className="text-right" value={this.formatCost(this.state.dedicatedFans * 10000)} readOnly /></td>
@@ -139,17 +155,17 @@ class Team extends Component {
             <Table bordered hover size="sm" className="player-table table-striped">
               <thead>
                 <tr>
-                  <th>#</th>
+                  <th className="text-center"></th>
                   <th>Name</th>
-                  <th>Position</th>
-                  <th>MA</th>
-                  <th>ST</th>
-                  <th>AG</th>
-                  <th>PA</th>
-                  <th>AV</th>
+                  <th className="text-center">Position</th>
+                  <th className="text-center">MA</th>
+                  <th className="text-center">ST</th>
+                  <th className="text-center">AG</th>
+                  <th className="text-center">PA</th>
+                  <th className="text-center">AV</th>
                   <th>Skills</th>
                   <th>Improvements</th>
-                  <th>Value</th>
+                  <th className="text-right">Value</th>
                 </tr>
               </thead>
               <tbody>

@@ -35,7 +35,7 @@ header #header {
 
 .form-control-sm, .form-control-plaintext {
   height: calc(1.1em + .5rem + 2px);
-  padding: .25rem .5rem;
+  padding: 0rem .5rem;
   font-size: .875rem;
   line-height: 1.5;
   border-radius: .2rem;
@@ -77,7 +77,6 @@ header #header {
   background-color: black;
   color: white;
   font-weight: normal;
-  text-align: center;
 }
 
 .player-table tbody tr td {
