@@ -10,10 +10,10 @@ header {
 }
 
 header #header {
-  font-size: 22pt;
+  font-size: 24pt;
   font-weight: bold;
   font-style: italic;
-  padding-top: 16px;
+  padding-top: 12px;
 }
 
 .row {
@@ -24,13 +24,20 @@ header #header {
   margin: 0;
 }
 
-.budget-header {
-  padding: .55rem 1.25rem;
-  cursor: pointer;
+.nav-tabs {
+  margin-bottom: 16px;
 }
 
-.form-inline .form-control {
-  margin: 0 .5em;
+.nav-tabs a.nav-item.nav-link {
+  color: black;
+  font-weight: bold;
+  font-style: italic;
+}
+
+.nav-tabs a.nav-item.nav-link.active {
+  color: orange;
+  font-weight: bold;
+  font-style: italic;
 }
 
 .form-control-sm, .form-control-plaintext {
@@ -75,8 +82,9 @@ header #header {
   border-bottom: none;
   border-color: black;
   background-color: black;
-  color: white;
-  font-weight: normal;
+  color: orange;
+  font-weight: bold;
+  font-style: italic;
 }
 
 .player-table tbody tr td {
@@ -85,10 +93,11 @@ header #header {
 }
 
 td.player-number {
-  border-color: black;
-  background-color: black;
-  color: white;
+  border-color: orange;
+  background-color: orange;
+  color: black;
   text-align: center;
+  font-style: italic;
 }
 
 .player-table tbody tr td.player-name {
