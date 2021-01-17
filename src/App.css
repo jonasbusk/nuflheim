@@ -98,16 +98,17 @@ td.player-number {
   color: black;
   text-align: center;
   font-style: italic;
+  width: 40px;
 }
 
 .player-table tbody tr td.player-name {
   padding: 0px;
+  width: 200px;
 }
 
-td.player-name input.form-control-plaintext {
-  height: calc(1.1em + .5rem + 0px);
-  padding: .1rem .5rem;
-  font-size: .875rem;
+.player-table tbody tr td.player-position {
+  padding: 0px;
+  width: 160px;
 }
 
 td.player-ma, td.player-st, td.player-ag, td.player-pa, td.player-av {

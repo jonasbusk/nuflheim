@@ -130,8 +130,8 @@ const rosters = [
       player(16, 'Lineman', 50000, 6, 3, 3, 4, 9, [], 'G', 'AS'),
       player(2, 'Thrower', 80000, 6, 3, 3, 2, 9, [skills.pass, skills.sureHands], 'GP', 'AS'),
       player(4, 'Catcher', 65000, 8, 2, 3, 5, 8, [skills.catch, skills.dodge], 'AG', 'SP'),
-      player(4, 'Blitzer', 85000, 7, 3, 3, 4, 9, [skills.Block], 'GS', 'AP'),
-      player(3, 'Halfling Hopeful', 30000, 5, 2, 3, 4, 7, skills.dodge, skills.rightStuff, skills.stunty, 'A', 'GS'),
+      player(4, 'Blitzer', 85000, 7, 3, 3, 4, 9, [skills.block], 'GS', 'AP'),
+      player(3, 'Halfling Hopeful', 30000, 5, 2, 3, 4, 7, [skills.dodge, skills.rightStuff, skills.stunty], 'A', 'GS'),
       player(1, 'Ogre', 140000, 5, 5, 4, 5, 10, [skills.boneHead, skills.loner(4), skills.mightyBlow(1), skills.thickSkull, skills.throwTeamMate], 'S', 'AG')
     ],
     50000,

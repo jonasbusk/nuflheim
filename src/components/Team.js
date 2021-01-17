@@ -11,6 +11,22 @@ import Form from 'react-bootstrap/Form'
 import rosters from '../data'
 
 
+// A player in the player list
+const player = (name, position, ma, st, ag, pa, av, skills, value) => {
+  return {
+    name: name,
+    position: position,
+    ma: ma,
+    st: st,
+    ag: ag,
+    pa: pa,
+    av: av,
+    skills: skills,
+    value: value
+  }
+}
+
+
 class Team extends Component {
 
   state = {
@@ -23,36 +39,63 @@ class Team extends Component {
     assistantCoaches: 0,
     cheerleaders: 0,
     apothecary: 0,
-    players: new Array(16).fill(null)
+    players: new Array(16).fill(null).map((x) => player())
   }
 
-  setRoster = (index) => {
+  setRoster = (roster_index) => {
+    // Select a team roster
     this.setState({
-      roster: rosters[index],
+      roster: rosters[roster_index],
       reRolls: 0,
       dedicatedFans: 0,
       assistantCoaches: 0,
       cheerleaders: 0,
       apothecary: 0,
-      players: new Array(16).fill(null)
+      players: new Array(16).fill(null).map((x) => player())
     });
   }
 
+  setPlayer = (player_number, player_position) => {
+    // Set a player in the player list
+    // Note: inputs player_number and player_position are one-indexed
+    let players = this.state.players;
+    if (player_position === 0) {
+      // No position is selected: insert empty player
+      players[player_number-1] = player(players[player_number-1].name);
+    } else {
+      // Position is selected: insert player
+      let p = this.state.roster.players[player_position-1];
+      players[player_number-1] = player(players[player_number-1].name, player_position, p.ma, p.st, p.ag, p.pa, p.av, p.skills, p.cost);
+    }
+    this.setState({players: players})
+  }
+
+  setPlayerName = (player_number, player_name) => {
+    // Set the name of a player in the player list
+    let players = this.state.players;
+    players[player_number-1].name = player_name;
+    this.setState({players: players});
+  }
+
   getTeamValue = () => {
+    // Compute the current team value
     let tv = 0;
     tv += this.state.reRolls * this.state.roster.reRollsCost;
     tv += this.state.dedicatedFans * 10000;
     tv += this.state.assistantCoaches * 10000;
     tv += this.state.cheerleaders * 10000;
     tv += this.state.apothecary * 50000;
+    tv += this.state.players.reduce((total, player) => {return total + (player.value || 0)}, 0);
     return tv;
   }
 
   getTreasury = () => {
+    // Compute the current treasury value
     return this.state.budget - this.getTeamValue();
   }
 
   formatCost = (x) => {
+    // Format a number into a cost string, example: 10000 -> 10,000 GP
     return `${x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")} GP`;
   }
 
@@ -159,32 +202,35 @@ class Team extends Component {
               <thead>
                 <tr>
                   <th className="text-center"></th>
-                  <th>Name</th>
-                  <th className="text-center">Position</th>
+                  <th className="text-left">Name</th>
+                  <th className="text-left">Position</th>
                   <th className="text-center">MA</th>
                   <th className="text-center">ST</th>
                   <th className="text-center">AG</th>
                   <th className="text-center">PA</th>
                   <th className="text-center">AV</th>
-                  <th>Skills</th>
-                  <th>Improvements</th>
-                  <th className="text-right">Value</th>
+                  <th className="text-left">Skills</th>
+                  <th className="text-center">Value</th>
                 </tr>
               </thead>
               <tbody>
                 {this.state.players.map((player, i) => {
                   return (<tr key={i+1}>
                     <td className="player-number">{i+1}</td>
-                    <td className="player-name"><Form.Control type="text" plaintext /></td>
-                    <td className="player-position"></td>
-                    <td className="player-ma"></td>
-                    <td className="player-st"></td>
-                    <td className="player-ag"></td>
-                    <td className="player-pa"></td>
-                    <td className="player-av"></td>
-                    <td className="player-skills"></td>
-                    <td className="player-improvements"></td>
-                    <td className="player-value"></td>
+                    <td className="player-name"><Form.Control type="text" id={i+1} plaintext value={player.name || ""} onChange={(e) => this.setPlayerName(parseInt(e.target.id), e.target.value)} /></td>
+                    <td className="player-position">
+                      <Form.Control as="select" id={i+1} size="sm" plaintext value={player.position || 0} onChange={(e) => this.setPlayer(parseInt(e.target.id), parseInt(e.target.value))}>
+                        <option key="0" value="0">-</option>
+                        {this.state.roster.players.map((p, i) => {return <option key={i+1} value={i+1}>{p.position}</option>})}
+                      </Form.Control>
+                    </td>
+                    <td className="player-ma">{player.ma}</td>
+                    <td className="player-st">{player.st}</td>
+                    <td className="player-ag">{player.ag}</td>
+                    <td className="player-pa">{player.pa}</td>
+                    <td className="player-av">{player.av}</td>
+                    <td className="player-skills">{player.skills && player.skills.join(", ")}</td>
+                    <td className="player-value">{player.value && this.formatCost(player.value)}</td>
                   </tr>)
                 })}
               </tbody>

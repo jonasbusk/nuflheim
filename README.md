@@ -1,3 +1,7 @@
+# Nuflheim
+
+A Team Draft List for Fantasy Football.
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts
