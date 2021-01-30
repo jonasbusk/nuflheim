@@ -12,7 +12,7 @@ import rosters from '../data'
 
 
 // A player in the player list
-const player = (name, position, ma, st, ag, pa, av, skills, value) => {
+const player = (name, position, ma, st, ag, pa, av, skills, value, primary, secondary) => {
   return {
     name: name,
     position: position,
@@ -22,7 +22,9 @@ const player = (name, position, ma, st, ag, pa, av, skills, value) => {
     pa: pa,
     av: av,
     skills: skills,
-    value: value
+    value: value,
+    primary: primary,
+    secondary: secondary
   }
 }
 
@@ -65,7 +67,7 @@ class Team extends Component {
     } else {
       // Position is selected: insert player
       let p = this.state.roster.players[player_position-1];
-      players[player_number-1] = player(players[player_number-1].name, player_position, p.ma, p.st, p.ag, p.pa, p.av, p.skills, p.cost);
+      players[player_number-1] = player(players[player_number-1].name, player_position, p.ma, p.st, p.ag, p.pa, p.av, p.skills, p.cost, p.primary, p.secondary);
     }
     this.setState({players: players})
   }
@@ -111,7 +113,7 @@ class Team extends Component {
                   <tbody>
                     <tr>
                       <td>Team Name:</td>
-                      <td><Form.Control type="text" size="sm" className="text-center" value={this.state.name} onChange={(e) => this.setState({name: e.target.value})} /></td>
+                      <td><Form.Control type="text" size="sm" value={this.state.name} onChange={(e) => this.setState({name: e.target.value})} /></td>
                     </tr>
                     <tr>
                       <td>Team Roster:</td>
@@ -123,7 +125,7 @@ class Team extends Component {
                     </tr>
                     <tr>
                       <td>Coach:</td>
-                      <td><Form.Control type="text" size="sm" className="text-center" value={this.state.coach} onChange={(e) => this.setState({coach: e.target.value})} /></td>
+                      <td><Form.Control type="text" size="sm" value={this.state.coach} onChange={(e) => this.setState({coach: e.target.value})} /></td>
                     </tr>
                     <tr>
                       <td>Treasury:</td>
@@ -226,9 +228,9 @@ class Team extends Component {
                     </td>
                     <td className="player-ma">{player.ma}</td>
                     <td className="player-st">{player.st}</td>
-                    <td className="player-ag">{player.ag}</td>
-                    <td className="player-pa">{player.pa}</td>
-                    <td className="player-av">{player.av}</td>
+                    <td className="player-ag">{player.ag && player.ag + '+'}</td>
+                    <td className="player-pa">{(player.pa && player.pa + '+') || (player.pa === null && '-')}</td>
+                    <td className="player-av">{player.av && player.av + '+'}</td>
                     <td className="player-skills">{player.skills && player.skills.join(", ")}</td>
                     <td className="player-value">{player.value && this.formatCost(player.value)}</td>
                   </tr>)
