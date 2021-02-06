@@ -126,6 +126,18 @@ const roster = (name, players, reRollsCost, apothecaryAllowed, tier) => {
 
 const rosters = [
   roster(
+    'Amazon',
+    [
+      player(16, 'Linewoman', 50000, 6, 3, 3, 4, 8, [skills.dodge], 'G', 'AS'),
+      player(2, 'Thrower', 75000, 6, 3, 3, 3, 8, [skills.dodge, skills.pass], 'GP', 'AS'),
+      player(2, 'Catcher', 75000, 6, 3, 3, 5, 8, [skills.catch, skills.dodge], 'AG', 'S'),
+      player(4, 'Blitzer', 90000, 6, 3, 3, 5, 8, [skills.block, skills.dodge], 'GS', 'A')
+    ],
+    50000,
+    true,
+    1,
+  ),
+  roster(
     'Black Orc',
     [
       player(12, 'Goblin Bruiser', 45000, 6, 2, 3, 4, 8, [skills.dodge, skills.rightStuff, skills.stunty, skills.thickSkull], 'A', 'GPS'),
@@ -148,6 +160,18 @@ const rosters = [
     60000,
     true,
     2,
+  ),
+  roster(
+    'Chaos Dwarf',
+    [
+      player(16, 'Hobgoblin', 40000, 6, 3, 3, 4, 8, [], 'G', 'AS'),
+      player(6, 'Blocker', 70000, 4, 3, 4, 6, 10, [skills.block, skills.tackle, skills.thickSkull], 'GS', 'AM'),
+      player(2, 'Bull Centaur', 130000, 6, 4, 4, 6, 10, [skills.sprint, skills.sureFeet, skills.thickSkull], 'GS', 'A'),
+      player(1, 'Enslaved Minotaur', 150000, 5, 5, 4, null, 9, [skills.animalSavagery, skills.frenzy, skills.horns, skills.loner(4), skills.mightyBlow(1), skills.thickSkull], 'S', 'AGM')
+    ],
+    70000,
+    true,
+    1,
   ),
   roster(
     'Chaos Renegade',
@@ -234,6 +258,18 @@ const rosters = [
     3,
   ),
   roster(
+    'High Elf',
+    [
+      player(16, 'Lineman', 70000, 6, 3, 2, 4, 9, [], 'AG', 'PS'),
+      player(2, 'Thrower', 100000, 6, 3, 2, 2, 9, [skills.cloudBurster, skills.pass, skills.safePass], 'AGP', 'S'),
+      player(4, 'Catcher', 90000, 8, 3, 2, 5, 8, [skills.catch], 'AG', 'S'),
+      player(2, 'Blitzer', 100000, 7, 3, 2, 4, 9, [skills.block], 'AG', 'PS')
+    ],
+    50000,
+    true,
+    2,
+  ),
+  roster(
     'Human',
     [
       player(16, 'Lineman', 50000, 6, 3, 3, 4, 9, [], 'G', 'AS'),
@@ -284,6 +320,20 @@ const rosters = [
     70000,
     false,
     2,
+  ),
+  roster(
+    'Norse',
+    [
+      player(12, 'Lineman', 50000, 6, 3, 3, 4, 8, [skills.block], 'G', 'AS'),
+      player(2, 'Thrower', 70000, 6, 3, 3, 3, 8, [skills.block, skills.pass], 'GP', 'AS'),
+      player(2, 'Catcher', 90000, 7, 3, 3, 5, 8, [skills.block, skills.dauntless], 'AG', 'S'),
+      player(2, 'Berserker', 90000, 6, 3, 3, 5, 8, [skills.block, skills.frenzy, skills.jumpUp], 'GS', 'A'),
+      player(2, 'Ulfwerener', 105000, 6, 4, 4, null, 9, [skills.frenzy], 'GS', 'A'),
+      player(1, 'Yhetee', 140000, 5, 5, 5, null, 9, [skills.claws, skills.disturbingPresence, skills.frenzy, skills.loner(4), skills.unchannelledFury], 'S', 'AG')
+    ],
+    60000,
+    true,
+    1,
   ),
   roster(
     'Nurgle',
@@ -382,6 +432,18 @@ const rosters = [
     3,
   ),
   roster(
+    'Tomb Kings',
+    [
+      player(16, 'Skeleton', 40000, 5, 3, 4, 6, 8, [skills.regeneration, skills.thickSkull], 'G', 'AS'),
+      player(2, 'Anointed Thrower', 70000, 6, 3, 4, 3, 8, [skills.pass, skills.regeneration, skills.sureHands, skills.thickSkull], 'GP', 'A'),
+      player(2, 'Anointed Blitzer', 90000, 6, 3, 4, 6, 9, [skills.block, skills.regeneration, skills.thickSkull], 'GS', 'AP'),
+      player(4, 'Tomb Guardian', 100000, 4, 5, 5, null, 10, [skills.decay, skills.regeneration], 'S', 'AG')
+    ],
+    70000,
+    false,
+    2,
+  ),
+  roster(
     'Underworld Denizens',
     [
       player(12, 'Underworld Goblin', 40000, 6, 2, 3, 4, 8, [skills.dodge, skills.rightStuff, skills.stunty], 'AM', 'GS'),
@@ -392,6 +454,16 @@ const rosters = [
       player(2, 'Skaven Blitzer', 90000, 7, 3, 3, 5, 9, [skills.animosity('Underworld Goblin Linemen'), skills.block], 'GMS', 'AP'),
       player(2, 'Underworld Troll', 115000, 4, 5, 5, 5, 10, [skills.alwaysHungry, skills.loner(4), skills.mightyBlow(1), skills.projectileVomit, skills.reallyStupid, skills.regeneration, skills.throwTeamMate], 'MS', 'AGP'),
       player(1, 'Mutant Rat Ogre', 150000, 6, 5, 4, null, 9, [skills.animalSavagery, skills.frenzy, skills.loner(4), skills.mightyBlow(1), skills.prehensileTail], 'MS', 'AG')
+    ],
+    70000,
+    true,
+    2,
+  ),
+  roster(
+    'Vampire',
+    [
+      player(12, 'Thrall', 40000, 6, 3, 3, 5, 8, [], 'G', 'AS'),
+      player(6, 'Vampire', 110000, 6, 4, 2, 3, 9, [skills.animalSavagery, skills.hypnoticGaze, skills.regeneration], 'AGS', 'P')
     ],
     70000,
     true,
