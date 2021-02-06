@@ -16,6 +16,14 @@ header #header {
   padding-top: 12px;
 }
 
+footer a {
+  color: orange;
+}
+
+footer a:hover {
+  color: black;
+}
+
 .row {
   margin-bottom: 1em;
 }
