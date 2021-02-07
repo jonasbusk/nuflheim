@@ -1,5 +1,5 @@
 const skills = {
-  // agility
+  // Agility
   catch: 'Catch',
   divingCatch: 'Diving Catch',
   divingTackle: 'Diving Tackle',
@@ -12,7 +12,7 @@ const skills = {
   sneakyGit: 'Sneaky Git',
   sprint: 'Sprint',
   sureFeet: 'Sure Feet',
-  // general
+  // General
   block: 'Block',
   dauntless: 'Dauntless',
   dirtyPlayer: (x) => 'Dirty Player (+' + x + ')',
@@ -25,7 +25,7 @@ const skills = {
   sureHands: 'Sure Hands',
   tackle: 'Tackle',
   wrestle: 'Wrestle',
-  // mutation
+  // Mutation
   bigHand: 'Big Hand',
   claws: 'Claws',
   disturbingPresence: 'Disturbing Presence',
@@ -38,7 +38,7 @@ const skills = {
   tentacles: 'Tentacles',
   twoHeads: 'Two Heads',
   veryLongLegs: 'Very Long Legs',
-  // passing
+  // Passing
   accurate: 'Accurate',
   cannoneer: 'Cannoneer',
   cloudBurster: 'Cloud Burster',
@@ -51,7 +51,7 @@ const skills = {
   pass: 'Pass',
   runningPass: 'Running Pass',
   safePass: 'Safe Pass',
-  // strength
+  // Strength
   armBar: 'Arm Bar',
   brawler: 'Brawler',
   breakTackle: 'Break Tackle',
@@ -64,7 +64,7 @@ const skills = {
   standFirm: 'Stand Firm',
   strongArm: 'Strong Arm',
   thickSkull: 'Thick Skull',
-  // traits
+  // Traits
   animalSavagery: 'Animal Savagery',
   animosity: (x) => 'Animosity (' + x + ')',
   alwaysHungry: 'Always Hungry',
@@ -96,7 +96,7 @@ const skills = {
 }
 
 
-const player = (quantity, position, cost, ma, st, ag, pa, av, skills, primary, secondary) => {
+const player = (quantity, position, cost, ma, st, ag, pa, av, skills, primaryAccess, secondaryAccess) => {
   return {
     quantity: quantity,
     position: position,
@@ -107,8 +107,8 @@ const player = (quantity, position, cost, ma, st, ag, pa, av, skills, primary, s
     pa: pa,
     av: av,
     skills: skills,
-    primary: primary,
-    secondary: secondary,
+    primaryAccess: primaryAccess,
+    secondaryAccess: secondaryAccess,
   }
 }
 
@@ -484,4 +484,4 @@ const rosters = [
   ),
 ]
 
-export default rosters;
+export {rosters, skills};

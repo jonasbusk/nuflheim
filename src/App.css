@@ -24,6 +24,10 @@ footer a:hover {
   color: black;
 }
 
+.text-orange {
+  color: orange;
+}
+
 .row {
   margin-bottom: 1em;
 }
@@ -87,7 +91,6 @@ footer a:hover {
 }
 
 .player-table thead tr th  {
-  border-bottom: none;
   border-color: black;
   background-color: black;
   color: orange;
@@ -124,9 +127,44 @@ td.player-ma, td.player-st, td.player-ag, td.player-pa, td.player-av {
   width: 40px;
 }
 
+td.player-skills span {
+  display: block;
+  min-height: 1.3em;
+  cursor: pointer;
+}
+
 td.player-value {
   text-align: right;
   width: 95px;
+}
+
+.advancement-table th {
+  border-color: black;
+  text-align: center;
+  padding: 2px;
+  font-size: 11pt;
+  background-color: black;
+  color: orange;
+  font-weight: bold;
+  font-style: italic;
+  width: 20%;
+}
+
+.advancement-table td {
+  text-align: center;
+  padding: 1px;
+  font-size: 11pt;
+}
+
+.advancement-table .skill-available {
+  display: block;
+  cursor: pointer;
+}
+
+.advancement-table .skill-selected {
+  display: block;
+  cursor: pointer;
+  background-color: orange;
 }
 
 footer .row .col {
