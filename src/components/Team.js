@@ -72,7 +72,7 @@ class Team extends Component {
       players[playerNumber-1] = player(players[playerNumber-1].name);
     } else {
       // Position is selected: insert new player
-      let p = this.state.roster.players[positionNumber-1];
+      let p = this.state.roster.positionals[positionNumber-1];
       players[playerNumber-1] = player(players[playerNumber-1].name, positionNumber, p.position, p.ma, p.st, p.ag, p.pa, p.av, p.skills, p.cost, p.primaryAccess, p.secondaryAccess);
     }
     this.setState({players: players})
@@ -311,7 +311,7 @@ class Team extends Component {
                     <td className="player-position">
                       <Form.Control as="select" id={i+1} size="sm" plaintext value={player.positionNumber || 0} onChange={(e) => this.setPlayer(parseInt(e.target.id), parseInt(e.target.value))}>
                         <option key="0" value="0">-</option>
-                        {this.state.roster.players.map((p, i) => {return <option key={i+1} value={i+1}>{p.position}</option>})}
+                        {this.state.roster.positionals.map((p, i) => {return <option key={i+1} value={i+1}>{p.position}</option>})}
                       </Form.Control>
                     </td>
                     <td className="player-ma">{player.ma}</td>
