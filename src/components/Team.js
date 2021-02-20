@@ -23,6 +23,11 @@ const player = (name, positionNumber, positionName, ma, st, ag, pa, av, skills, 
     ag: ag,
     pa: pa,
     av: av,
+    maMod: 0,
+    stMod: 0,
+    agMod: 0,
+    paMod: 0,
+    avMod: 0,
     skills: skills || [],
     primarySkills: [],
     secondarySkills: [],
@@ -119,6 +124,48 @@ class Team extends Component {
     });
   }
 
+  renderPlayerChar = (player, char, interactive) => {
+    if (typeof player[char] !== 'undefined') {
+      let mod = player[char + 'Mod'];
+      if(['ma', 'st'].includes(char)) {
+        return <span className={mod && 'text-orange'}>{player[char] + mod}</span>;
+      } else if (char === 'ag') {
+        return <span className={mod && 'text-orange'}>{player[char] - mod + '+'}</span>;
+      } else if (char === 'pa') {
+        if (player[char] !== null) {
+          return <span className={mod && 'text-orange'}>{player[char] - mod + '+'}</span>;
+        } else {
+          return <span>-</span>;
+        }
+      } else if (char === 'av') {
+        return <span className={mod && 'text-orange'}>{player[char] + mod + '+'}</span>;
+      }
+    }
+  }
+
+  toggleSelectedPlayerChar = (char) => {
+    // Improve or reset a characteristic of the selected player
+    let player = this.getSelectedPlayer();
+    if (this.playerCharMayBeImproved(player, char)) {
+      player[char + 'Mod'] += 1;
+    } else {
+      player[char + 'Mod'] = 0;
+    }
+    this.setSelectedPlayer(player);
+  }
+
+  playerCharMayBeImproved = (player, char) => {
+    // Determine if a player characteristic may be improved
+    return !(
+      player[char + 'Mod'] === 2 ||
+      (char === 'ma' && player.ma + player.maMod === 9) ||
+      (char === 'st' && player.st + player.stMod === 8) ||
+      (char === 'ag' && player.ag - player.agMod === 1) ||
+      (char === 'pa' && (player.pa === null || player.pa - player.paMod === 1)) ||
+      (char === 'av' && player.av + player.avMod === 11)
+    )
+  }
+
   renderSkill = (skill, category) => {
     // Render a skill in the skill advancement table
     let player = this.getSelectedPlayer();
@@ -141,7 +188,7 @@ class Team extends Component {
 
   addSkill = (skill, category) => {
     // Add skill to selected player
-    let player = this.getSelectedPlayer()
+    let player = this.getSelectedPlayer();
     if (player.primaryAccess.includes(category)) {
       player.primarySkills.push(skill);
       player.primarySkills.sort();
@@ -162,6 +209,11 @@ class Team extends Component {
 
   getPlayerValue = (player) => {
     let value = player.value || 0;
+    value += player.maMod * 20000;
+    value += player.stMod * 80000;
+    value += player.agMod * 40000;
+    value += player.paMod * 20000;
+    value += player.avMod * 10000;
     value += player.primarySkills.length * 20000;
     value += player.secondarySkills.length * 40000;
     return value;
@@ -314,11 +366,11 @@ class Team extends Component {
                         {this.state.roster.positionals.map((p, i) => {return <option key={i+1} value={i+1}>{p.position}</option>})}
                       </Form.Control>
                     </td>
-                    <td className="player-ma">{player.ma}</td>
-                    <td className="player-st">{player.st}</td>
-                    <td className="player-ag">{player.ag && player.ag + '+'}</td>
-                    <td className="player-pa">{(player.pa && player.pa + '+') || (player.pa === null && '-')}</td>
-                    <td className="player-av">{player.av && player.av + '+'}</td>
+                    <td className="player-ma" onClick={() => player.positionNumber && this.showPlayerAdvancementModal(i+1)}>{this.renderPlayerChar(player, 'ma')}</td>
+                    <td className="player-st" onClick={() => player.positionNumber && this.showPlayerAdvancementModal(i+1)}>{this.renderPlayerChar(player, 'st')}</td>
+                    <td className="player-ag" onClick={() => player.positionNumber && this.showPlayerAdvancementModal(i+1)}>{this.renderPlayerChar(player, 'ag')}</td>
+                    <td className="player-pa" onClick={() => player.positionNumber && this.showPlayerAdvancementModal(i+1)}>{this.renderPlayerChar(player, 'pa')}</td>
+                    <td className="player-av" onClick={() => player.positionNumber && this.showPlayerAdvancementModal(i+1)}>{this.renderPlayerChar(player, 'av')}</td>
                     <td className="player-skills" onClick={() => player.positionNumber && this.showPlayerAdvancementModal(i+1)}>{this.renderPlayerSkills(player)}</td>
                     <td className="player-value">{player.value && this.formatCost(this.getPlayerValue(player))}</td>
                   </tr>)
@@ -355,11 +407,21 @@ class Team extends Component {
               </thead>
               <tbody>
                 <tr>
-                  <td>{this.getSelectedPlayer() && this.getSelectedPlayer().ma}</td>
-                  <td>{this.getSelectedPlayer() && this.getSelectedPlayer().st}</td>
-                  <td>{this.getSelectedPlayer() && this.getSelectedPlayer().ag + '+'}</td>
-                  <td>{this.getSelectedPlayer() && this.getSelectedPlayer().pa + '+'}</td>
-                  <td>{this.getSelectedPlayer() && this.getSelectedPlayer().av + '+'}</td>
+                  <td className="cursor-pointer" onClick={() => this.toggleSelectedPlayerChar('ma')}>
+                    {this.getSelectedPlayer() && this.renderPlayerChar(this.getSelectedPlayer(), 'ma')}
+                  </td>
+                  <td className="cursor-pointer" onClick={() => this.toggleSelectedPlayerChar('st')}>
+                    {this.getSelectedPlayer() && this.renderPlayerChar(this.getSelectedPlayer(), 'st')}
+                  </td>
+                  <td className="cursor-pointer" onClick={() => this.toggleSelectedPlayerChar('ag')}>
+                    {this.getSelectedPlayer() && this.renderPlayerChar(this.getSelectedPlayer(), 'ag')}
+                  </td>
+                  <td className="cursor-pointer" onClick={() => this.toggleSelectedPlayerChar('pa')}>
+                    {this.getSelectedPlayer() && this.renderPlayerChar(this.getSelectedPlayer(), 'pa')}
+                  </td>
+                  <td className="cursor-pointer" onClick={() => this.toggleSelectedPlayerChar('av')}>
+                    {this.getSelectedPlayer() && this.renderPlayerChar(this.getSelectedPlayer(), 'av')}
+                  </td>
                 </tr>
               </tbody>
             </Table>
