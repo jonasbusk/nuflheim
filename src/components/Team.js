@@ -109,10 +109,10 @@ class Team extends Component {
   renderPlayerSkills = (player) => {
     // Render player skill list including skill advancements
     if (player.positionNumber) {
-      let skills = [...player.skills];
-      skills = skills.concat(player.primarySkills.map((s) => s + '*'));
-      skills = skills.concat(player.secondarySkills.map((s) => s + '**'));
-      return <span>{skills.join(", ")}</span>;
+      let skills = player.skills.map((s) => <span className='skill-default'>{s}</span>);
+      skills = skills.concat(player.primarySkills.map((s) => <span className='skill-primary'>{s}</span>));
+      skills = skills.concat(player.secondarySkills.map((s) => <span className='skill-secondary'>{s}</span>));
+      return <div>{skills.map((s, i) => i > 0 ? <span key={i}>, {s}</span> : <span key={i}>{s}</span>)}</div>
     }
   }
 

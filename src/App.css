@@ -136,10 +136,17 @@ td.player-ma span, td.player-st span, td.player-ag span, td.player-pa span, td.p
   cursor: pointer;
 }
 
-td.player-skills span {
-  display: block;
+td.player-skills div {
   min-height: 1.3em;
   cursor: pointer;
+}
+
+td.player-skills span.skill-primary {
+  color: orange;
+}
+
+td.player-skills span.skill-secondary {
+  color: orange;
 }
 
 td.player-value {
