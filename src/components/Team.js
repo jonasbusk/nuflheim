@@ -1,15 +1,15 @@
-import React, {Component} from 'react';
+import React, {Component} from "react";
 
-import Container from 'react-bootstrap/Container'
-import Row from 'react-bootstrap/Row'
-import Col from 'react-bootstrap/Col'
-import Tab from 'react-bootstrap/Tab'
-import Table from 'react-bootstrap/Table'
-import Tabs from 'react-bootstrap/Tabs'
-import Form from 'react-bootstrap/Form'
-import Modal from 'react-bootstrap/Modal'
+import Container from "react-bootstrap/Container";
+import Row from "react-bootstrap/Row";
+import Col from "react-bootstrap/Col";
+import Tab from "react-bootstrap/Tab";
+import Table from "react-bootstrap/Table";
+import Tabs from "react-bootstrap/Tabs";
+import Form from "react-bootstrap/Form";
+import Modal from "react-bootstrap/Modal";
 
-import {rosters, skills} from '../data'
+import {rosters, skills} from "../data";
 
 
 // A player in the player list
@@ -34,8 +34,8 @@ const player = (name, positionNumber, positionName, ma, st, ag, pa, av, skills, 
     value: value,
     primaryAccess: primaryAccess,
     secondaryAccess: secondaryAccess
-  }
-}
+  };
+};
 
 
 class Team extends Component {
@@ -51,9 +51,9 @@ class Team extends Component {
     costOfPA: 20000,
     costOfAG: 40000,
     costOfST: 80000,
-    name: '',
+    name: "",
     roster: rosters[0],
-    coach: '',
+    coach: "",
     reRolls: 0,
     dedicatedFans: 0,
     assistantCoaches: 0,
@@ -61,7 +61,7 @@ class Team extends Component {
     apothecary: 0,
     players: new Array(16).fill(null).map((x) => player()),
     showPlayerAdvancementModal: false,
-    selectedPlayerNumber: null
+    selectedPlayerNumber: null,
   }
 
   setRoster = (rosterIndex) => {
@@ -89,7 +89,7 @@ class Team extends Component {
       let p = this.state.roster.positionals[positionNumber-1];
       players[playerNumber-1] = player(players[playerNumber-1].name, positionNumber, p.position, p.ma, p.st, p.ag, p.pa, p.av, p.skills, p.cost, p.primaryAccess, p.secondaryAccess);
     }
-    this.setState({players: players})
+    this.setState({players: players});
   }
 
   setPlayerName = (playerNumber, playerName) => {
@@ -102,9 +102,9 @@ class Team extends Component {
   getSelectedPlayer = () => {
     // Get the player selected for advancement
     if (this.state.showPlayerAdvancementModal && this.state.selectedPlayerNumber) {
-      return this.state.players[this.state.selectedPlayerNumber-1]
+      return this.state.players[this.state.selectedPlayerNumber-1];
     } else {
-      return null
+      return null;
     }
   }
 
@@ -118,10 +118,10 @@ class Team extends Component {
   renderPlayerSkills = (player) => {
     // Render player skill list including skill advancements
     if (player.positionNumber) {
-      let skills = player.skills.map((s) => <span className='skill-default'>{s}</span>);
-      skills = skills.concat(player.primarySkills.map((s) => <span className='skill-primary'>{s}</span>));
-      skills = skills.concat(player.secondarySkills.map((s) => <span className='skill-secondary'>{s}</span>));
-      return <div>{skills.map((s, i) => i > 0 ? <span key={i}>, {s}</span> : <span key={i}>{s}</span>)}</div>
+      let skills = player.skills.map((s) => <span className="skill-default">{s}</span>);
+      skills = skills.concat(player.primarySkills.map((s) => <span className="skill-primary">{s}</span>));
+      skills = skills.concat(player.secondarySkills.map((s) => <span className="skill-secondary">{s}</span>));
+      return <div>{skills.map((s, i) => i > 0 ? <span key={i}>, {s}</span> : <span key={i}>{s}</span>)}</div>;
     }
   }
 
@@ -134,20 +134,20 @@ class Team extends Component {
   }
 
   renderPlayerChar = (player, char, interactive) => {
-    if (typeof player[char] !== 'undefined') {
-      let mod = player[char + 'Mod'];
-      if(['ma', 'st'].includes(char)) {
-        return <span className={mod && 'text-orange'}>{player[char] + mod}</span>;
-      } else if (char === 'ag') {
-        return <span className={mod && 'text-orange'}>{player[char] - mod + '+'}</span>;
-      } else if (char === 'pa') {
+    if (typeof player[char] !== "undefined") {
+      let mod = player[char + "Mod"];
+      if(["ma", "st"].includes(char)) {
+        return <span className={mod && "text-orange"}>{player[char] + mod}</span>;
+      } else if (char === "ag") {
+        return <span className={mod && "text-orange"}>{player[char] - mod + "+"}</span>;
+      } else if (char === "pa") {
         if (player[char] !== null) {
-          return <span className={mod && 'text-orange'}>{player[char] - mod + '+'}</span>;
+          return <span className={mod && "text-orange"}>{player[char] - mod + "+"}</span>;
         } else {
           return <span>-</span>;
         }
-      } else if (char === 'av') {
-        return <span className={mod && 'text-orange'}>{player[char] + mod + '+'}</span>;
+      } else if (char === "av") {
+        return <span className={mod && "text-orange"}>{player[char] + mod + "+"}</span>;
       }
     }
   }
@@ -156,9 +156,9 @@ class Team extends Component {
     // Improve or reset a characteristic of the selected player
     let player = this.getSelectedPlayer();
     if (this.playerCharMayBeImproved(player, char)) {
-      player[char + 'Mod'] += 1;
+      player[char + "Mod"] += 1;
     } else {
-      player[char + 'Mod'] = 0;
+      player[char + "Mod"] = 0;
     }
     this.setSelectedPlayer(player);
   }
@@ -166,13 +166,13 @@ class Team extends Component {
   playerCharMayBeImproved = (player, char) => {
     // Determine if a player characteristic may be improved
     return !(
-      player[char + 'Mod'] === 2 ||
-      (char === 'ma' && player.ma + player.maMod === 9) ||
-      (char === 'st' && player.st + player.stMod === 8) ||
-      (char === 'ag' && player.ag - player.agMod === 1) ||
-      (char === 'pa' && (player.pa === null || player.pa - player.paMod === 1)) ||
-      (char === 'av' && player.av + player.avMod === 11)
-    )
+      player[char + "Mod"] === 2 ||
+      (char === "ma" && player.ma + player.maMod === 9) ||
+      (char === "st" && player.st + player.stMod === 8) ||
+      (char === "ag" && player.ag - player.agMod === 1) ||
+      (char === "pa" && (player.pa === null || player.pa - player.paMod === 1)) ||
+      (char === "av" && player.av + player.avMod === 11)
+    );
   }
 
   renderSkill = (skill, category) => {
@@ -210,9 +210,9 @@ class Team extends Component {
 
   removeSkill = (skill) => {
     // Remove skill from selected player
-    let player = this.getSelectedPlayer()
-    player.primarySkills = player.primarySkills.filter((s) => s !== skill)
-    player.secondarySkills = player.secondarySkills.filter((s) => s !== skill)
+    let player = this.getSelectedPlayer();
+    player.primarySkills = player.primarySkills.filter((s) => s !== skill);
+    player.secondarySkills = player.secondarySkills.filter((s) => s !== skill);
     this.setSelectedPlayer(player);
   }
 
@@ -238,7 +238,7 @@ class Team extends Component {
     tv += this.state.assistantCoaches * 10000;
     tv += this.state.cheerleaders * 10000;
     tv += this.state.apothecary * 50000;
-    tv += this.state.players.reduce((total, player) => {return total + this.getPlayerValue(player)}, 0);
+    tv += this.state.players.reduce((total, player) => {return total + this.getPlayerValue(player);}, 0);
     return tv;
   }
 
@@ -283,7 +283,7 @@ class Team extends Component {
                       <td>Team Roster:</td>
                       <td>
                         <Form.Control as="select" size="sm" onChange={(e) => this.setRoster(e.target.value)}>
-                         {rosters.map((roster, i) => {return <option key={i} value={i}>{roster.name}</option>})}
+                         {rosters.map((roster, i) => {return <option key={i} value={i}>{roster.name}</option>;})}
                         </Form.Control>
                       </td>
                     </tr>
@@ -438,17 +438,17 @@ class Team extends Component {
                     <td className="player-position">
                       <Form.Control as="select" id={i+1} size="sm" plaintext value={player.positionNumber || 0} onChange={(e) => this.setPlayer(parseInt(e.target.id), parseInt(e.target.value))}>
                         <option key="0" value="0">-</option>
-                        {this.state.roster.positionals.map((p, i) => {return <option key={i+1} value={i+1}>{p.position}</option>})}
+                        {this.state.roster.positionals.map((p, i) => {return <option key={i+1} value={i+1}>{p.position}</option>;})}
                       </Form.Control>
                     </td>
-                    <td className="player-ma" onClick={() => player.positionNumber && this.showPlayerAdvancementModal(i+1)}>{this.renderPlayerChar(player, 'ma')}</td>
-                    <td className="player-st" onClick={() => player.positionNumber && this.showPlayerAdvancementModal(i+1)}>{this.renderPlayerChar(player, 'st')}</td>
-                    <td className="player-ag" onClick={() => player.positionNumber && this.showPlayerAdvancementModal(i+1)}>{this.renderPlayerChar(player, 'ag')}</td>
-                    <td className="player-pa" onClick={() => player.positionNumber && this.showPlayerAdvancementModal(i+1)}>{this.renderPlayerChar(player, 'pa')}</td>
-                    <td className="player-av" onClick={() => player.positionNumber && this.showPlayerAdvancementModal(i+1)}>{this.renderPlayerChar(player, 'av')}</td>
+                    <td className="player-ma" onClick={() => player.positionNumber && this.showPlayerAdvancementModal(i+1)}>{this.renderPlayerChar(player, "ma")}</td>
+                    <td className="player-st" onClick={() => player.positionNumber && this.showPlayerAdvancementModal(i+1)}>{this.renderPlayerChar(player, "st")}</td>
+                    <td className="player-ag" onClick={() => player.positionNumber && this.showPlayerAdvancementModal(i+1)}>{this.renderPlayerChar(player, "ag")}</td>
+                    <td className="player-pa" onClick={() => player.positionNumber && this.showPlayerAdvancementModal(i+1)}>{this.renderPlayerChar(player, "pa")}</td>
+                    <td className="player-av" onClick={() => player.positionNumber && this.showPlayerAdvancementModal(i+1)}>{this.renderPlayerChar(player, "av")}</td>
                     <td className="player-skills" onClick={() => player.positionNumber && this.showPlayerAdvancementModal(i+1)}>{this.renderPlayerSkills(player)}</td>
                     <td className="player-value">{player.value && this.formatCost(this.getPlayerValue(player))}</td>
-                  </tr>)
+                  </tr>);
                 })}
               </tbody>
             </Table>
@@ -482,20 +482,20 @@ class Team extends Component {
               </thead>
               <tbody>
                 <tr>
-                  <td className="cursor-pointer" onClick={() => this.toggleSelectedPlayerChar('ma')}>
-                    {this.getSelectedPlayer() && this.renderPlayerChar(this.getSelectedPlayer(), 'ma')}
+                  <td className="cursor-pointer" onClick={() => this.toggleSelectedPlayerChar("ma")}>
+                    {this.getSelectedPlayer() && this.renderPlayerChar(this.getSelectedPlayer(), "ma")}
                   </td>
-                  <td className="cursor-pointer" onClick={() => this.toggleSelectedPlayerChar('st')}>
-                    {this.getSelectedPlayer() && this.renderPlayerChar(this.getSelectedPlayer(), 'st')}
+                  <td className="cursor-pointer" onClick={() => this.toggleSelectedPlayerChar("st")}>
+                    {this.getSelectedPlayer() && this.renderPlayerChar(this.getSelectedPlayer(), "st")}
                   </td>
-                  <td className="cursor-pointer" onClick={() => this.toggleSelectedPlayerChar('ag')}>
-                    {this.getSelectedPlayer() && this.renderPlayerChar(this.getSelectedPlayer(), 'ag')}
+                  <td className="cursor-pointer" onClick={() => this.toggleSelectedPlayerChar("ag")}>
+                    {this.getSelectedPlayer() && this.renderPlayerChar(this.getSelectedPlayer(), "ag")}
                   </td>
-                  <td className="cursor-pointer" onClick={() => this.toggleSelectedPlayerChar('pa')}>
-                    {this.getSelectedPlayer() && this.renderPlayerChar(this.getSelectedPlayer(), 'pa')}
+                  <td className="cursor-pointer" onClick={() => this.toggleSelectedPlayerChar("pa")}>
+                    {this.getSelectedPlayer() && this.renderPlayerChar(this.getSelectedPlayer(), "pa")}
                   </td>
-                  <td className="cursor-pointer" onClick={() => this.toggleSelectedPlayerChar('av')}>
-                    {this.getSelectedPlayer() && this.renderPlayerChar(this.getSelectedPlayer(), 'av')}
+                  <td className="cursor-pointer" onClick={() => this.toggleSelectedPlayerChar("av")}>
+                    {this.getSelectedPlayer() && this.renderPlayerChar(this.getSelectedPlayer(), "av")}
                   </td>
                 </tr>
               </tbody>
@@ -527,25 +527,25 @@ class Team extends Component {
                 </tr>
               </thead>
               <tbody>
-                <tr><td>{this.renderSkill(skills.catch, 'A')}</td><td>{this.renderSkill(skills.block, 'G')}</td><td>{this.renderSkill(skills.bigHand, 'M')}</td><td>{this.renderSkill(skills.accurate, 'P')}</td><td>{this.renderSkill(skills.armBar, 'S')}</td></tr>
-                <tr><td>{this.renderSkill(skills.divingCatch, 'A')}</td><td>{this.renderSkill(skills.dauntless, 'G')}</td><td>{this.renderSkill(skills.claws, 'M')}</td><td>{this.renderSkill(skills.cannoneer, 'P')}</td><td>{this.renderSkill(skills.brawler, 'S')}</td></tr>
-                <tr><td>{this.renderSkill(skills.divingTackle, 'A')}</td><td>{this.renderSkill(skills.dirtyPlayer(1), 'G')}</td><td>{this.renderSkill(skills.disturbingPresence, 'M')}</td><td>{this.renderSkill(skills.cloudBurster, 'P')}</td><td>{this.renderSkill(skills.breakTackle, 'S')}</td></tr>
-                <tr><td>{this.renderSkill(skills.dodge, 'A')}</td><td>{this.renderSkill(skills.fend, 'G')}</td><td>{this.renderSkill(skills.extraArms, 'M')}</td><td>{this.renderSkill(skills.dumpOff, 'P')}</td><td>{this.renderSkill(skills.grab, 'S')}</td></tr>
-                <tr><td>{this.renderSkill(skills.defensive, 'A')}</td><td>{this.renderSkill(skills.frenzy, 'G')}</td><td>{this.renderSkill(skills.foulAppearance, 'M')}</td><td>{this.renderSkill(skills.fumblerooskie, 'P')}</td><td>{this.renderSkill(skills.guard, 'S')}</td></tr>
-                <tr><td>{this.renderSkill(skills.jumpUp, 'A')}</td><td>{this.renderSkill(skills.kick, 'G')}</td><td>{this.renderSkill(skills.horns, 'M')}</td><td>{this.renderSkill(skills.hailMaryPass, 'P')}</td><td>{this.renderSkill(skills.juggernaut, 'S')}</td></tr>
-                <tr><td>{this.renderSkill(skills.leap, 'A')}</td><td>{this.renderSkill(skills.pro, 'G')}</td><td>{this.renderSkill(skills.ironHardSkin, 'M')}</td><td>{this.renderSkill(skills.leader, 'P')}</td><td>{this.renderSkill(skills.mightyBlow(1), 'S')}</td></tr>
-                <tr><td>{this.renderSkill(skills.safePairOfHands, 'A')}</td><td>{this.renderSkill(skills.shadowing, 'G')}</td><td>{this.renderSkill(skills.monstrousMouth, 'M')}</td><td>{this.renderSkill(skills.nervesOfSteel, 'P')}</td><td>{this.renderSkill(skills.multipleBlock, 'S')}</td></tr>
-                <tr><td>{this.renderSkill(skills.sideStep, 'A')}</td><td>{this.renderSkill(skills.stripBall, 'G')}</td><td>{this.renderSkill(skills.prehensileTail, 'M')}</td><td>{this.renderSkill(skills.onTheBall, 'P')}</td><td>{this.renderSkill(skills.pileDriver, 'S')}</td></tr>
-                <tr><td>{this.renderSkill(skills.sneakyGit, 'A')}</td><td>{this.renderSkill(skills.sureHands, 'G')}</td><td>{this.renderSkill(skills.tentacles, 'M')}</td><td>{this.renderSkill(skills.pass, 'P')}</td><td>{this.renderSkill(skills.standFirm, 'S')}</td></tr>
-                <tr><td>{this.renderSkill(skills.sprint, 'A')}</td><td>{this.renderSkill(skills.tackle, 'G')}</td><td>{this.renderSkill(skills.twoHeads, 'M')}</td><td>{this.renderSkill(skills.runningPass, 'P')}</td><td>{this.renderSkill(skills.strongArm, 'S')}</td></tr>
-                <tr><td>{this.renderSkill(skills.sureFeet, 'A')}</td><td>{this.renderSkill(skills.wrestle, 'G')}</td><td>{this.renderSkill(skills.veryLongLegs, 'M')}</td><td>{this.renderSkill(skills.safePass, 'P')}</td><td>{this.renderSkill(skills.thickSkull, 'S')}</td></tr>
+                <tr><td>{this.renderSkill(skills.catch, "A")}</td><td>{this.renderSkill(skills.block, "G")}</td><td>{this.renderSkill(skills.bigHand, "M")}</td><td>{this.renderSkill(skills.accurate, "P")}</td><td>{this.renderSkill(skills.armBar, "S")}</td></tr>
+                <tr><td>{this.renderSkill(skills.divingCatch, "A")}</td><td>{this.renderSkill(skills.dauntless, "G")}</td><td>{this.renderSkill(skills.claws, "M")}</td><td>{this.renderSkill(skills.cannoneer, "P")}</td><td>{this.renderSkill(skills.brawler, "S")}</td></tr>
+                <tr><td>{this.renderSkill(skills.divingTackle, "A")}</td><td>{this.renderSkill(skills.dirtyPlayer(1), "G")}</td><td>{this.renderSkill(skills.disturbingPresence, "M")}</td><td>{this.renderSkill(skills.cloudBurster, "P")}</td><td>{this.renderSkill(skills.breakTackle, "S")}</td></tr>
+                <tr><td>{this.renderSkill(skills.dodge, "A")}</td><td>{this.renderSkill(skills.fend, "G")}</td><td>{this.renderSkill(skills.extraArms, "M")}</td><td>{this.renderSkill(skills.dumpOff, "P")}</td><td>{this.renderSkill(skills.grab, "S")}</td></tr>
+                <tr><td>{this.renderSkill(skills.defensive, "A")}</td><td>{this.renderSkill(skills.frenzy, "G")}</td><td>{this.renderSkill(skills.foulAppearance, "M")}</td><td>{this.renderSkill(skills.fumblerooskie, "P")}</td><td>{this.renderSkill(skills.guard, "S")}</td></tr>
+                <tr><td>{this.renderSkill(skills.jumpUp, "A")}</td><td>{this.renderSkill(skills.kick, "G")}</td><td>{this.renderSkill(skills.horns, "M")}</td><td>{this.renderSkill(skills.hailMaryPass, "P")}</td><td>{this.renderSkill(skills.juggernaut, "S")}</td></tr>
+                <tr><td>{this.renderSkill(skills.leap, "A")}</td><td>{this.renderSkill(skills.pro, "G")}</td><td>{this.renderSkill(skills.ironHardSkin, "M")}</td><td>{this.renderSkill(skills.leader, "P")}</td><td>{this.renderSkill(skills.mightyBlow(1), "S")}</td></tr>
+                <tr><td>{this.renderSkill(skills.safePairOfHands, "A")}</td><td>{this.renderSkill(skills.shadowing, "G")}</td><td>{this.renderSkill(skills.monstrousMouth, "M")}</td><td>{this.renderSkill(skills.nervesOfSteel, "P")}</td><td>{this.renderSkill(skills.multipleBlock, "S")}</td></tr>
+                <tr><td>{this.renderSkill(skills.sideStep, "A")}</td><td>{this.renderSkill(skills.stripBall, "G")}</td><td>{this.renderSkill(skills.prehensileTail, "M")}</td><td>{this.renderSkill(skills.onTheBall, "P")}</td><td>{this.renderSkill(skills.pileDriver, "S")}</td></tr>
+                <tr><td>{this.renderSkill(skills.sneakyGit, "A")}</td><td>{this.renderSkill(skills.sureHands, "G")}</td><td>{this.renderSkill(skills.tentacles, "M")}</td><td>{this.renderSkill(skills.pass, "P")}</td><td>{this.renderSkill(skills.standFirm, "S")}</td></tr>
+                <tr><td>{this.renderSkill(skills.sprint, "A")}</td><td>{this.renderSkill(skills.tackle, "G")}</td><td>{this.renderSkill(skills.twoHeads, "M")}</td><td>{this.renderSkill(skills.runningPass, "P")}</td><td>{this.renderSkill(skills.strongArm, "S")}</td></tr>
+                <tr><td>{this.renderSkill(skills.sureFeet, "A")}</td><td>{this.renderSkill(skills.wrestle, "G")}</td><td>{this.renderSkill(skills.veryLongLegs, "M")}</td><td>{this.renderSkill(skills.safePass, "P")}</td><td>{this.renderSkill(skills.thickSkull, "S")}</td></tr>
               </tbody>
             </Table>
           </Modal.Body>
         </Modal>
 
       </Container>
-    )
+    );
   }
 }
 

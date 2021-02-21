@@ -8,6 +8,7 @@
     "@testing-library/react": "^11.2.3",
     "@testing-library/user-event": "^12.6.0",
     "bootstrap": "^4.5.3",
+    "eslint": "^7.20.0",
     "gh-pages": "^3.1.0",
     "react": "^17.0.1",
     "react-bootstrap": "^1.4.3",
@@ -23,7 +24,17 @@
     "deploy": "gh-pages -d build"
   },
   "eslintConfig": {
-    "extends": "react-app"
+    "extends": "react-app",
+    "rules": {
+      "semi": [
+        "error",
+        "always"
+      ],
+      "quotes": [
+        "error",
+        "double"
+      ]
+    }
   },
   "browserslist": {
     "production": [
