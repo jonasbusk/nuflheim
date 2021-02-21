@@ -42,6 +42,15 @@ class Team extends Component {
 
   state = {
     budget: 1000000,
+    playerAdvancementsCountTowardsTV: true,
+    customisePlayerAdvancementCosts: false,
+    costOfPrimarySkill: 20000,
+    costOfSecondarySkill: 40000,
+    costOfAV: 10000,
+    costOfMA: 20000,
+    costOfPA: 20000,
+    costOfAG: 40000,
+    costOfST: 80000,
     name: '',
     roster: rosters[0],
     coach: '',
@@ -209,13 +218,15 @@ class Team extends Component {
 
   getPlayerValue = (player) => {
     let value = player.value || 0;
-    value += player.maMod * 20000;
-    value += player.stMod * 80000;
-    value += player.agMod * 40000;
-    value += player.paMod * 20000;
-    value += player.avMod * 10000;
-    value += player.primarySkills.length * 20000;
-    value += player.secondarySkills.length * 40000;
+    if (this.state.playerAdvancementsCountTowardsTV) {
+      value += player.primarySkills.length * this.state.costOfPrimarySkill;
+      value += player.secondarySkills.length * this.state.costOfSecondarySkill;
+      value += player.maMod * this.state.costOfMA;
+      value += player.stMod * this.state.costOfST;
+      value += player.agMod * this.state.costOfAG;
+      value += player.paMod * this.state.costOfPA;
+      value += player.avMod * this.state.costOfAV;
+    }
     return value;
   }
 
@@ -239,6 +250,19 @@ class Team extends Component {
   formatCost = (x) => {
     // Format a number into a cost string, example: 10000 -> 10,000 GP
     return `${x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")} GP`;
+  }
+
+  toggleCustomisePlayerAdvancementCosts = () => {
+    this.setState({
+      customisePlayerAdvancementCosts: !this.state.customisePlayerAdvancementCosts,
+      costOfPrimarySkill: 20000,
+      costOfSecondarySkill: 40000,
+      costOfAV: 10000,
+      costOfMA: 20000,
+      costOfPA: 20000,
+      costOfAG: 40000,
+      costOfST: 80000,
+    });
   }
 
   render() {
@@ -323,12 +347,63 @@ class Team extends Component {
           </Tab>
           <Tab eventKey="budget" title="Budget">
             <Row>
-              <Col md="5">
+              <Col md="7">
                 <Table borderless size="sm" className="margin-zero budget-table">
                   <tbody>
                     <tr>
                       <td>Budget:</td>
-                      <td><Form.Control type="number" size="sm" className="text-right" value={this.state.budget} onChange={(e) => this.setState({budget: e.target.value})} /></td>
+                      <td><Form.Control type="number" size="sm" className="text-right" value={this.state.budget} onChange={(e) => this.setState({budget: Math.max(parseInt(e.target.value) || 0, 0)})} /></td>
+                      <td>GP</td>
+                    </tr>
+                    <tr>
+                      <td>Player advancements count towards TV:</td>
+                      <td><Form.Check inline type="checkbox" defaultChecked={this.state.playerAdvancementsCountTowardsTV} onChange={(e) => this.setState({playerAdvancementsCountTowardsTV: !this.state.playerAdvancementsCountTowardsTV})} /></td>
+                      <td></td>
+                    </tr>
+                    <tr>
+                      <td>Customise cost of player advancements:</td>
+                      <td><Form.Check inline type="checkbox" defaultChecked={this.state.customisePlayerAdvancementCosts} onChange={(e) => this.toggleCustomisePlayerAdvancementCosts()} /></td>
+                      <td></td>
+                    </tr>
+                    <tr>
+                      <td>Cost of primary skill:</td>
+                      <td><Form.Control type="number" size="sm" className="text-right" value={this.state.costOfPrimarySkill} onChange={(e) => this.setState({costOfPrimarySkill: Math.max(parseInt(e.target.value) || 0, 0)})} readOnly={!this.state.customisePlayerAdvancementCosts} /></td>
+                      <td>GP</td>
+                    </tr>
+                    <tr>
+                      <td>Cost of secondary skill:</td>
+                      <td><Form.Control type="number" size="sm" className="text-right" value={this.state.costOfSecondarySkill} onChange={(e) => this.setState({costOfSecondarySkill: Math.max(parseInt(e.target.value) || 0, 0)})} readOnly={!this.state.customisePlayerAdvancementCosts} /></td>
+                      <td>GP</td>
+                    </tr>
+                  </tbody>
+                </Table>
+              </Col>
+              <Col md="5">
+                <Table borderless size="sm" className="margin-zero budget-table">
+                  <tbody>
+                    <tr>
+                      <td>Cost of AV:</td>
+                      <td><Form.Control type="number" size="sm" className="text-right" value={this.state.costOfAV} onChange={(e) => this.setState({costOfAV: Math.max(parseInt(e.target.value) || 0, 0)})} readOnly={!this.state.customisePlayerAdvancementCosts} /></td>
+                      <td>GP</td>
+                    </tr>
+                    <tr>
+                      <td>Cost of MA:</td>
+                      <td><Form.Control type="number" size="sm" className="text-right" value={this.state.costOfMA} onChange={(e) => this.setState({costOfMA: Math.max(parseInt(e.target.value) || 0, 0)})} readOnly={!this.state.customisePlayerAdvancementCosts} /></td>
+                      <td>GP</td>
+                    </tr>
+                    <tr>
+                      <td>Cost of PA:</td>
+                      <td><Form.Control type="number" size="sm" className="text-right" value={this.state.costOfPA} onChange={(e) => this.setState({costOfPA: Math.max(parseInt(e.target.value) || 0, 0)})} readOnly={!this.state.customisePlayerAdvancementCosts} /></td>
+                      <td>GP</td>
+                    </tr>
+                    <tr>
+                      <td>Cost of AG:</td>
+                      <td><Form.Control type="number" size="sm" className="text-right" value={this.state.costOfAG} onChange={(e) => this.setState({costOfAG: Math.max(parseInt(e.target.value) || 0, 0)})} readOnly={!this.state.customisePlayerAdvancementCosts} /></td>
+                      <td>GP</td>
+                    </tr>
+                    <tr>
+                      <td>Cost of ST:</td>
+                      <td><Form.Control type="number" size="sm" className="text-right" value={this.state.costOfST} onChange={(e) => this.setState({costOfST: Math.max(parseInt(e.target.value) || 0, 0)})} readOnly={!this.state.customisePlayerAdvancementCosts} /></td>
                       <td>GP</td>
                     </tr>
                   </tbody>
