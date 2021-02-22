@@ -307,35 +307,35 @@ class Team extends Component {
                   <tbody>
                     <tr>
                       <td>Team re-rolls:</td>
-                      <td><Form.Control type="number" size="sm" value={this.state.reRolls} onChange={(e) => this.setState({reRolls: Math.min(Math.max(parseInt(e.target.value) || 0, 0), 8)})} /></td>
+                      <td><Form.Control type="number" size="sm" value={this.state.reRolls.toString()} onChange={(e) => this.setState({reRolls: e.target.value && Math.min(Math.max(parseInt(e.target.value) || 0, 0), 8)})} /></td>
                       <td>x</td>
                       <td><Form.Control type="text" size="sm" className="text-right" value={this.formatCost(this.state.roster.reRollsCost)} readOnly /></td>
                       <td><Form.Control type="text" size="sm" className="text-right" value={this.formatCost(this.state.reRolls * this.state.roster.reRollsCost)} readOnly /></td>
                     </tr>
                     <tr>
                       <td>Dedicated Fans:</td>
-                      <td><Form.Control type="number" size="sm" value={this.state.dedicatedFans} onChange={(e) => this.setState({dedicatedFans: Math.max(parseInt(e.target.value) || 0, 0)})} /></td>
+                      <td><Form.Control type="number" size="sm" value={this.state.dedicatedFans.toString()} onChange={(e) => this.setState({dedicatedFans: e.target.value && Math.min(Math.max(parseInt(e.target.value) || 0, 0), 99)})} /></td>
                       <td>x</td>
                       <td><Form.Control type="text" size="sm" className="text-right" defaultValue={this.formatCost(10000)} plaintext readOnly /></td>
                       <td><Form.Control type="text" size="sm" className="text-right" value={this.formatCost(this.state.dedicatedFans * 10000)} readOnly /></td>
                     </tr>
                     <tr>
                       <td>Assistant Coaches:</td>
-                      <td><Form.Control type="number" size="sm" value={this.state.assistantCoaches} onChange={(e) => this.setState({assistantCoaches: Math.max(parseInt(e.target.value) || 0, 0)})} /></td>
+                      <td><Form.Control type="number" size="sm" value={this.state.assistantCoaches.toString()} onChange={(e) => this.setState({assistantCoaches: e.target.value && Math.min(Math.max(parseInt(e.target.value) || 0, 0), 99)})} /></td>
                       <td>x</td>
                       <td><Form.Control type="text" size="sm" className="text-right" defaultValue={this.formatCost(10000)} plaintext readOnly /></td>
                       <td><Form.Control type="text" size="sm" className="text-right" value={this.formatCost(this.state.assistantCoaches * 10000)} readOnly /></td>
                     </tr>
                     <tr>
                       <td>Cheerleaders:</td>
-                      <td><Form.Control type="number" size="sm" value={this.state.cheerleaders} onChange={(e) => this.setState({cheerleaders: Math.max(parseInt(e.target.value) || 0, 0)})} /></td>
+                      <td><Form.Control type="number" size="sm" value={this.state.cheerleaders.toString()} onChange={(e) => this.setState({cheerleaders: e.target.value && Math.min(Math.max(parseInt(e.target.value) || 0, 0), 99)})} /></td>
                       <td>x</td>
                       <td><Form.Control type="text" size="sm" className="text-right" defaultValue={this.formatCost(10000)} plaintext readOnly /></td>
                       <td><Form.Control type="text" size="sm" className="text-right" value={this.formatCost(this.state.cheerleaders * 10000)} readOnly /></td>
                     </tr>
                     <tr>
                       <td>Apothecary:</td>
-                      <td><Form.Control type="number" size="sm" value={this.state.apothecary} onChange={(e) => this.setState({apothecary: Math.min(Math.max(parseInt(e.target.value) || 0, 0), 1)})} readOnly={!this.state.roster.apothecaryAllowed} /></td>
+                      <td><Form.Control type="number" size="sm" value={this.state.apothecary.toString()} onChange={(e) => this.setState({apothecary: e.target.value && Math.min(Math.max(parseInt(e.target.value) || 0, 0), 1)})} readOnly={!this.state.roster.apothecaryAllowed} /></td>
                       <td>x</td>
                       <td><Form.Control type="text" size="sm" className="text-right" defaultValue={this.formatCost(50000)} plaintext readOnly /></td>
                       <td><Form.Control type="text" size="sm" className="text-right" value={this.formatCost(this.state.apothecary * 50000)} readOnly /></td>
@@ -352,7 +352,7 @@ class Team extends Component {
                   <tbody>
                     <tr>
                       <td>Budget:</td>
-                      <td><Form.Control type="number" size="sm" className="text-right" value={this.state.budget} onChange={(e) => this.setState({budget: Math.max(parseInt(e.target.value) || 0, 0)})} /></td>
+                      <td><Form.Control type="number" size="sm" className="text-right" value={this.state.budget.toString()} onChange={(e) => this.setState({budget: e.target.value && Math.min(Math.max(parseInt(e.target.value) || 0, 0), Number.MAX_SAFE_INTEGER)})} /></td>
                       <td>GP</td>
                     </tr>
                     <tr>
@@ -367,12 +367,12 @@ class Team extends Component {
                     </tr>
                     <tr>
                       <td>Cost of primary skill:</td>
-                      <td><Form.Control type="number" size="sm" className="text-right" value={this.state.costOfPrimarySkill} onChange={(e) => this.setState({costOfPrimarySkill: Math.max(parseInt(e.target.value) || 0, 0)})} readOnly={!this.state.customisePlayerAdvancementCosts} /></td>
+                      <td><Form.Control type="number" size="sm" className="text-right" value={this.state.costOfPrimarySkill.toString()} onChange={(e) => this.setState({costOfPrimarySkill: e.target.value && Math.min(Math.max(parseInt(e.target.value) || 0, 0), Number.MAX_SAFE_INTEGER)})} readOnly={!this.state.customisePlayerAdvancementCosts} /></td>
                       <td>GP</td>
                     </tr>
                     <tr>
                       <td>Cost of secondary skill:</td>
-                      <td><Form.Control type="number" size="sm" className="text-right" value={this.state.costOfSecondarySkill} onChange={(e) => this.setState({costOfSecondarySkill: Math.max(parseInt(e.target.value) || 0, 0)})} readOnly={!this.state.customisePlayerAdvancementCosts} /></td>
+                      <td><Form.Control type="number" size="sm" className="text-right" value={this.state.costOfSecondarySkill.toString()} onChange={(e) => this.setState({costOfSecondarySkill: e.target.value && Math.min(Math.max(parseInt(e.target.value) || 0, 0), Number.MAX_SAFE_INTEGER)})} readOnly={!this.state.customisePlayerAdvancementCosts} /></td>
                       <td>GP</td>
                     </tr>
                   </tbody>
@@ -383,27 +383,27 @@ class Team extends Component {
                   <tbody>
                     <tr>
                       <td>Cost of AV:</td>
-                      <td><Form.Control type="number" size="sm" className="text-right" value={this.state.costOfAV} onChange={(e) => this.setState({costOfAV: Math.max(parseInt(e.target.value) || 0, 0)})} readOnly={!this.state.customisePlayerAdvancementCosts} /></td>
+                      <td><Form.Control type="number" size="sm" className="text-right" value={this.state.costOfAV.toString()} onChange={(e) => this.setState({costOfAV: e.target.value && Math.min(Math.max(parseInt(e.target.value) || 0, 0), Number.MAX_SAFE_INTEGER)})} readOnly={!this.state.customisePlayerAdvancementCosts} /></td>
                       <td>GP</td>
                     </tr>
                     <tr>
                       <td>Cost of MA:</td>
-                      <td><Form.Control type="number" size="sm" className="text-right" value={this.state.costOfMA} onChange={(e) => this.setState({costOfMA: Math.max(parseInt(e.target.value) || 0, 0)})} readOnly={!this.state.customisePlayerAdvancementCosts} /></td>
+                      <td><Form.Control type="number" size="sm" className="text-right" value={this.state.costOfMA.toString()} onChange={(e) => this.setState({costOfMA: e.target.value && Math.min(Math.max(parseInt(e.target.value) || 0, 0), Number.MAX_SAFE_INTEGER)})} readOnly={!this.state.customisePlayerAdvancementCosts} /></td>
                       <td>GP</td>
                     </tr>
                     <tr>
                       <td>Cost of PA:</td>
-                      <td><Form.Control type="number" size="sm" className="text-right" value={this.state.costOfPA} onChange={(e) => this.setState({costOfPA: Math.max(parseInt(e.target.value) || 0, 0)})} readOnly={!this.state.customisePlayerAdvancementCosts} /></td>
+                      <td><Form.Control type="number" size="sm" className="text-right" value={this.state.costOfPA.toString()} onChange={(e) => this.setState({costOfPA: e.target.value && Math.min(Math.max(parseInt(e.target.value) || 0, 0), Number.MAX_SAFE_INTEGER)})} readOnly={!this.state.customisePlayerAdvancementCosts} /></td>
                       <td>GP</td>
                     </tr>
                     <tr>
                       <td>Cost of AG:</td>
-                      <td><Form.Control type="number" size="sm" className="text-right" value={this.state.costOfAG} onChange={(e) => this.setState({costOfAG: Math.max(parseInt(e.target.value) || 0, 0)})} readOnly={!this.state.customisePlayerAdvancementCosts} /></td>
+                      <td><Form.Control type="number" size="sm" className="text-right" value={this.state.costOfAG.toString()} onChange={(e) => this.setState({costOfAG: e.target.value && Math.min(Math.max(parseInt(e.target.value) || 0, 0), Number.MAX_SAFE_INTEGER)})} readOnly={!this.state.customisePlayerAdvancementCosts} /></td>
                       <td>GP</td>
                     </tr>
                     <tr>
                       <td>Cost of ST:</td>
-                      <td><Form.Control type="number" size="sm" className="text-right" value={this.state.costOfST} onChange={(e) => this.setState({costOfST: Math.max(parseInt(e.target.value) || 0, 0)})} readOnly={!this.state.customisePlayerAdvancementCosts} /></td>
+                      <td><Form.Control type="number" size="sm" className="text-right" value={this.state.costOfST.toString()} onChange={(e) => this.setState({costOfST: e.target.value && Math.min(Math.max(parseInt(e.target.value) || 0, 0), Number.MAX_SAFE_INTEGER)})} readOnly={!this.state.customisePlayerAdvancementCosts} /></td>
                       <td>GP</td>
                     </tr>
                   </tbody>
