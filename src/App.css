@@ -83,12 +83,18 @@ footer a:hover {
 }
 
 .team-table-2 td:nth-child(4) {
-  width: 100px;
+  width: 105px;
 }
 
 .team-table-2 td:nth-child(5) {
   width: 105px;
 }
+
+.budget-table td:nth-child(3) {
+  width: 40px;
+}
+
+
 
 .player-table {
   line-height: normal;

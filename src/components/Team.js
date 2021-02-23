@@ -42,7 +42,8 @@ class Team extends Component {
 
   state = {
     budget: 1000000,
-    playerAdvancementsCountTowardsTV: true,
+    playerAdvancementsCostGold: true,
+    reRollsCostDouble: false,
     customisePlayerAdvancementCosts: false,
     costOfPrimarySkill: 20000,
     costOfSecondarySkill: 40000,
@@ -75,6 +76,10 @@ class Team extends Component {
       apothecary: 0,
       players: new Array(16).fill(null).map((x) => player())
     });
+  }
+
+  getReRollsCost = () => {
+    return this.state.reRollsCostDouble ? this.state.roster.reRollsCost * 2 : this.state.roster.reRollsCost;
   }
 
   setPlayer = (playerNumber, positionNumber) => {
@@ -218,7 +223,7 @@ class Team extends Component {
 
   getPlayerValue = (player) => {
     let value = player.value || 0;
-    if (this.state.playerAdvancementsCountTowardsTV) {
+    if (this.state.playerAdvancementsCostGold) {
       value += player.primarySkills.length * this.state.costOfPrimarySkill;
       value += player.secondarySkills.length * this.state.costOfSecondarySkill;
       value += player.maMod * this.state.costOfMA;
@@ -233,7 +238,7 @@ class Team extends Component {
   getTeamValue = () => {
     // Compute the current team value
     let tv = 0;
-    tv += this.state.reRolls * this.state.roster.reRollsCost;
+    tv += this.state.reRolls * this.getReRollsCost();
     tv += this.state.dedicatedFans * 10000;
     tv += this.state.assistantCoaches * 10000;
     tv += this.state.cheerleaders * 10000;
@@ -309,8 +314,8 @@ class Team extends Component {
                       <td>Team re-rolls:</td>
                       <td><Form.Control type="number" size="sm" value={this.state.reRolls.toString()} onChange={(e) => this.setState({reRolls: e.target.value && Math.min(Math.max(parseInt(e.target.value) || 0, 0), 8)})} /></td>
                       <td>x</td>
-                      <td><Form.Control type="text" size="sm" className="text-right" value={this.formatCost(this.state.roster.reRollsCost)} readOnly /></td>
-                      <td><Form.Control type="text" size="sm" className="text-right" value={this.formatCost(this.state.reRolls * this.state.roster.reRollsCost)} readOnly /></td>
+                      <td><Form.Control type="text" size="sm" className="text-right" value={this.formatCost(this.getReRollsCost())} readOnly /></td>
+                      <td><Form.Control type="text" size="sm" className="text-right" value={this.formatCost(this.state.reRolls * this.getReRollsCost())} readOnly /></td>
                     </tr>
                     <tr>
                       <td>Dedicated Fans:</td>
@@ -351,13 +356,28 @@ class Team extends Component {
                 <Table borderless size="sm" className="margin-zero budget-table">
                   <tbody>
                     <tr>
-                      <td>Budget:</td>
+                      <td>Team budget:</td>
                       <td><Form.Control type="number" size="sm" className="text-right" value={this.state.budget.toString()} onChange={(e) => this.setState({budget: e.target.value && Math.min(Math.max(parseInt(e.target.value) || 0, 0), Number.MAX_SAFE_INTEGER)})} /></td>
                       <td>GP</td>
                     </tr>
+                  </tbody>
+                </Table>
+              </Col>
+              <Col md="5">
+              </Col>
+            </Row>
+            <Row>
+              <Col md="7">
+                <Table borderless size="sm" className="margin-zero budget-table">
+                  <tbody>
                     <tr>
-                      <td>Player advancements count towards TV:</td>
-                      <td><Form.Check inline type="checkbox" defaultChecked={this.state.playerAdvancementsCountTowardsTV} onChange={(e) => this.setState({playerAdvancementsCountTowardsTV: !this.state.playerAdvancementsCountTowardsTV})} /></td>
+                      <td>Player advancements cost gold:</td>
+                      <td><Form.Check inline type="checkbox" defaultChecked={this.state.playerAdvancementsCostGold} onChange={(e) => this.setState({playerAdvancementsCostGold: !this.state.playerAdvancementsCostGold})} /></td>
+                      <td></td>
+                    </tr>
+                    <tr>
+                      <td>Rerolls cost double:</td>
+                      <td><Form.Check inline type="checkbox" defaultChecked={this.state.reRollsCostDouble} onChange={(e) => this.setState({reRollsCostDouble: !this.state.reRollsCostDouble})} /></td>
                       <td></td>
                     </tr>
                     <tr>
