@@ -11,7 +11,7 @@ function App() {
   return (
     <div className="App">
       <header>
-        <Container><Row><Col id="header">Team Draft List</Col></Row></Container>
+        <Container><Row><Col id="header"><span className="text-orange">Nuflheim</span> Team Draft List</Col></Row></Container>
       </header>
       <main>
         <Team />
