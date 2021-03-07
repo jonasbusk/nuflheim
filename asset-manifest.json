@@ -1,23 +1,23 @@
 {
   "files": {
-    "main.css": "/nuflheim/static/css/main.034aebe5.chunk.css",
-    "main.js": "/nuflheim/static/js/main.66400acc.chunk.js",
-    "main.js.map": "/nuflheim/static/js/main.66400acc.chunk.js.map",
+    "main.css": "/nuflheim/static/css/main.40756ae7.chunk.css",
+    "main.js": "/nuflheim/static/js/main.53c08544.chunk.js",
+    "main.js.map": "/nuflheim/static/js/main.53c08544.chunk.js.map",
     "runtime-main.js": "/nuflheim/static/js/runtime-main.80762add.js",
     "runtime-main.js.map": "/nuflheim/static/js/runtime-main.80762add.js.map",
     "static/css/2.ae9f1eb3.chunk.css": "/nuflheim/static/css/2.ae9f1eb3.chunk.css",
-    "static/js/2.2eee421e.chunk.js": "/nuflheim/static/js/2.2eee421e.chunk.js",
-    "static/js/2.2eee421e.chunk.js.map": "/nuflheim/static/js/2.2eee421e.chunk.js.map",
+    "static/js/2.24e4c278.chunk.js": "/nuflheim/static/js/2.24e4c278.chunk.js",
+    "static/js/2.24e4c278.chunk.js.map": "/nuflheim/static/js/2.24e4c278.chunk.js.map",
     "index.html": "/nuflheim/index.html",
     "static/css/2.ae9f1eb3.chunk.css.map": "/nuflheim/static/css/2.ae9f1eb3.chunk.css.map",
-    "static/css/main.034aebe5.chunk.css.map": "/nuflheim/static/css/main.034aebe5.chunk.css.map",
-    "static/js/2.2eee421e.chunk.js.LICENSE.txt": "/nuflheim/static/js/2.2eee421e.chunk.js.LICENSE.txt"
+    "static/css/main.40756ae7.chunk.css.map": "/nuflheim/static/css/main.40756ae7.chunk.css.map",
+    "static/js/2.24e4c278.chunk.js.LICENSE.txt": "/nuflheim/static/js/2.24e4c278.chunk.js.LICENSE.txt"
   },
   "entrypoints": [
     "static/js/runtime-main.80762add.js",
     "static/css/2.ae9f1eb3.chunk.css",
-    "static/js/2.2eee421e.chunk.js",
-    "static/css/main.034aebe5.chunk.css",
-    "static/js/main.66400acc.chunk.js"
+    "static/js/2.24e4c278.chunk.js",
+    "static/css/main.40756ae7.chunk.css",
+    "static/js/main.53c08544.chunk.js"
   ]
 }
