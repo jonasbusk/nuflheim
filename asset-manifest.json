@@ -1,8 +1,8 @@
 {
   "files": {
     "main.css": "/nuflheim/static/css/main.40756ae7.chunk.css",
-    "main.js": "/nuflheim/static/js/main.e2c7050f.chunk.js",
-    "main.js.map": "/nuflheim/static/js/main.e2c7050f.chunk.js.map",
+    "main.js": "/nuflheim/static/js/main.d463c64f.chunk.js",
+    "main.js.map": "/nuflheim/static/js/main.d463c64f.chunk.js.map",
     "runtime-main.js": "/nuflheim/static/js/runtime-main.80762add.js",
     "runtime-main.js.map": "/nuflheim/static/js/runtime-main.80762add.js.map",
     "static/css/2.ae9f1eb3.chunk.css": "/nuflheim/static/css/2.ae9f1eb3.chunk.css",
@@ -18,6 +18,6 @@
     "static/css/2.ae9f1eb3.chunk.css",
     "static/js/2.24e4c278.chunk.js",
     "static/css/main.40756ae7.chunk.css",
-    "static/js/main.e2c7050f.chunk.js"
+    "static/js/main.d463c64f.chunk.js"
   ]
 }
