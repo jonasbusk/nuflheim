@@ -297,6 +297,18 @@ const rosters = [
     2,
   ),
   roster(
+    "Khorne",
+    [
+      positional(16, "Pit Fighter", 60000, 6, 3, 3, 4, 9, [skills.frenzy], "G", "AS"),
+      positional(4, "Bloodletter", 80000, 6, 3, 3, 4, 8, [skills.horns, skills.juggernaut, skills.regeneration], "AGS", "P"),
+      positional(2, "Herald", 90000, 6, 3, 3, 5, 9, [skills.frenzy, skills.horns, skills.juggernaut], "GS", "AP"),
+      positional(1, "Bloodthirster", 180000, 6, 5, 5, null, 10, [skills.claws, skills.frenzy, skills.horns, skills.juggernaut, skills.loner(4), skills.regeneration, skills.unchannelledFury], "S", "AG"),
+    ],
+    70000,
+    true,
+    2,
+  ),
+  roster(
     "Lizardmen",
     [
       positional(12, "Skink Runner", 60000, 8, 2, 3, 4, 8, [skills.dodge, skills.stunty], "A", "GPS"),
@@ -416,6 +428,18 @@ const rosters = [
     50000,
     true,
     1,
+  ),
+  roster(
+    "Slann",
+    [
+      positional(16, "Lineman", 60000, 6, 3, 3, 4, 9, [skills.pogoStick, skills.veryLongLegs], "G", "AS"),
+      positional(4, "Catcher", 80000, 7, 2, 2, 4, 8, [skills.divingCatch, skills.pogoStick, skills.veryLongLegs], "AG", "PS"),
+      positional(4, "Blitzer", 110000, 7, 3, 3, 4, 9, [skills.divingTackle, skills.jumpUp, skills.pogoStick, skills.veryLongLegs], "AGS", "P"),
+      positional(1, "Kroxigor", 140000, 6, 5, 5, null, 10, [skills.boneHead, skills.loner(4), skills.mightyBlow(1), skills.prehensileTail, skills.thickSkull], "S", "AG")
+    ],
+    50000,
+    true,
+    2,
   ),
   roster(
     "Snotling",
