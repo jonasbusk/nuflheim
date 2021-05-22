@@ -42,8 +42,12 @@ class Team extends Component {
 
   state = {
     budget: 1000000,
+    costMultiplierReRolls: 1,
+    costOfAssistantCoaches: 10000,
+    costOfCheerleaders: 10000,
+    costOfDedicatedFans: 10000,
+    costOfApothecary: 50000,
     playerAdvancementsCostGold: true,
-    reRollsCostDouble: false,
     customisePlayerAdvancementCosts: false,
     costOfPrimarySkill: 20000,
     costOfSecondarySkill: 40000,
@@ -78,8 +82,8 @@ class Team extends Component {
     });
   }
 
-  getReRollsCost = () => {
-    return this.state.reRollsCostDouble ? this.state.roster.reRollsCost * 2 : this.state.roster.reRollsCost;
+  getCostOfReRolls = () => {
+    return Math.round(this.state.roster.costOfReRolls * this.state.costMultiplierReRolls);
   }
 
   setPlayer = (playerNumber, positionNumber) => {
@@ -238,11 +242,11 @@ class Team extends Component {
   getTeamValue = () => {
     // Compute the current team value
     let tv = 0;
-    tv += this.state.reRolls * this.getReRollsCost();
-    tv += this.state.dedicatedFans * 10000;
-    tv += this.state.assistantCoaches * 10000;
-    tv += this.state.cheerleaders * 10000;
-    tv += this.state.apothecary * 50000;
+    tv += this.state.reRolls * this.getCostOfReRolls();
+    tv += this.state.assistantCoaches * this.state.costOfAssistantCoaches;
+    tv += this.state.cheerleaders * this.state.costOfCheerleaders;
+    tv += this.state.dedicatedFans * this.state.costOfDedicatedFans;
+    tv += this.state.apothecary * this.state.costOfApothecary;
     tv += this.state.players.reduce((total, player) => {return total + this.getPlayerValue(player);}, 0);
     return tv;
   }
@@ -285,16 +289,16 @@ class Team extends Component {
                       <td><Form.Control type="text" size="sm" value={this.state.name} onChange={(e) => this.setState({name: e.target.value})} /></td>
                     </tr>
                     <tr>
-                      <td>Team Roster:</td>
+                      <td>Coach:</td>
+                      <td><Form.Control type="text" size="sm" value={this.state.coach} onChange={(e) => this.setState({coach: e.target.value})} /></td>
+                    </tr>
+                    <tr>
+                      <td>Roster:</td>
                       <td>
                         <Form.Control as="select" size="sm" onChange={(e) => this.setRoster(e.target.value)}>
                          {rosters.map((roster, i) => {return <option key={i} value={i}>{roster.name}</option>;})}
                         </Form.Control>
                       </td>
-                    </tr>
-                    <tr>
-                      <td>Coach:</td>
-                      <td><Form.Control type="text" size="sm" value={this.state.coach} onChange={(e) => this.setState({coach: e.target.value})} /></td>
                     </tr>
                     <tr>
                       <td>Treasury:</td>
@@ -314,36 +318,36 @@ class Team extends Component {
                       <td>Team re-rolls:</td>
                       <td><Form.Control type="number" size="sm" value={this.state.reRolls.toString()} onChange={(e) => this.setState({reRolls: e.target.value && Math.min(Math.max(parseInt(e.target.value) || 0, 0), 8)})} /></td>
                       <td>x</td>
-                      <td><Form.Control type="text" size="sm" className="text-right" value={this.formatCost(this.getReRollsCost())} readOnly /></td>
-                      <td><Form.Control type="text" size="sm" className="text-right" value={this.formatCost(this.state.reRolls * this.getReRollsCost())} readOnly /></td>
-                    </tr>
-                    <tr>
-                      <td>Dedicated Fans:</td>
-                      <td><Form.Control type="number" size="sm" value={this.state.dedicatedFans.toString()} onChange={(e) => this.setState({dedicatedFans: e.target.value && Math.min(Math.max(parseInt(e.target.value) || 0, 0), 99)})} /></td>
-                      <td>x</td>
-                      <td><Form.Control type="text" size="sm" className="text-right" defaultValue={this.formatCost(10000)} plaintext readOnly /></td>
-                      <td><Form.Control type="text" size="sm" className="text-right" value={this.formatCost(this.state.dedicatedFans * 10000)} readOnly /></td>
+                      <td><Form.Control type="text" size="sm" className="text-right" value={this.formatCost(this.getCostOfReRolls())} readOnly /></td>
+                      <td><Form.Control type="text" size="sm" className="text-right" value={this.formatCost(this.state.reRolls * this.getCostOfReRolls())} readOnly /></td>
                     </tr>
                     <tr>
                       <td>Assistant Coaches:</td>
                       <td><Form.Control type="number" size="sm" value={this.state.assistantCoaches.toString()} onChange={(e) => this.setState({assistantCoaches: e.target.value && Math.min(Math.max(parseInt(e.target.value) || 0, 0), 99)})} /></td>
                       <td>x</td>
-                      <td><Form.Control type="text" size="sm" className="text-right" defaultValue={this.formatCost(10000)} plaintext readOnly /></td>
-                      <td><Form.Control type="text" size="sm" className="text-right" value={this.formatCost(this.state.assistantCoaches * 10000)} readOnly /></td>
+                      <td><Form.Control type="text" size="sm" className="text-right" value={this.formatCost(this.state.costOfAssistantCoaches)} plaintext readOnly /></td>
+                      <td><Form.Control type="text" size="sm" className="text-right" value={this.formatCost(this.state.assistantCoaches * this.state.costOfAssistantCoaches)} readOnly /></td>
                     </tr>
                     <tr>
                       <td>Cheerleaders:</td>
                       <td><Form.Control type="number" size="sm" value={this.state.cheerleaders.toString()} onChange={(e) => this.setState({cheerleaders: e.target.value && Math.min(Math.max(parseInt(e.target.value) || 0, 0), 99)})} /></td>
                       <td>x</td>
-                      <td><Form.Control type="text" size="sm" className="text-right" defaultValue={this.formatCost(10000)} plaintext readOnly /></td>
-                      <td><Form.Control type="text" size="sm" className="text-right" value={this.formatCost(this.state.cheerleaders * 10000)} readOnly /></td>
+                      <td><Form.Control type="text" size="sm" className="text-right" value={this.formatCost(this.state.costOfCheerleaders)} plaintext readOnly /></td>
+                      <td><Form.Control type="text" size="sm" className="text-right" value={this.formatCost(this.state.cheerleaders * this.state.costOfCheerleaders)} readOnly /></td>
+                    </tr>
+                    <tr>
+                      <td>Dedicated Fans:</td>
+                      <td><Form.Control type="number" size="sm" value={this.state.dedicatedFans.toString()} onChange={(e) => this.setState({dedicatedFans: e.target.value && Math.min(Math.max(parseInt(e.target.value) || 0, 0), 99)})} /></td>
+                      <td>x</td>
+                      <td><Form.Control type="text" size="sm" className="text-right" value={this.formatCost(this.state.costOfDedicatedFans)} plaintext readOnly /></td>
+                      <td><Form.Control type="text" size="sm" className="text-right" value={this.formatCost(this.state.dedicatedFans * this.state.costOfDedicatedFans)} readOnly /></td>
                     </tr>
                     <tr>
                       <td>Apothecary:</td>
                       <td><Form.Control type="number" size="sm" value={this.state.apothecary.toString()} onChange={(e) => this.setState({apothecary: e.target.value && Math.min(Math.max(parseInt(e.target.value) || 0, 0), 1)})} readOnly={!this.state.roster.apothecaryAllowed} /></td>
                       <td>x</td>
-                      <td><Form.Control type="text" size="sm" className="text-right" defaultValue={this.formatCost(50000)} plaintext readOnly /></td>
-                      <td><Form.Control type="text" size="sm" className="text-right" value={this.formatCost(this.state.apothecary * 50000)} readOnly /></td>
+                      <td><Form.Control type="text" size="sm" className="text-right" value={this.formatCost(this.state.costOfApothecary)} plaintext readOnly /></td>
+                      <td><Form.Control type="text" size="sm" className="text-right" value={this.formatCost(this.state.apothecary * this.state.costOfApothecary)} readOnly /></td>
                     </tr>
                   </tbody>
                 </Table>
@@ -352,32 +356,48 @@ class Team extends Component {
           </Tab>
           <Tab eventKey="budget" title="Budget">
             <Row>
-              <Col md="7">
+              <Col md="6">
                 <Table borderless size="sm" className="margin-zero budget-table">
                   <tbody>
                     <tr>
-                      <td>Team budget:</td>
+                      <td>Team draft budget:</td>
                       <td><Form.Control type="number" size="sm" className="text-right" value={this.state.budget.toString()} onChange={(e) => this.setState({budget: e.target.value && Math.min(Math.max(parseInt(e.target.value) || 0, 0), Number.MAX_SAFE_INTEGER)})} /></td>
+                      <td>GP</td>
+                    </tr>
+                    <tr>
+                      <td>Team re-roll cost multiplier:</td>
+                        <td><Form.Control type="number" size="sm" className="text-right" value={this.state.costMultiplierReRolls.toString()} onChange={(e) => this.setState({costMultiplierReRolls: e.target.value && Math.max(e.target.value || 0, 0)})} /></td>
+                      <td>x</td>
+                    </tr>
+                    <tr>
+                      <td>Cost of assistant coaches:</td>
+                      <td><Form.Control type="number" size="sm" className="text-right" value={this.state.costOfAssistantCoaches.toString()} onChange={(e) => this.setState({costOfAssistantCoaches: e.target.value && Math.min(Math.max(parseInt(e.target.value) || 0, 0), Number.MAX_SAFE_INTEGER)})} /></td>
+                      <td>GP</td>
+                    </tr>
+                    <tr>
+                      <td>Cost of cheerleaders:</td>
+                      <td><Form.Control type="number" size="sm" className="text-right" value={this.state.costOfCheerleaders.toString()} onChange={(e) => this.setState({costOfCheerleaders: e.target.value && Math.min(Math.max(parseInt(e.target.value) || 0, 0), Number.MAX_SAFE_INTEGER)})} /></td>
+                      <td>GP</td>
+                    </tr>
+                    <tr>
+                      <td>Cost of dedicated fans:</td>
+                      <td><Form.Control type="number" size="sm" className="text-right" value={this.state.costOfDedicatedFans.toString()} onChange={(e) => this.setState({costOfDedicatedFans: e.target.value && Math.min(Math.max(parseInt(e.target.value) || 0, 0), Number.MAX_SAFE_INTEGER)})} /></td>
+                      <td>GP</td>
+                    </tr>
+                    <tr>
+                      <td>Cost of apothecary:</td>
+                      <td><Form.Control type="number" size="sm" className="text-right" value={this.state.costOfApothecary.toString()} onChange={(e) => this.setState({costOfApothecary: e.target.value && Math.min(Math.max(parseInt(e.target.value) || 0, 0), Number.MAX_SAFE_INTEGER)})} /></td>
                       <td>GP</td>
                     </tr>
                   </tbody>
                 </Table>
               </Col>
-              <Col md="5">
-              </Col>
-            </Row>
-            <Row>
-              <Col md="7">
+              <Col md="6">
                 <Table borderless size="sm" className="margin-zero budget-table">
                   <tbody>
                     <tr>
                       <td>Player advancements cost gold:</td>
                       <td><Form.Check inline type="checkbox" defaultChecked={this.state.playerAdvancementsCostGold} onChange={(e) => this.setState({playerAdvancementsCostGold: !this.state.playerAdvancementsCostGold})} /></td>
-                      <td></td>
-                    </tr>
-                    <tr>
-                      <td>Rerolls cost double:</td>
-                      <td><Form.Check inline type="checkbox" defaultChecked={this.state.reRollsCostDouble} onChange={(e) => this.setState({reRollsCostDouble: !this.state.reRollsCostDouble})} /></td>
                       <td></td>
                     </tr>
                     <tr>
@@ -395,12 +415,6 @@ class Team extends Component {
                       <td><Form.Control type="number" size="sm" className="text-right" value={this.state.costOfSecondarySkill.toString()} onChange={(e) => this.setState({costOfSecondarySkill: e.target.value && Math.min(Math.max(parseInt(e.target.value) || 0, 0), Number.MAX_SAFE_INTEGER)})} readOnly={!this.state.customisePlayerAdvancementCosts} /></td>
                       <td>GP</td>
                     </tr>
-                  </tbody>
-                </Table>
-              </Col>
-              <Col md="5">
-                <Table borderless size="sm" className="margin-zero budget-table">
-                  <tbody>
                     <tr>
                       <td>Cost of AV:</td>
                       <td><Form.Control type="number" size="sm" className="text-right" value={this.state.costOfAV.toString()} onChange={(e) => this.setState({costOfAV: e.target.value && Math.min(Math.max(parseInt(e.target.value) || 0, 0), Number.MAX_SAFE_INTEGER)})} readOnly={!this.state.customisePlayerAdvancementCosts} /></td>

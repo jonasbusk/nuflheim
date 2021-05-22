@@ -113,11 +113,11 @@ const positional = (quantity, position, cost, ma, st, ag, pa, av, skills, primar
 };
 
 
-const roster = (name, positionals, reRollsCost, apothecaryAllowed, tier) => {
+const roster = (name, positionals, costOfReRolls, apothecaryAllowed, tier) => {
   return {
     name: name,
     positionals: positionals,
-    reRollsCost: reRollsCost,
+    costOfReRolls: costOfReRolls,
     apothecaryAllowed: apothecaryAllowed,
     tier: tier,
   };
