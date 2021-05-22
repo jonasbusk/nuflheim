@@ -7,6 +7,7 @@ import Tab from "react-bootstrap/Tab";
 import Table from "react-bootstrap/Table";
 import Tabs from "react-bootstrap/Tabs";
 import Form from "react-bootstrap/Form";
+import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
 
 import {rosters, skills} from "../data";
@@ -79,6 +80,28 @@ class Team extends Component {
       cheerleaders: 0,
       apothecary: 0,
       players: new Array(16).fill(null).map((x) => player())
+    });
+  }
+
+  setRulesPresetStandard = () => {
+    this.setState({
+      budget: 1000000,
+      costMultiplierReRolls: 1,
+      costOfAssistantCoaches: 10000,
+      costOfCheerleaders: 10000,
+      costOfDedicatedFans: 10000,
+      costOfApothecary: 50000,
+    });
+  }
+
+  setRulesPresetSevens = () => {
+    this.setState({
+      budget: 600000,
+      costMultiplierReRolls: 2,
+      costOfAssistantCoaches: 20000,
+      costOfCheerleaders: 20000,
+      costOfDedicatedFans: 20000,
+      costOfApothecary: 80000,
     });
   }
 
@@ -359,6 +382,14 @@ class Team extends Component {
               <Col md="6">
                 <Table borderless size="sm" className="margin-zero budget-table">
                   <tbody>
+                    <tr>
+                      <td>Rules presets:</td>
+                      <td>
+                        <Button variant="outline-primary" size="sm" onClick={() => this.setRulesPresetStandard()}>Standard</Button>{" "}
+                        <Button variant="outline-primary" size="sm" onClick={() => this.setRulesPresetSevens()}>Sevens</Button>
+                      </td>
+                      <td></td>
+                    </tr>
                     <tr>
                       <td>Team draft budget:</td>
                       <td><Form.Control type="number" size="sm" className="text-right" value={this.state.budget.toString()} onChange={(e) => this.setState({budget: e.target.value && Math.min(Math.max(parseInt(e.target.value) || 0, 0), Number.MAX_SAFE_INTEGER)})} /></td>
