@@ -1,8 +1,8 @@
 {
   "files": {
     "main.css": "/nuflheim/static/css/main.deadfebe.chunk.css",
-    "main.js": "/nuflheim/static/js/main.0525acfb.chunk.js",
-    "main.js.map": "/nuflheim/static/js/main.0525acfb.chunk.js.map",
+    "main.js": "/nuflheim/static/js/main.760293c6.chunk.js",
+    "main.js.map": "/nuflheim/static/js/main.760293c6.chunk.js.map",
     "runtime-main.js": "/nuflheim/static/js/runtime-main.7f52eabd.js",
     "runtime-main.js.map": "/nuflheim/static/js/runtime-main.7f52eabd.js.map",
     "static/css/2.4c97ca4f.chunk.css": "/nuflheim/static/css/2.4c97ca4f.chunk.css",
@@ -18,6 +18,6 @@
     "static/css/2.4c97ca4f.chunk.css",
     "static/js/2.2cc9cf6b.chunk.js",
     "static/css/main.deadfebe.chunk.css",
-    "static/js/main.0525acfb.chunk.js"
+    "static/js/main.760293c6.chunk.js"
   ]
 }
