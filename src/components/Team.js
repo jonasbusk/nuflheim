@@ -265,18 +265,24 @@ class Team extends Component {
   getTeamValue = () => {
     // Compute the current team value
     let tv = 0;
-    tv += this.state.reRolls * this.getCostOfReRolls();
+    // players
+    tv += this.state.players.reduce((total, player) => {return total + this.getPlayerValue(player);}, 0);
+    // sideline staff
     tv += this.state.assistantCoaches * this.state.costOfAssistantCoaches;
     tv += this.state.cheerleaders * this.state.costOfCheerleaders;
-    tv += this.state.dedicatedFans * this.state.costOfDedicatedFans;
     tv += this.state.apothecary * this.state.costOfApothecary;
-    tv += this.state.players.reduce((total, player) => {return total + this.getPlayerValue(player);}, 0);
+    // team re-rolls
+    tv += this.state.reRolls * this.getCostOfReRolls();
+    // (fans and treasury do not add to team value)
     return tv;
   }
 
   getTreasury = () => {
     // Compute the current treasury value
-    return this.state.budget - this.getTeamValue();
+    let treasury = this.state.budget;
+    treasury -= this.getTeamValue();
+    treasury -= this.state.dedicatedFans * this.state.costOfDedicatedFans;
+    return treasury;
   }
 
   formatCost = (x) => {
@@ -346,21 +352,21 @@ class Team extends Component {
                     </tr>
                     <tr>
                       <td>Assistant Coaches:</td>
-                      <td><Form.Control type="number" size="sm" value={this.state.assistantCoaches.toString()} onChange={(e) => this.setState({assistantCoaches: e.target.value && Math.min(Math.max(parseInt(e.target.value) || 0, 0), 99)})} /></td>
+                      <td><Form.Control type="number" size="sm" value={this.state.assistantCoaches.toString()} onChange={(e) => this.setState({assistantCoaches: e.target.value && Math.min(Math.max(parseInt(e.target.value) || 0, 0), 6)})} /></td>
                       <td>x</td>
                       <td><Form.Control type="text" size="sm" className="text-right" value={this.formatCost(this.state.costOfAssistantCoaches)} plaintext readOnly /></td>
                       <td><Form.Control type="text" size="sm" className="text-right" value={this.formatCost(this.state.assistantCoaches * this.state.costOfAssistantCoaches)} readOnly /></td>
                     </tr>
                     <tr>
                       <td>Cheerleaders:</td>
-                      <td><Form.Control type="number" size="sm" value={this.state.cheerleaders.toString()} onChange={(e) => this.setState({cheerleaders: e.target.value && Math.min(Math.max(parseInt(e.target.value) || 0, 0), 99)})} /></td>
+                      <td><Form.Control type="number" size="sm" value={this.state.cheerleaders.toString()} onChange={(e) => this.setState({cheerleaders: e.target.value && Math.min(Math.max(parseInt(e.target.value) || 0, 0), 12)})} /></td>
                       <td>x</td>
                       <td><Form.Control type="text" size="sm" className="text-right" value={this.formatCost(this.state.costOfCheerleaders)} plaintext readOnly /></td>
                       <td><Form.Control type="text" size="sm" className="text-right" value={this.formatCost(this.state.cheerleaders * this.state.costOfCheerleaders)} readOnly /></td>
                     </tr>
                     <tr>
                       <td>Dedicated Fans:</td>
-                      <td><Form.Control type="number" size="sm" value={this.state.dedicatedFans.toString()} onChange={(e) => this.setState({dedicatedFans: e.target.value && Math.min(Math.max(parseInt(e.target.value) || 0, 0), 99)})} /></td>
+                      <td><Form.Control type="number" size="sm" value={this.state.dedicatedFans.toString()} onChange={(e) => this.setState({dedicatedFans: e.target.value && Math.min(Math.max(parseInt(e.target.value) || 0, 0), 6)})} /></td>
                       <td>x</td>
                       <td><Form.Control type="text" size="sm" className="text-right" value={this.formatCost(this.state.costOfDedicatedFans)} plaintext readOnly /></td>
                       <td><Form.Control type="text" size="sm" className="text-right" value={this.formatCost(this.state.dedicatedFans * this.state.costOfDedicatedFans)} readOnly /></td>
