@@ -122,6 +122,24 @@ class Team extends Component {
       players[playerNumber-1] = player(players[playerNumber-1].name, positionNumber, p.position, p.ma, p.st, p.ag, p.pa, p.av, p.skills, p.cost, p.primaryAccess, p.secondaryAccess);
     }
     this.setState({players: players});
+    // Remove focus from dropdown menu to trigger onblur event
+    document.activeElement.blur();
+  }
+
+  onSetPlayerOpen = (options) => {
+    // Show quantity (0-16) in dropdown options
+    for (let i = 0; i < this.state.roster.positionals.length; i++) {
+      let p = this.state.roster.positionals[i];
+      options[i+1].textContent = p.position + " (0-" + p.quantity + ")";
+    }
+  }
+
+  onSetPlayerClose = (options) => {
+    // Remove quantity (0-16) in dropdown options
+    for (let i = 0; i < this.state.roster.positionals.length; i++) {
+      let p = this.state.roster.positionals[i];
+      options[i+1].textContent = p.position;
+    }
   }
 
   setPlayerName = (playerNumber, playerName) => {
@@ -391,8 +409,8 @@ class Team extends Component {
                     <tr>
                       <td>Rules presets:</td>
                       <td>
-                        <Button variant="outline-primary" size="sm" onClick={() => this.setRulesPresetStandard()}>Standard</Button>{" "}
-                        <Button variant="outline-primary" size="sm" onClick={() => this.setRulesPresetSevens()}>Sevens</Button>
+                        <Button variant="dark" size="sm" onClick={() => this.setRulesPresetStandard()}>Standard</Button>{" "}
+                        <Button variant="dark" size="sm" onClick={() => this.setRulesPresetSevens()}>Sevens</Button>
                       </td>
                       <td></td>
                     </tr>
@@ -507,7 +525,11 @@ class Team extends Component {
                     <td className="player-number">{i+1}</td>
                     <td className="player-name"><Form.Control type="text" id={i+1} plaintext value={player.name || ""} onChange={(e) => this.setPlayerName(parseInt(e.target.id), e.target.value)} /></td>
                     <td className="player-position">
-                      <Form.Control as="select" id={i+1} size="sm" plaintext value={player.positionNumber || 0} onChange={(e) => this.setPlayer(parseInt(e.target.id), parseInt(e.target.value))}>
+                      <Form.Control as="select" id={i+1} size="sm" plaintext value={player.positionNumber || 0}
+                        onChange={(e) => this.setPlayer(parseInt(e.target.id), parseInt(e.target.value))}
+                        onFocus={(e) => this.onSetPlayerOpen(e.target.children)}
+                        onBlur={(e) => this.onSetPlayerClose(e.target.children)}
+                      >
                         <option key="0" value="0">-</option>
                         {this.state.roster.positionals.map((p, i) => {return <option key={i+1} value={i+1}>{p.position}</option>;})}
                       </Form.Control>
