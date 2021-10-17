@@ -192,6 +192,18 @@ const rosters = [
     2,
   ),
   roster(
+    "Daemons of Khorne",
+    [
+      positional(16, "Pit Fighter", 60000, 6, 3, 3, 4, 9, [skills.frenzy], "G", "AS"),
+      positional(4, "Bloodletter", 80000, 6, 3, 3, 4, 8, [skills.horns, skills.juggernaut, skills.regeneration], "AGS", "P"),
+      positional(2, "Herald", 90000, 6, 3, 3, 5, 9, [skills.frenzy, skills.horns, skills.juggernaut], "GS", "AP"),
+      positional(1, "Bloodthirster", 180000, 6, 5, 5, null, 10, [skills.claws, skills.frenzy, skills.horns, skills.juggernaut, skills.loner(4), skills.regeneration, skills.unchannelledFury], "S", "AG"),
+    ],
+    70000,
+    true,
+    2,
+  ),
+  roster(
     "Dark Elf",
     [
       positional(12, "Lineman", 70000, 6, 3, 2, 4, 9, [], "AG", "S"),
@@ -291,18 +303,6 @@ const rosters = [
       positional(2, "Noble Blitzer", 105000, 7, 3, 3, 4, 9, [skills.block, skills.catch], "AG", "PS"),
       positional(4, "Bodyguard", 90000, 6, 3, 3, 5, 9, [skills.standFirm, skills.wrestle], "GS", "A"),
       positional(1, "Ogre", 140000, 5, 5, 4, 5, 10, [skills.boneHead, skills.loner(4), skills.mightyBlow(1), skills.thickSkull, skills.throwTeamMate], "S", "AG")
-    ],
-    70000,
-    true,
-    2,
-  ),
-  roster(
-    "Khorne",
-    [
-      positional(16, "Pit Fighter", 60000, 6, 3, 3, 4, 9, [skills.frenzy], "G", "AS"),
-      positional(4, "Bloodletter", 80000, 6, 3, 3, 4, 8, [skills.horns, skills.juggernaut, skills.regeneration], "AGS", "P"),
-      positional(2, "Herald", 90000, 6, 3, 3, 5, 9, [skills.frenzy, skills.horns, skills.juggernaut], "GS", "AP"),
-      positional(1, "Bloodthirster", 180000, 6, 5, 5, null, 10, [skills.claws, skills.frenzy, skills.horns, skills.juggernaut, skills.loner(4), skills.regeneration, skills.unchannelledFury], "S", "AG"),
     ],
     70000,
     true,
