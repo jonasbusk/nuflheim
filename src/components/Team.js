@@ -10,11 +10,11 @@ import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
 
-import {rosters, skills} from "../data";
+import {rosters, skills, starPlayers} from "../data";
 
 
 // A player in the player list
-const player = (name, positionNumber, positionName, ma, st, ag, pa, av, skills, value, primaryAccess, secondaryAccess) => {
+const player = (name, positionNumber, positionName, ma, st, ag, pa, av, skills, value, primaryAccess="", secondaryAccess="", specialRules=[], isStar=false) => {
   return {
     name: name,
     positionNumber: positionNumber,
@@ -34,7 +34,9 @@ const player = (name, positionNumber, positionName, ma, st, ag, pa, av, skills, 
     secondarySkills: [],
     value: value,
     primaryAccess: primaryAccess,
-    secondaryAccess: secondaryAccess
+    secondaryAccess: secondaryAccess,
+    specialRules: specialRules,
+    isStar: isStar,
   };
 };
 
@@ -70,6 +72,7 @@ class Team extends Component {
       players: new Array(16).fill(null).map((x) => player()),
       showPlayerAdvancementModal: false,
       selectedPlayerNumber: null,  // indexed 1-16
+      availableStarPlayers: this.getFilteredStarPlayers(rosters[0]),
     };
   }
 
@@ -82,7 +85,8 @@ class Team extends Component {
       assistantCoaches: 0,
       cheerleaders: 0,
       apothecary: 0,
-      players: new Array(16).fill(null).map((x) => player())
+      players: new Array(16).fill(null).map((x) => player()),
+      availableStarPlayers: this.getFilteredStarPlayers(rosters[rosterIndex])
     });
   }
 
@@ -116,11 +120,19 @@ class Team extends Component {
     // Set a player in the player list
     // Note: inputs playerNumber and playerPosition are one-indexed
     let players = this.state.players;
+    if (players[playerNumber-1].isStar) {
+      // If player was a star player, clear the name
+      players[playerNumber-1].name = "";
+    }
     if (positionNumber === 0) {
       // No position is selected: insert empty player
       players[playerNumber-1] = player(players[playerNumber-1].name);
+    } else if (positionNumber > 100) {
+      // Star player is selected: insert star player
+      let p = this.state.availableStarPlayers[positionNumber-101];
+      players[playerNumber-1] = player(p.name, positionNumber, "Star", p.ma, p.st, p.ag, p.pa, p.av, p.skills, p.cost, null, null, p.specialRules, true);
     } else {
-      // Position is selected: insert new player
+      // Positional player is selected: insert new player
       let p = this.state.roster.positionals[positionNumber-1];
       players[playerNumber-1] = player(players[playerNumber-1].name, positionNumber, p.position, p.ma, p.st, p.ag, p.pa, p.av, p.skills, p.cost, p.primaryAccess, p.secondaryAccess);
     }
@@ -135,6 +147,10 @@ class Team extends Component {
       let p = this.state.roster.positionals[i];
       options[i+1].textContent = p.position + " (0-" + p.quantity + ")";
     }
+    for (let i = 0; i < this.state.availableStarPlayers.length; i++) {
+      let p = this.state.availableStarPlayers[i];
+      options[i+this.state.roster.positionals.length+1].textContent = p.name;
+    }
   }
 
   onSetPlayerClose = (options) => {
@@ -142,6 +158,9 @@ class Team extends Component {
     for (let i = 0; i < this.state.roster.positionals.length; i++) {
       let p = this.state.roster.positionals[i];
       options[i+1].textContent = p.position;
+    }
+    for (let i = 0; i < this.state.availableStarPlayers.length; i++) {
+      options[i+this.state.roster.positionals.length+1].textContent = "Star Player";
     }
   }
 
@@ -174,7 +193,8 @@ class Team extends Component {
       let skills = player.skills.map((s) => <span className="skill-default">{s}</span>);
       skills = skills.concat(player.primarySkills.map((s) => <span className="skill-primary">{s}</span>));
       skills = skills.concat(player.secondarySkills.map((s) => <span className="skill-secondary">{s}</span>));
-      return <div>{skills.map((s, i) => i > 0 ? <span key={i}>, {s}</span> : <span key={i}>{s}</span>)}</div>;
+      skills = skills.concat(player.specialRules.map((s) => <span className="skill-special">{s}</span>));
+      return <div className={(!player.isStar && "cursor-pointer") || ""}>{skills.map((s, i) => i > 0 ? <span key={i}>, {s}</span> : <span key={i}>{s}</span>)}</div>;
     }
   }
 
@@ -321,6 +341,13 @@ class Team extends Component {
       costOfPA: 20000,
       costOfAG: 40000,
       costOfST: 80000,
+    });
+  }
+
+  getFilteredStarPlayers = (roster) => {
+    // TODO: Is 'Favoured of' handled correctly? Is it even used?
+    return starPlayers.filter(starPlayer => {
+      return starPlayer.playsFor.includes("Any team") || starPlayer.playsFor.some(r => roster.specialRules.includes(r));
     });
   }
 
@@ -526,7 +553,7 @@ class Team extends Component {
                 {this.state.players.map((player, i) => {
                   return (<tr key={i+1}>
                     <td className="player-number">{i+1}</td>
-                    <td className="player-name"><Form.Control type="text" id={i+1} plaintext value={player.name || ""} onChange={(e) => this.setPlayerName(parseInt(e.target.id), e.target.value)} /></td>
+                    <td className="player-name"><Form.Control type="text" id={i+1} readOnly={player.isStar} plaintext value={player.name || ""} onChange={(e) => this.setPlayerName(parseInt(e.target.id), e.target.value)} /></td>
                     <td className="player-position">
                       <Form.Control as="select" id={i+1} size="sm" plaintext value={player.positionNumber || 0}
                         onChange={(e) => this.setPlayer(parseInt(e.target.id), parseInt(e.target.value))}
@@ -535,6 +562,7 @@ class Team extends Component {
                       >
                         <option key="0" value="0">-</option>
                         {this.state.roster.positionals.map((p, i) => {return <option key={i+1} value={i+1}>{p.position}</option>;})}
+                        {this.state.availableStarPlayers.map((p, i) => {return <option key={i+101} value={i+101}>{p.name}</option>;})}
                       </Form.Control>
                     </td>
                     <td className="player-ma" onClick={() => player.positionNumber && this.showPlayerAdvancementModal(i+1)}>{this.renderPlayerChar(player, "ma")}</td>
@@ -542,7 +570,7 @@ class Team extends Component {
                     <td className="player-ag" onClick={() => player.positionNumber && this.showPlayerAdvancementModal(i+1)}>{this.renderPlayerChar(player, "ag")}</td>
                     <td className="player-pa" onClick={() => player.positionNumber && this.showPlayerAdvancementModal(i+1)}>{this.renderPlayerChar(player, "pa")}</td>
                     <td className="player-av" onClick={() => player.positionNumber && this.showPlayerAdvancementModal(i+1)}>{this.renderPlayerChar(player, "av")}</td>
-                    <td className="player-skills" onClick={() => player.positionNumber && this.showPlayerAdvancementModal(i+1)}>{this.renderPlayerSkills(player)}</td>
+                    <td className="player-skills" onClick={() => player.positionNumber && !player.isStar && this.showPlayerAdvancementModal(i+1)}>{this.renderPlayerSkills(player)}</td>
                     <td className="player-value">{player.value && this.formatCost(this.getPlayerValue(player))}</td>
                   </tr>);
                 })}

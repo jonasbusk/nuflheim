@@ -152,7 +152,18 @@ td.player-ma span, td.player-st span, td.player-ag span, td.player-pa span, td.p
 
 td.player-skills div {
   min-height: 1.3em;
+}
+
+.cursor-pointor {
   cursor: pointer;
+}
+
+td.player-skills div span span {
+  white-space: pre;
+}
+
+td.player-skills span.skill-default {
+
 }
 
 td.player-skills span.skill-primary {
@@ -160,6 +171,10 @@ td.player-skills span.skill-primary {
 }
 
 td.player-skills span.skill-secondary {
+  color: orange;
+}
+
+td.player-skills span.skill-special {
   color: orange;
 }
 
