@@ -41,33 +41,36 @@ const player = (name, positionNumber, positionName, ma, st, ag, pa, av, skills, 
 
 class Team extends Component {
 
-  state = {
-    budget: 1000000,
-    costMultiplierReRolls: 1,
-    costOfAssistantCoaches: 10000,
-    costOfCheerleaders: 10000,
-    costOfDedicatedFans: 10000,
-    costOfApothecary: 50000,
-    playerAdvancementsCostGold: true,
-    customisePlayerAdvancementCosts: false,
-    costOfPrimarySkill: 20000,
-    costOfSecondarySkill: 40000,
-    costOfAV: 10000,
-    costOfMA: 20000,
-    costOfPA: 20000,
-    costOfAG: 40000,
-    costOfST: 80000,
-    name: "",
-    roster: rosters[0],
-    coach: "",
-    reRolls: 0,
-    dedicatedFans: 0,
-    assistantCoaches: 0,
-    cheerleaders: 0,
-    apothecary: 0,
-    players: new Array(16).fill(null).map((x) => player()),
-    showPlayerAdvancementModal: false,
-    selectedPlayerNumber: null,
+  constructor(props) {
+    super(props);
+    this.state = {
+      budget: 1000000,
+      costMultiplierReRolls: 1,
+      costOfAssistantCoaches: 10000,
+      costOfCheerleaders: 10000,
+      costOfDedicatedFans: 10000,
+      costOfApothecary: 50000,
+      playerAdvancementsCostGold: true,
+      customisePlayerAdvancementCosts: false,
+      costOfPrimarySkill: 20000,
+      costOfSecondarySkill: 40000,
+      costOfAV: 10000,
+      costOfMA: 20000,
+      costOfPA: 20000,
+      costOfAG: 40000,
+      costOfST: 80000,
+      name: "",
+      roster: rosters[0],
+      coach: "",
+      reRolls: 0,
+      dedicatedFans: 0,
+      assistantCoaches: 0,
+      cheerleaders: 0,
+      apothecary: 0,
+      players: new Array(16).fill(null).map((x) => player()),
+      showPlayerAdvancementModal: false,
+      selectedPlayerNumber: null,  // indexed 1-16
+    };
   }
 
   setRoster = (rosterIndex) => {
