@@ -472,11 +472,11 @@ const rosters = [
     [
       positional(12, "Underworld Goblin", 40000, 6, 2, 3, 4, 8, [skills.dodge, skills.rightStuff, skills.stunty], "AM", "GS"),
       positional(6, "Underworld Snotling", 15000, 5, 1, 3, 5, 6, [skills.dodge, skills.rightStuff, skills.sideStep, skills.stunty, skills.swarming, skills.titchy], "AM", "G"),
-      positional(16, "Skaven Clanrat", 50000, 7, 3, 3, 4, 8, [skills.animosity("Underworld Goblin Linemen")], "GM", "AS"),
-      positional(2, "Skaven Thrower", 85000, 7, 3, 3, 2, 8, [skills.animosity("Underworld Goblin Linemen"), skills.pass, skills.sureHands], "GMP", "AS"),
-      positional(4, "Gutter Runner", 85000, 9, 2, 2, 4, 8, [skills.animosity("Underworld Goblin Linemen"), skills.dodge], "AGM", "PS"),
-      positional(2, "Skaven Blitzer", 90000, 7, 3, 3, 5, 9, [skills.animosity("Underworld Goblin Linemen"), skills.block], "GMS", "AP"),
-      positional(2, "Underworld Troll", 115000, 4, 5, 5, 5, 10, [skills.alwaysHungry, skills.loner(4), skills.mightyBlow(1), skills.projectileVomit, skills.reallyStupid, skills.regeneration, skills.throwTeamMate], "MS", "AGP"),
+      positional(3, "Skaven Clanrat", 50000, 7, 3, 3, 4, 8, [skills.animosity("Underworld Goblin Linemen")], "GM", "AS"),
+      positional(1, "Skaven Thrower", 85000, 7, 3, 3, 2, 8, [skills.animosity("Underworld Goblin Linemen"), skills.pass, skills.sureHands], "GMP", "AS"),
+      positional(1, "Gutter Runner", 85000, 9, 2, 2, 4, 8, [skills.animosity("Underworld Goblin Linemen"), skills.dodge], "AGM", "PS"),
+      positional(1, "Skaven Blitzer", 90000, 7, 3, 3, 5, 9, [skills.animosity("Underworld Goblin Linemen"), skills.block], "GMS", "AP"),
+      positional(1, "Underworld Troll", 115000, 4, 5, 5, 5, 10, [skills.alwaysHungry, skills.loner(4), skills.mightyBlow(1), skills.projectileVomit, skills.reallyStupid, skills.regeneration, skills.throwTeamMate], "MS", "AGP"),
       positional(1, "Mutant Rat Ogre", 150000, 6, 5, 4, null, 9, [skills.animalSavagery, skills.frenzy, skills.loner(4), skills.mightyBlow(1), skills.prehensileTail], "MS", "AG")
     ],
     70000,
