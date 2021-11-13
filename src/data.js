@@ -116,16 +116,20 @@ const rosterSpecialRules = {
 
 
 const starPlayerSpecialRules = {
+  blindRage: "Blind Rage",
   brutalBlock: "Brutal Block",
   burstOfSpeed: "Burst of Speed",
   consummateProfessional: "Consummate Professional",
   crushingBlow: "Crushing Blow",
   excuseMeAreYouAZoat: "Excuse Me, Are You a Zoat?",  // TODO: should have double quotes
   frenziedRush: "Frenzied Rush",
+  furyOfTheBloodGod: "Fury of the Blood God",
   ghostlyFlames: "Ghostly Flames",
+  goredByTheBull: "Gored by the Bull",
   incorporeal: "Incorporeal",
   indomitable: "Indomitable",
   lordOfChaos: "Lord of Chaos",
+  maximumCarnage: "Maximum Carnage",
   mesmerizingDance: "Mesmerizing Dance",
   oldPro: "Old Pro",
   ram: "Ram",
@@ -386,6 +390,19 @@ const rosters = [
     true,
   ),
   roster(
+    "Khorne",
+    [
+      positional(16, "Bloodborn Marauder", 50000, 6, 3, 3, 4, 8, [skills.frenzy], "GM", "AS"),
+      positional(4, "Khorngor", 70000, 6, 3, 3, 4, 9, [skills.horns, skills.juggernaut], "GMS", "AP"),
+      positional(4, "Bloodseeker", 110000, 5, 4, 4, 6, 10, [skills.frenzy], "GMS", "A"),
+      positional(1, "Bloodspawn", 160000, 5, 5, 4, null, 9, [skills.claws, skills.frenzy, skills.loner(4), skills.mightyBlow(1), skills.unchannelledFury], "MS", "AG")
+    ],
+    60000,
+    2,
+    [rosterSpecialRules.favouredOf, rosterSpecialRules.favouredOfKhorne],
+    true,
+  ),
+  roster(
     "Lizardmen",
     [
       positional(12, "Skink Runner", 60000, 8, 2, 3, 4, 8, [skills.dodge, skills.stunty], "A", "GPS"),
@@ -602,6 +619,7 @@ const rosters = [
 
 
 const starPlayers = [
+  starPlayer("Akhorne the Squirrel", 7, 1, 2, null, 6, [skills.claws, skills.dauntless, skills.dodge, skills.frenzy, skills.jumpUp, skills.loner(4), skills.noHands, skills.sideStep, skills.stunty, skills.titchy], 80000, [rosterSpecialRules.any], [starPlayerSpecialRules.blindRage]),
   starPlayer("Bryce 'the Slice' Cambuel", 5, 3, 4, null, 9, [skills.chainsaw, skills.loner(4), skills.regeneration, skills.secretWeapon, skills.standFirm, skills.thickSkull], 130000, [rosterSpecialRules.sylvanianSpotlight], [starPlayerSpecialRules.ghostlyFlames]),
   starPlayer("The Black Gobbo", 6, 2, 3, 3, 9, [skills.bombardier, skills.disturbingPresence, skills.dodge, skills.loner(3), skills.sideStep, skills.sneakyGit, skills.stab, skills.stunty], 225000, [rosterSpecialRules.badlandsBrawl, rosterSpecialRules.underworldChallenge], [starPlayerSpecialRules.sneakiestOfTheLot]),
   starPlayer("Deeproot Strongbranch", 2, 7, 5, 4, 11, [skills.block, skills.loner(4), skills.mightyBlow(2), skills.standFirm, skills.strongArm, skills.thickSkull, skills.throwTeamMate, skills.timmmber], 280000, [rosterSpecialRules.halflingThimbleCup, rosterSpecialRules.oldWorldClassic], [starPlayerSpecialRules.reliable]),
@@ -611,6 +629,7 @@ const starPlayers = [
   starPlayer("Gloriel Summerbloom", 7, 2, 2, 2, 8, [skills.accurate, skills.dodge, skills.loner(3), skills.pass, skills.sideStep, skills.sureHands], 150000, [rosterSpecialRules.elvenKingdomsLeague], [starPlayerSpecialRules.shotToNothing]),
   starPlayer("Grak", 5, 5, 4, 4, 10, [skills.boneHead, skills.kickTeamMate, skills.loner(4), skills.mightyBlow(1), skills.thickSkull], 250000, [rosterSpecialRules.any], [starPlayerSpecialRules.twoForOne]),
   starPlayer("Crumbleberry", 5, 2, 3, 6, 7, [skills.dodge, skills.loner(4), skills.rightStuff, skills.stunty, skills.sureHands], 0, [rosterSpecialRules.any], [starPlayerSpecialRules.twoForOne]),
+  starPlayer("Grashnak Blackhoof", 6, 6, 4, null, 9, [skills.frenzy, skills.horns, skills.loner(4), skills.mightyBlow(1), skills.thickSkull, skills.unchannelledFury], 240000, [rosterSpecialRules.favouredOf], [starPlayerSpecialRules.goredByTheBull]),
   starPlayer("Gretchen Wächter", 7, 3, 2, null, 9, [skills.disturbingPresence, skills.dodge, skills.foulAppearance, skills.jumpUp, skills.loner(4), skills.noHands, skills.regeneration, skills.shadowing, skills.sideStep], 260000, [rosterSpecialRules.sylvanianSpotlight], [starPlayerSpecialRules.incorporeal]),
   starPlayer("Griff Oberwald", 7, 4, 2, 3, 9, [skills.block, skills.dodge, skills.fend, skills.loner(3), skills.sprint, skills.sureFeet], 280000, [rosterSpecialRules.halflingThimbleCup, rosterSpecialRules.oldWorldClassic], [starPlayerSpecialRules.consummateProfessional]),
   starPlayer("Grim Ironjaw", 5, 4, 3, null, 9, [skills.block, skills.dauntless, skills.frenzy, skills.loner(4), skills.multipleBlock, skills.thickSkull], 200000, [rosterSpecialRules.halflingThimbleCup, rosterSpecialRules.oldWorldClassic, rosterSpecialRules.worldsEdgeSuperleague], [starPlayerSpecialRules.slayer]),
@@ -618,11 +637,13 @@ const starPlayers = [
   starPlayer("Helmut Wulf", 6, 3, 3, null, 9, [skills.chainsaw, skills.loner(4), skills.pro, skills.secretWeapon, skills.standFirm], 140000, [rosterSpecialRules.any], [starPlayerSpecialRules.oldPro]),
   starPlayer("Karla Von Kill", 6, 4, 3, 4, 9, [skills.block, skills.dauntless, skills.dodge, skills.jumpUp, skills.loner(4)], 210000, [rosterSpecialRules.halflingThimbleCup, rosterSpecialRules.oldWorldClassic, rosterSpecialRules.lustrianSuperleague], [starPlayerSpecialRules.indomitable]),
   starPlayer("Lord Borak the Despoiler", 5, 5, 3, 5, 10, [skills.block, skills.dirtyPlayer(2), skills.loner(4), skills.mightyBlow(1), skills.sneakyGit], 260000, [rosterSpecialRules.favouredOf], [starPlayerSpecialRules.lordOfChaos]),
+  starPlayer("Max Spleenripper", 5, 4, 4, null, 9, [skills.chainsaw, skills.loner(4), skills.secretWeapon], 130000, [rosterSpecialRules.favouredOf], [starPlayerSpecialRules.maximumCarnage]),
   starPlayer("Mighty Zug", 4, 5, 4, 6, 10, [skills.block, skills.loner(4), skills.mightyBlow(1)], 220000, [rosterSpecialRules.halflingThimbleCup, rosterSpecialRules.oldWorldClassic, rosterSpecialRules.lustrianSuperleague], [starPlayerSpecialRules.crushingBlow]),
   starPlayer("Morg 'n' Thorg", 6, 6, 3, 4, 11, [skills.block, skills.loner(4), skills.mightyBlow(2), skills.thickSkull, skills.throwTeamMate], 340000, [rosterSpecialRules.badlandsBrawl, rosterSpecialRules.elvenKingdomsLeague, rosterSpecialRules.halflingThimbleCup, rosterSpecialRules.lustrianSuperleague, rosterSpecialRules.oldWorldClassic, rosterSpecialRules.underworldChallenge, rosterSpecialRules.worldsEdgeSuperleague, rosterSpecialRules.favouredOf], [starPlayerSpecialRules.theBallista]),
   starPlayer("Roxanna Darknail", 8, 3, 1, 4, 8, [skills.dodge, skills.frenzy, skills.jumpUp, skills.juggernaut, skills.leap, skills.loner(4)], 270000, [rosterSpecialRules.elvenKingdomsLeague], [starPlayerSpecialRules.burstOfSpeed]),
   starPlayer("Rumbelow Sheepskin", 6, 3, 3, null, 8, [skills.block, skills.horns, skills.juggernaut, skills.loner(4), skills.noHands, skills.tackle, skills.thickSkull], 170000, [rosterSpecialRules.halflingThimbleCup, rosterSpecialRules.oldWorldClassic, rosterSpecialRules.worldsEdgeSuperleague], [starPlayerSpecialRules.ram]),
   starPlayer("Skrull Halfheight", 6, 3, 4, 4, 9, [skills.accurate, skills.loner(4), skills.nervesOfSteel, skills.pass, skills.regeneration, skills.sureHands, skills.thickSkull], 150000, [rosterSpecialRules.sylvanianSpotlight, rosterSpecialRules.worldsEdgeSuperleague], [starPlayerSpecialRules.strongPassingGame]),
+  starPlayer("Scyla Anfingrimm", 5, 5, 4, null, 10, [skills.claws, skills.frenzy, skills.loner(4), skills.mightyBlow(1), skills.prehensileTail, skills.thickSkull, skills.unchannelledFury], 200000, [rosterSpecialRules.favouredOf], [starPlayerSpecialRules.furyOfTheBloodGod]),
   starPlayer("Lucien Swift", 7, 3, 2, 5, 9, [skills.block, skills.loner(4), skills.mightyBlow(1), skills.tackle], 340000, [rosterSpecialRules.elvenKingdomsLeague], [starPlayerSpecialRules.twoForOne]),
   starPlayer("Valen Swift", 7, 3, 2, 2, 8, [skills.accurate, skills.loner(4), skills.nervesOfSteel, skills.pass, skills.safePass, skills.sureHands], 0, [rosterSpecialRules.elvenKingdomsLeague], [starPlayerSpecialRules.twoForOne]),
   starPlayer("Varag Ghoul-Chewer", 6, 5, 3, 5, 10, [skills.block, skills.jumpUp, skills.loner(4), skills.mightyBlow(1), skills.thickSkull], 280000, [rosterSpecialRules.badlandsBrawl, rosterSpecialRules.underworldChallenge], [starPlayerSpecialRules.crushingBlow]),

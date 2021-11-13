@@ -171,11 +171,11 @@ td.player-skills span.skill-primary {
 }
 
 td.player-skills span.skill-secondary {
-  color: orange;
+  color: red;
 }
 
 td.player-skills span.skill-special {
-  color: orange;
+  color: blue;
 }
 
 td.player-value {
