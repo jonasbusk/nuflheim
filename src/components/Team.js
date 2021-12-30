@@ -13,6 +13,7 @@ import Modal from "react-bootstrap/Modal";
 import {rosters, starPlayers} from "../data";
 import PlayerTable from "./PlayerTable";
 import PlayerCustom from "./PlayerCustom";
+import CreatePDF from "./CreatePDF";
 
 
 const player = (name, positionNumber, positionName, ma, st, ag, pa, av, skills, value, primaryAccess="", secondaryAccess="", specialRules=[], isStar=false) => {
@@ -498,6 +499,30 @@ class Team extends Component {
               getPlayerValue={this.getPlayerValue}
               formatCost={this.formatCost}
               togglePlayerAdvancementModal={this.togglePlayerAdvancementModal}
+            />
+          </Col>
+        </Row>
+
+        <Row>
+          <Col className="text-center">
+            <CreatePDF
+              name={this.state.name}
+              rosterName={this.state.roster.name}
+              coach={this.state.coach}
+              treasury={this.getTreasury()}
+              teamValue={this.getTeamValue()}
+              reRolls={this.state.reRolls}
+              costOfReRolls={this.getCostOfReRolls()}
+              assistantCoaches={this.state.assistantCoaches}
+              costOfAssistantCoaches={this.state.costOfAssistantCoaches}
+              cheerleaders={this.state.cheerleaders}
+              costOfCheerleaders={this.state.costOfCheerleaders}
+              dedicatedFans={this.state.dedicatedFans}
+              costOfDedicatedFans={this.state.costOfDedicatedFans}
+              apothecary={this.state.apothecary}
+              costOfApothecary={this.state.costOfApothecary}
+              players={this.state.players}
+              getPlayerValue={this.getPlayerValue}
             />
           </Col>
         </Row>
