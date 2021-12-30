@@ -10,7 +10,7 @@ import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
 
-import {rosters, skills, starPlayers} from "../data";
+import {rosters, starPlayers} from "../data";
 import PlayerTable from "./PlayerTable";
 import PlayerCustom from "./PlayerCustom";
 
@@ -64,8 +64,8 @@ class Team extends Component {
       costOfAG: 40000,
       costOfST: 80000,
       name: "",
-      roster: rosters[0],
       coach: "",
+      roster: rosters[0],
       reRolls: 0,
       dedicatedFans: 0,
       assistantCoaches: 0,
@@ -181,7 +181,7 @@ class Team extends Component {
     }
   }
 
-  renderPlayerChar = (player, char, interactive) => {
+  renderPlayerChar = (player, char) => {
     if (typeof player[char] !== "undefined") {
       let mod = player[char + "Mod"];
       if(["ma", "st"].includes(char)) {
@@ -346,7 +346,7 @@ class Team extends Component {
                 <Table borderless size="sm" className="margin-zero team-table-2">
                   <tbody>
                     <tr>
-                      <td>Team re-rolls:</td>
+                      <td>Team Re-rolls:</td>
                       <td><Form.Control type="number" size="sm" value={this.state.reRolls.toString()} onChange={(e) => this.setState({reRolls: e.target.value && Math.min(Math.max(parseInt(e.target.value) || 0, 0), 8)})} /></td>
                       <td>x</td>
                       <td><Form.Control type="text" size="sm" className="text-right" value={this.formatCost(this.getCostOfReRolls())} readOnly /></td>
