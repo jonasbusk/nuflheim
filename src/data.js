@@ -73,10 +73,12 @@ const skills = {
   boneHead: "Bone Head",
   chainsaw: "Chainsaw",
   decay: "Decay",
+  drunkard: "Drunkard",
   hypnoticGaze: "Hypnotic Gaze",
   kickTeamMate: "Kick Team Mate",
   loner: (x) => "Loner (" + x + "+)",
   noHands: "No Hands",
+  pickMeUp: "Pick-me-up",
   plagueRidden: "Plague Ridden",
   pogoStick: "Pogo Stick",
   projectileVomit: "Projectile Vomit",
@@ -116,6 +118,7 @@ const rosterSpecialRules = {
 
 
 const starPlayerSpecialRules = {
+  beerBarrelBash: "Beer Barrel Bash!",
   blindRage: "Blind Rage",
   brutalBlock: "Brutal Block",
   burstOfSpeed: "Burst of Speed",
@@ -132,6 +135,8 @@ const starPlayerSpecialRules = {
   maximumCarnage: "Maximum Carnage",
   mesmerizingDance: "Mesmerizing Dance",
   oldPro: "Old Pro",
+  pumpUpTheCrowd: "Pump Up the Crowd",
+  raidingParty: "Raiding Party",
   ram: "Ram",
   reliable: "Reliable",
   savageMauling: "Savage Mauling",
@@ -432,6 +437,21 @@ const rosters = [
   roster(
     "Norse",
     [
+      positional(16, "Raider Lineman", 50000, 6, 3, 3, 4, 8, [skills.block, skills.drunkard, skills.thickSkull], "G", "APS"),
+      positional(2, "Beer Boar", 20000, 5, 1, 3, null, 6, [skills.dodge, skills.noHands, skills.pickMeUp, skills.stunty, skills.titchy], "-", "A"),
+      positional(2, "Berserker", 90000, 6, 3, 3, 5, 8, [skills.block, skills.frenzy, skills.jumpUp], "GS", "AP"),
+      positional(2, "Valkyrie", 95000, 7, 3, 3, 3, 8, [skills.catch, skills.dauntless, skills.pass, skills.stripBall], "AGP", "S"),
+      positional(2, "Ulfwerener", 105000, 6, 4, 4, null, 9, [skills.frenzy], "GS", "A"),
+      positional(1, "Yhetee", 140000, 5, 5, 4, null, 9, [skills.claws, skills.disturbingPresence, skills.frenzy, skills.loner(4), skills.unchannelledFury], "S", "AG")
+    ],
+    60000,
+    1,
+    [rosterSpecialRules.favouredOf, rosterSpecialRules.oldWorldClassic],
+    true,
+  ),
+  roster(
+    "Norse of legend",
+    [
       positional(12, "Lineman", 50000, 6, 3, 3, 4, 8, [skills.block], "G", "AS"),
       positional(2, "Thrower", 70000, 6, 3, 3, 3, 8, [skills.block, skills.pass], "GP", "AS"),
       positional(2, "Catcher", 90000, 7, 3, 3, 5, 8, [skills.block, skills.dauntless], "AG", "S"),
@@ -635,6 +655,7 @@ const starPlayers = [
   starPlayer("Grim Ironjaw", 5, 4, 3, null, 9, [skills.block, skills.dauntless, skills.frenzy, skills.loner(4), skills.multipleBlock, skills.thickSkull], 200000, [rosterSpecialRules.halflingThimbleCup, rosterSpecialRules.oldWorldClassic, rosterSpecialRules.worldsEdgeSuperleague], [starPlayerSpecialRules.slayer]),
   starPlayer("Hakflem Skuttlespike", 9, 3, 2, 3, 8, [skills.dodge, skills.extraArms, skills.loner(4), skills.prehensileTail, skills.twoHeads], 210000, [rosterSpecialRules.favouredOf, rosterSpecialRules.underworldChallenge], [starPlayerSpecialRules.treacherous]),
   starPlayer("Helmut Wulf", 6, 3, 3, null, 9, [skills.chainsaw, skills.loner(4), skills.pro, skills.secretWeapon, skills.standFirm], 140000, [rosterSpecialRules.any], [starPlayerSpecialRules.oldPro]),
+  starPlayer("Ivar Eriksson", 6, 4, 3, 4, 9, [skills.block, skills.guard, skills.loner(3), skills.tackle], 245000, [rosterSpecialRules.oldWorldClassic], [starPlayerSpecialRules.raidingParty]),
   starPlayer("Karla Von Kill", 6, 4, 3, 4, 9, [skills.block, skills.dauntless, skills.dodge, skills.jumpUp, skills.loner(4)], 210000, [rosterSpecialRules.halflingThimbleCup, rosterSpecialRules.oldWorldClassic, rosterSpecialRules.lustrianSuperleague], [starPlayerSpecialRules.indomitable]),
   starPlayer("Lord Borak the Despoiler", 5, 5, 3, 5, 10, [skills.block, skills.dirtyPlayer(2), skills.loner(4), skills.mightyBlow(1), skills.sneakyGit], 260000, [rosterSpecialRules.favouredOf], [starPlayerSpecialRules.lordOfChaos]),
   starPlayer("Max Spleenripper", 5, 4, 4, null, 9, [skills.chainsaw, skills.loner(4), skills.secretWeapon], 130000, [rosterSpecialRules.favouredOf], [starPlayerSpecialRules.maximumCarnage]),
@@ -642,8 +663,10 @@ const starPlayers = [
   starPlayer("Morg 'n' Thorg", 6, 6, 3, 4, 11, [skills.block, skills.loner(4), skills.mightyBlow(2), skills.thickSkull, skills.throwTeamMate], 380000, [rosterSpecialRules.badlandsBrawl, rosterSpecialRules.elvenKingdomsLeague, rosterSpecialRules.halflingThimbleCup, rosterSpecialRules.lustrianSuperleague, rosterSpecialRules.oldWorldClassic, rosterSpecialRules.underworldChallenge, rosterSpecialRules.worldsEdgeSuperleague, rosterSpecialRules.favouredOf], [starPlayerSpecialRules.theBallista]),
   starPlayer("Roxanna Darknail", 8, 3, 1, 4, 8, [skills.dodge, skills.frenzy, skills.jumpUp, skills.juggernaut, skills.leap, skills.loner(4)], 270000, [rosterSpecialRules.elvenKingdomsLeague], [starPlayerSpecialRules.burstOfSpeed]),
   starPlayer("Rumbelow Sheepskin", 6, 3, 3, null, 8, [skills.block, skills.horns, skills.juggernaut, skills.loner(4), skills.noHands, skills.tackle, skills.thickSkull], 170000, [rosterSpecialRules.halflingThimbleCup, rosterSpecialRules.oldWorldClassic, rosterSpecialRules.worldsEdgeSuperleague], [starPlayerSpecialRules.ram]),
+  starPlayer("Skrorg Snowpelt", 5, 5, 4, null, 9, [skills.claws, skills.disturbingPresence, skills.juggernaut, skills.loner(4), skills.mightyBlow(1)], 250000, [rosterSpecialRules.oldWorldClassic], [starPlayerSpecialRules.pumpUpTheCrowd]),
   starPlayer("Skrull Halfheight", 6, 3, 4, 4, 9, [skills.accurate, skills.loner(4), skills.nervesOfSteel, skills.pass, skills.regeneration, skills.sureHands, skills.thickSkull], 150000, [rosterSpecialRules.sylvanianSpotlight, rosterSpecialRules.worldsEdgeSuperleague], [starPlayerSpecialRules.strongPassingGame]),
   starPlayer("Scyla Anfingrimm", 5, 5, 4, null, 10, [skills.claws, skills.frenzy, skills.loner(4), skills.mightyBlow(1), skills.prehensileTail, skills.thickSkull, skills.unchannelledFury], 200000, [rosterSpecialRules.favouredOf], [starPlayerSpecialRules.furyOfTheBloodGod]),
+  starPlayer("Thorsson Stoutmead", 6, 3, 4, 3, 8, [skills.block, skills.drunkard, skills.loner(4), skills.thickSkull], 170000, [rosterSpecialRules.oldWorldClassic], [starPlayerSpecialRules.beerBarrelBash]),
   starPlayer("Lucien Swift", 7, 3, 2, 5, 9, [skills.block, skills.loner(4), skills.mightyBlow(1), skills.tackle], 340000, [rosterSpecialRules.elvenKingdomsLeague], [starPlayerSpecialRules.twoForOne]),
   starPlayer("Valen Swift", 7, 3, 2, 2, 8, [skills.accurate, skills.loner(4), skills.nervesOfSteel, skills.pass, skills.safePass, skills.sureHands], 0, [rosterSpecialRules.elvenKingdomsLeague], [starPlayerSpecialRules.twoForOne]),
   starPlayer("Varag Ghoul-Chewer", 6, 5, 3, 5, 10, [skills.block, skills.jumpUp, skills.loner(4), skills.mightyBlow(1), skills.thickSkull], 280000, [rosterSpecialRules.badlandsBrawl, rosterSpecialRules.underworldChallenge], [starPlayerSpecialRules.crushingBlow]),
