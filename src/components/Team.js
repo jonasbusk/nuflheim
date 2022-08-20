@@ -133,7 +133,7 @@ class Team extends Component {
     } else if (positionNumber > 100) {
       // Star player is selected: insert star player
       let p = this.state.availableStarPlayers[positionNumber-101];
-      players[playerNumber-1] = player(p.name, positionNumber, "Star", p.ma, p.st, p.ag, p.pa, p.av, p.skills, p.cost, null, null, p.specialRules, true);
+      players[playerNumber-1] = player(p.name, positionNumber, "Star", p.ma, p.st, p.ag, p.pa, p.av, p.skills, p.cost, "", "", p.specialRules, true);
     } else {
       // Positional player is selected: insert new player
       let p = this.state.roster.positionals[positionNumber-1];

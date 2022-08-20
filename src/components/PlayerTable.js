@@ -13,7 +13,7 @@ class PlayerTable extends Component {
       skills = skills.concat(player.primarySkills.map((s) => <span className="skill-primary">{s}</span>));
       skills = skills.concat(player.secondarySkills.map((s) => <span className="skill-secondary">{s}</span>));
       skills = skills.concat(player.specialRules.map((s) => <span className="skill-special">{s}</span>));
-      return <div className={(!player.isStar && "cursor-pointer") || ""}>{skills.map((s, i) => i > 0 ? <span key={i}>, {s}</span> : <span key={i}>{s}</span>)}</div>;
+      return <div>{skills.map((s, i) => i > 0 ? <span key={i}>, {s}</span> : <span key={i}>{s}</span>)}</div>;
     }
   }
 
@@ -55,12 +55,12 @@ class PlayerTable extends Component {
           {this.props.availableStarPlayers.map((p, i) => {return <option key={i+101} value={i+101}>{p.name}</option>;})}
         </Form.Control>
       </td>
-      <td className="player-ma" onClick={() => player.positionNumber && this.props.togglePlayerAdvancementModal(i+1)}>{this.props.renderPlayerChar(player, "ma")}</td>
-      <td className="player-st" onClick={() => player.positionNumber && this.props.togglePlayerAdvancementModal(i+1)}>{this.props.renderPlayerChar(player, "st")}</td>
-      <td className="player-ag" onClick={() => player.positionNumber && this.props.togglePlayerAdvancementModal(i+1)}>{this.props.renderPlayerChar(player, "ag")}</td>
-      <td className="player-pa" onClick={() => player.positionNumber && this.props.togglePlayerAdvancementModal(i+1)}>{this.props.renderPlayerChar(player, "pa")}</td>
-      <td className="player-av" onClick={() => player.positionNumber && this.props.togglePlayerAdvancementModal(i+1)}>{this.props.renderPlayerChar(player, "av")}</td>
-      <td className="player-skills" onClick={() => player.positionNumber && !player.isStar && this.props.togglePlayerAdvancementModal(i+1)}>{this.renderPlayerSkills(player)}</td>
+      <td className={"player-ma" + (player.positionNumber && !player.isStar && " cursor-pointer" || "")} onClick={() => player.positionNumber && !player.isStar && this.props.togglePlayerAdvancementModal(i+1)}>{this.props.renderPlayerChar(player, "ma")}</td>
+      <td className={"player-st" + (player.positionNumber && !player.isStar && " cursor-pointer" || "")} onClick={() => player.positionNumber && !player.isStar && this.props.togglePlayerAdvancementModal(i+1)}>{this.props.renderPlayerChar(player, "st")}</td>
+      <td className={"player-ag" + (player.positionNumber && !player.isStar && " cursor-pointer" || "")} onClick={() => player.positionNumber && !player.isStar && this.props.togglePlayerAdvancementModal(i+1)}>{this.props.renderPlayerChar(player, "ag")}</td>
+      <td className={"player-pa" + (player.positionNumber && !player.isStar && " cursor-pointer" || "")} onClick={() => player.positionNumber && !player.isStar && this.props.togglePlayerAdvancementModal(i+1)}>{this.props.renderPlayerChar(player, "pa")}</td>
+      <td className={"player-av" + (player.positionNumber && !player.isStar && " cursor-pointer" || "")} onClick={() => player.positionNumber && !player.isStar && this.props.togglePlayerAdvancementModal(i+1)}>{this.props.renderPlayerChar(player, "av")}</td>
+      <td className={"player-skills" + (player.positionNumber && !player.isStar && " cursor-pointer" || "")} onClick={() => player.positionNumber && !player.isStar && this.props.togglePlayerAdvancementModal(i+1)}>{this.renderPlayerSkills(player)}</td>
       <td className="player-value">{player.value && this.props.formatCost(this.props.getPlayerValue(player))}</td>
     </tr>);
   }

@@ -147,7 +147,6 @@ td.player-ma, td.player-st, td.player-ag, td.player-pa, td.player-av {
 
 td.player-ma span, td.player-st span, td.player-ag span, td.player-pa span, td.player-av span {
   display: block;
-  cursor: pointer;
 }
 
 td.player-skills div {
