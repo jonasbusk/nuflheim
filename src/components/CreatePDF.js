@@ -1,8 +1,12 @@
 // import React, {Component} from "react";
 
 import Button from "react-bootstrap/Button";
-import {pdf, StyleSheet, Document, Page, View, Text} from "@react-pdf/renderer";
+import {pdf, StyleSheet, Document, Font, Page, View, Text} from "@react-pdf/renderer";
 import FileSaver from "file-saver";
+
+
+// disable hyphenation
+Font.registerHyphenationCallback(word => [word]);
 
 
 const formatCost = (x) => {
@@ -35,8 +39,8 @@ const formatPlayerSkills = (player) => {
   // Render player skill list including skill advancements
   if (player.positionNumber) {
     let skills = player.skills;
-    skills = skills.concat(player.primarySkills);
-    skills = skills.concat(player.secondarySkills);
+    skills = skills.concat(player.primarySkills.map((s) => s + "*"));
+    skills = skills.concat(player.secondarySkills.map((s) => s + "**"));
     skills = skills.concat(player.specialRules);
     return skills.join(", ");
   }
