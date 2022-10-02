@@ -74,6 +74,7 @@ const skills = {
   chainsaw: "Chainsaw",
   decay: "Decay",
   drunkard: "Drunkard",
+  hitAndRun: "Hit and Run",
   hypnoticGaze: "Hypnotic Gaze",
   kickTeamMate: "Kick Team Mate",
   loner: (x) => "Loner (" + x + "+)",
@@ -118,6 +119,7 @@ const rosterSpecialRules = {
 
 
 const starPlayerSpecialRules = {
+  balefulHex: "Baleful Hex",
   beerBarrelBash: "Beer Barrel Bash!",
   blastIt: "Blast It!",
   blindRage: "Blind Rage",
@@ -134,10 +136,12 @@ const starPlayerSpecialRules = {
   indomitable: "Indomitable",
   illBeBack: "I'll Be Back!",
   kaboom: "Kaboom!",
+  lookIntoMyEyes: "Look Into My Eyes",
   lordOfChaos: "Lord of Chaos",
   maximumCarnage: "Maximum Carnage",
   mesmerizingDance: "Mesmerizing Dance",
   oldPro: "Old Pro",
+  primalSavagery: "Primal Savagery",
   pumpUpTheCrowd: "Pump Up the Crowd",
   raidingParty: "Raiding Party",
   ram: "Ram",
@@ -203,6 +207,19 @@ const starPlayer = (name, ma, st, ag, pa, av, skills, cost, playsFor, specialRul
 const rosters = [
   roster(
     "Amazon",
+    [
+      positional(16, "Eagle Linewoman", 50000, 6, 3, 3, 4, 8, [skills.dodge], "G", "AS"),
+      positional(2, "Python Thrower", 80000, 6, 3, 3, 3, 8, [skills.dodge, skills.onTheBall, skills.pass, skills.safePass], "GP", "AS"),
+      positional(2, "Piranha Blitzer", 90000, 7, 3, 3, 5, 8, [skills.dodge, skills.hitAndRun, skills.jumpUp], "AG", "S"),
+      positional(2, "Jaguar Blocker", 110000, 6, 4, 3, 5, 9, [skills.defensive, skills.dodge], "GS", "A")
+    ],
+    60000,
+    1,
+    [rosterSpecialRules.lustrianSuperleague],
+    true,
+  ),
+  roster(
+    "Amazon of legend",
     [
       positional(16, "Linewoman", 50000, 6, 3, 3, 4, 8, [skills.dodge], "G", "AS"),
       positional(2, "Thrower", 75000, 6, 3, 3, 3, 8, [skills.dodge, skills.pass], "GP", "AS"),
@@ -646,14 +663,17 @@ const starPlayers = [
   starPlayer("Akhorne the Squirrel", 7, 1, 2, null, 6, [skills.claws, skills.dauntless, skills.dodge, skills.frenzy, skills.jumpUp, skills.loner(4), skills.noHands, skills.sideStep, skills.stunty, skills.titchy], 80000, [rosterSpecialRules.any], [starPlayerSpecialRules.blindRage]),
   starPlayer("Barik Farblast", 6, 3, 4, 3, 9, [skills.cannoneer, skills.hailMaryPass, skills.loner(4), skills.pass, skills.secretWeapon, skills.sureHands, skills.thickSkull], 80000, [rosterSpecialRules.halflingThimbleCup, rosterSpecialRules.oldWorldClassic, rosterSpecialRules.worldsEdgeSuperleague], [starPlayerSpecialRules.blastIt]),
   starPlayer("The Black Gobbo", 6, 2, 3, 3, 9, [skills.bombardier, skills.disturbingPresence, skills.dodge, skills.loner(3), skills.sideStep, skills.sneakyGit, skills.stab, skills.stunty], 225000, [rosterSpecialRules.badlandsBrawl, rosterSpecialRules.underworldChallenge], [starPlayerSpecialRules.sneakiestOfTheLot]),
+  starPlayer("Boa Kon'ssstriktr", 6, 3, 3, 4, 9, [skills.dodge, skills.hypnoticGaze, skills.loner(4), skills.prehensileTail, skills.safePairOfHands, skills.sideStep], 200000, [rosterSpecialRules.lustrianSuperleague], [starPlayerSpecialRules.lookIntoMyEyes]),
   starPlayer("Bomber Dribblesnot", 6, 2, 3, 3, 8, [skills.accurate, skills.bombardier, skills.dodge, skills.loner(4), skills.rightStuff, skills.secretWeapon, skills.stunty], 50000, [rosterSpecialRules.badlandsBrawl, rosterSpecialRules.underworldChallenge], [starPlayerSpecialRules.kaboom]),
   starPlayer("Bryce 'the Slice' Cambuel", 5, 3, 4, null, 9, [skills.chainsaw, skills.loner(4), skills.regeneration, skills.secretWeapon, skills.standFirm, skills.thickSkull], 130000, [rosterSpecialRules.sylvanianSpotlight], [starPlayerSpecialRules.ghostlyFlames]),
   starPlayer("Deeproot Strongbranch", 2, 7, 5, 4, 11, [skills.block, skills.loner(4), skills.mightyBlow(2), skills.standFirm, skills.strongArm, skills.thickSkull, skills.throwTeamMate, skills.timmmber], 280000, [rosterSpecialRules.halflingThimbleCup, rosterSpecialRules.oldWorldClassic], [starPlayerSpecialRules.reliable]),
   starPlayer("Eldril Sidewinder", 8, 3, 2, 5, 8, [skills.catch, skills.dodge, skills.hypnoticGaze, skills.loner(4), skills.nervesOfSteel, skills.onTheBall], 230000, [rosterSpecialRules.elvenKingdomsLeague], [starPlayerSpecialRules.mesmerizingDance]),
+  starPlayer("Estelle la Veneaux", 6, 3, 3, 4, 8, [skills.disturbingPresence, skills.dodge, skills.guard, skills.loner(4), skills.sideStep], 190000, [rosterSpecialRules.lustrianSuperleague], [starPlayerSpecialRules.balefulHex]),
   starPlayer("Frank 'n' Stein", 4, 5, 4, null, 10, [skills.breakTackle, skills.loner(4), skills.mightyBlow(1), skills.regeneration, skills.standFirm, skills.thickSkull], 250000, [rosterSpecialRules.oldWorldClassic, rosterSpecialRules.sylvanianSpotlight], [starPlayerSpecialRules.brutalBlock]),
   starPlayer("Fungus the Loon", 4, 7, 3, null, 8, [skills.ballAndChain, skills.mightyBlow(1), skills.loner(4), skills.noHands, skills.secretWeapon, skills.stunty], 80000, [rosterSpecialRules.badlandsBrawl, rosterSpecialRules.underworldChallenge], [starPlayerSpecialRules.whirlingDervish]),
   starPlayer("Glart Smashrip", 5, 4, 4, null, 9, [skills.block, skills.claws, skills.grab, skills.juggernaut, skills.loner(4), skills.standFirm], 195000, [rosterSpecialRules.favouredOf, rosterSpecialRules.underworldChallenge], [starPlayerSpecialRules.frenziedRush]),
   starPlayer("Gloriel Summerbloom", 7, 2, 2, 2, 8, [skills.accurate, skills.dodge, skills.loner(3), skills.pass, skills.sideStep, skills.sureHands], 150000, [rosterSpecialRules.elvenKingdomsLeague], [starPlayerSpecialRules.shotToNothing]),
+  starPlayer("Glotl Stop", 6, 6, 5, null, 10, [skills.animalSavagery, skills.frenzy, skills.loner(4), skills.mightyBlow(1), skills.prehensileTail, skills.standFirm, skills.thickSkull], 270000, [rosterSpecialRules.lustrianSuperleague], [starPlayerSpecialRules.primalSavagery]),
   starPlayer("Grak", 5, 5, 4, 4, 10, [skills.boneHead, skills.kickTeamMate, skills.loner(4), skills.mightyBlow(1), skills.thickSkull], 250000, [rosterSpecialRules.any], [starPlayerSpecialRules.twoForOne]),
   starPlayer("Crumbleberry", 5, 2, 3, 6, 7, [skills.dodge, skills.loner(4), skills.rightStuff, skills.stunty, skills.sureHands], 0, [rosterSpecialRules.any], [starPlayerSpecialRules.twoForOne]),
   starPlayer("Grashnak Blackhoof", 6, 6, 4, null, 9, [skills.frenzy, skills.horns, skills.loner(4), skills.mightyBlow(1), skills.thickSkull, skills.unchannelledFury], 240000, [rosterSpecialRules.favouredOf], [starPlayerSpecialRules.goredByTheBull]),
