@@ -1,5 +1,6 @@
 .App {
   background-color: rgba(0,0,0,0.02);
+  font-size: .9rem;
 }
 
 header {
@@ -60,7 +61,7 @@ footer a:hover {
 .form-control-sm, .form-control-plaintext {
   height: calc(1.1em + .5rem + 2px);
   padding: 0rem .5rem;
-  font-size: .875rem;
+  font-size: .8rem;
   line-height: 1.5;
   border-radius: .2rem;
   vertical-align: middle;
@@ -98,7 +99,7 @@ footer a:hover {
 .budget-table button.btn-sm {
   height: calc(1.1em + .5rem + 2px);
   padding: 0rem .5rem;
-  font-size: .875rem;
+  font-size: .8rem;
   line-height: 1.5;
   border-radius: .2rem;
   vertical-align: middle;
@@ -114,10 +115,11 @@ footer a:hover {
   color: orange;
   font-weight: bold;
   font-style: italic;
+  font-size: .8rem;
 }
 
 .player-table tbody tr td {
-  font-size: .875rem;
+  font-size: .8rem;
   padding: .2rem .3rem;
 }
 
@@ -127,7 +129,7 @@ td.player-number {
   color: black;
   text-align: center;
   font-style: italic;
-  width: 40px;
+  width: 32px;
 }
 
 .player-table tbody tr td.player-name {
@@ -186,7 +188,7 @@ td.player-value {
   border-color: black;
   text-align: center;
   padding: 2px;
-  font-size: 11pt;
+  font-size: .8rem;
   background-color: black;
   color: orange;
   font-weight: bold;
@@ -197,7 +199,7 @@ td.player-value {
 .advancement-table td {
   text-align: center;
   padding: 1px;
-  font-size: 11pt;
+  font-size: .8rem;
 }
 
 .advancement-table .skill-available {
@@ -214,5 +216,4 @@ td.player-value {
 footer .row .col {
   text-align: center;
   padding: 50px;
-  font-size: .9rem;
 }
