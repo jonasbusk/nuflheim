@@ -61,7 +61,7 @@ class PlayerTable extends Component {
       <td className={"player-pa" + (player.positionNumber && !player.isStar && " cursor-pointer" || "")} onClick={() => player.positionNumber && !player.isStar && this.props.togglePlayerAdvancementModal(i+1)}>{this.props.renderPlayerChar(player, "pa")}</td>
       <td className={"player-av" + (player.positionNumber && !player.isStar && " cursor-pointer" || "")} onClick={() => player.positionNumber && !player.isStar && this.props.togglePlayerAdvancementModal(i+1)}>{this.props.renderPlayerChar(player, "av")}</td>
       <td className={"player-skills" + (player.positionNumber && !player.isStar && " cursor-pointer" || "")} onClick={() => player.positionNumber && !player.isStar && this.props.togglePlayerAdvancementModal(i+1)}>{this.renderPlayerSkills(player)}</td>
-      <td className="player-value">{player.value && this.props.formatCost(this.props.getPlayerValue(player))}</td>
+      <td className="player-value">{typeof player.value !== "undefined" && this.props.formatCost(this.props.getPlayerValue(player))}</td>
     </tr>);
   }
 
