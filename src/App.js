@@ -4,14 +4,13 @@ import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import "bootstrap/dist/css/bootstrap.min.css";
-import ReactGA from "react-ga";
+import ReactGA from "react-ga4";
 
 import Team from "./components/Team";
 import "./App.css";
 
 
-ReactGA.initialize("UA-191514354-1");
-ReactGA.pageview(window.location.href);
+ReactGA.initialize("G-ZZJZZQKWXM");
 
 
 function App() {
