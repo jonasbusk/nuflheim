@@ -69,6 +69,7 @@ const skills = {
   animosity: (x) => "Animosity (" + x + ")",
   alwaysHungry: "Always Hungry",
   ballAndChain: "Ball & Chain",
+  bloodlust: (x) => "Bloodlust (" + x + "+)",
   bombardier: "Bombardier",
   boneHead: "Bone Head",
   chainsaw: "Chainsaw",
@@ -114,6 +115,7 @@ const rosterSpecialRules = {
   oldWorldClassic: "Old World Classic",
   sylvanianSpotlight: "Sylvanlian Spotlight",
   underworldChallenge: "Underworld Challenge",
+  vampireLord: "Vampire Lord",
   worldsEdgeSuperleague: "Worlds Edge Superleague",
 };
 
@@ -592,6 +594,20 @@ const rosters = [
   ),
   roster(
     "Vampire",
+    [
+      positional(16, "Thrall Lineman", 40000, 6, 3, 3, 4, 8, [], "G", "AS"),
+      positional(2, "Vampire Runner", 100000, 8, 3, 2, 4, 8, [skills.bloodlust(2), skills.hypnoticGaze, skills.regeneration], "AG", "PS"),
+      positional(2, "Vampire Thrower", 110000, 6, 4, 2, 2, 9, [skills.bloodlust(2), skills.hypnoticGaze, skills.pass, skills.regeneration], "AGP", "S"),
+      positional(2, "Vampire Blitzer", 110000, 6, 4, 2, 5, 9, [skills.bloodlust(3), skills.hypnoticGaze, skills.juggernaut, skills.regeneration], "AGS", "-"),
+      positional(1, "Vargheist", 150000, 5, 5, 4, null, 10, [skills.bloodlust(3), skills.claws, skills.frenzy, skills.loner(4), skills.regeneration], "S", "AG")
+    ],
+    60000,
+    2,
+    [rosterSpecialRules.sylvanianSpotlight, rosterSpecialRules.vampireLord],
+    true,
+  ),
+  roster(
+    "Vampire of legend",
     [
       positional(12, "Thrall", 40000, 6, 3, 3, 5, 8, [], "G", "AS"),
       positional(6, "Vampire", 110000, 6, 4, 2, 3, 9, [skills.animalSavagery, skills.hypnoticGaze, skills.regeneration], "AGS", "P")
