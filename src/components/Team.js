@@ -75,6 +75,7 @@ class Team extends Component {
       players: new Array(16).fill(null).map((x) => player()),
       showPlayerAdvancementModal: false,
       advancementPlayerNumber: null,  // player selected for advancement, indexed 1-16
+      swapPlayerNumber: null,  // player selected for swap, indexed 1-16
       availableStarPlayers: this.getFilteredStarPlayers(rosters[0]),
     };
   }
@@ -89,7 +90,7 @@ class Team extends Component {
       cheerleaders: 0,
       apothecary: 0,
       players: new Array(16).fill(null).map((x) => player()),
-      availableStarPlayers: this.getFilteredStarPlayers(rosters[rosterIndex])
+      availableStarPlayers: this.getFilteredStarPlayers(rosters[rosterIndex]),
     });
   }
 
@@ -178,6 +179,26 @@ class Team extends Component {
       this.setState({
         advancementPlayerNumber: playerNumber,
         showPlayerAdvancementModal: true,
+      });
+    }
+  }
+
+  togglePlayerSwap = (playerNumber) => {
+    if (this.state.swapPlayerNumber === null) {
+      // Select player for swap
+      this.setState({swapPlayerNumber: playerNumber});
+    } else if (this.state.swapPlayerNumber === playerNumber) {
+      // Deselect player for swap
+      this.setState({swapPlayerNumber: null});
+    } else {
+      // Swap selected players
+      let players = this.state.players;
+      let player = players[this.state.swapPlayerNumber-1];
+      players[this.state.swapPlayerNumber-1] = players[playerNumber-1];
+      players[playerNumber-1] = player;
+      this.setState({
+        players: players,
+        swapPlayerNumber: null,
       });
     }
   }
@@ -499,6 +520,8 @@ class Team extends Component {
               getPlayerValue={this.getPlayerValue}
               formatCost={this.formatCost}
               togglePlayerAdvancementModal={this.togglePlayerAdvancementModal}
+              swapPlayerNumber={this.state.swapPlayerNumber}
+              togglePlayerSwap={this.togglePlayerSwap}
             />
           </Col>
         </Row>

@@ -164,7 +164,7 @@ td.player-skills div span span {
 }
 
 td.player-skills span.skill-default {
-
+  color: black;
 }
 
 td.player-skills span.skill-primary {
@@ -182,6 +182,15 @@ td.player-skills span.skill-special {
 td.player-value {
   text-align: right;
   width: 95px;
+}
+
+td.player-swap {
+  text-align: center;
+  width: 25px;
+}
+
+.player-table tbody tr td.player-swap-selected {
+  background-color: orange;
 }
 
 .advancement-table th {

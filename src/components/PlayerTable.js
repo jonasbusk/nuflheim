@@ -62,6 +62,7 @@ class PlayerTable extends Component {
       <td className={"player-av" + (player.positionNumber && !player.isStar && " cursor-pointer" || "")} onClick={() => player.positionNumber && !player.isStar && this.props.togglePlayerAdvancementModal(i+1)}>{this.props.renderPlayerChar(player, "av")}</td>
       <td className={"player-skills" + (player.positionNumber && !player.isStar && " cursor-pointer" || "")} onClick={() => player.positionNumber && !player.isStar && this.props.togglePlayerAdvancementModal(i+1)}>{this.renderPlayerSkills(player)}</td>
       <td className="player-value">{typeof player.value !== "undefined" && this.props.formatCost(this.props.getPlayerValue(player))}</td>
+      <td className={"player-swap cursor-pointer" + (i+1 === this.props.swapPlayerNumber && " player-swap-selected" || "")} onClick={() => this.props.togglePlayerSwap(i+1)}>&#8597;</td>
     </tr>);
   }
 
@@ -80,6 +81,7 @@ class PlayerTable extends Component {
             <th className="text-center">AV</th>
             <th className="text-left">Skills</th>
             <th className="text-center">Value</th>
+            <th className="text-center"></th>
           </tr>
         </thead>
         <tbody>
