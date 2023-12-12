@@ -12,7 +12,7 @@ import Modal from "react-bootstrap/Modal";
 
 import {rosters, starPlayers} from "../data";
 import PlayerTable from "./PlayerTable";
-import PlayerCustom from "./PlayerCustom";
+import PlayerAdvancement from "./PlayerAdvancement";
 import CreatePDF from "./CreatePDF";
 
 
@@ -74,7 +74,7 @@ class Team extends Component {
       apothecary: 0,
       players: new Array(16).fill(null).map((x) => player()),
       showPlayerAdvancementModal: false,
-      selectedPlayerNumber: null,  // indexed 1-16
+      advancementPlayerNumber: null,  // player selected for advancement, indexed 1-16
       availableStarPlayers: this.getFilteredStarPlayers(rosters[0]),
     };
   }
@@ -151,19 +151,19 @@ class Team extends Component {
     this.setState({players: players});
   }
 
-  getSelectedPlayer = () => {
+  getAdvancementPlayer = () => {
     // Get the player selected for advancement
-    if (this.state.showPlayerAdvancementModal && this.state.selectedPlayerNumber) {
-      return this.state.players[this.state.selectedPlayerNumber-1];
+    if (this.state.showPlayerAdvancementModal && this.state.advancementPlayerNumber) {
+      return this.state.players[this.state.advancementPlayerNumber-1];
     } else {
       return null;
     }
   }
 
-  setSelectedPlayer = (player) => {
+  setAdvancementPlayer = (player) => {
     // Save player to state at the index of the selected player
     let players = this.state.players;
-    players[this.state.selectedPlayerNumber-1] = player;
+    players[this.state.advancementPlayerNumber-1] = player;
     this.setState({players: players});
   }
 
@@ -176,8 +176,8 @@ class Team extends Component {
     } else {
       // Select player and show player advancement modal
       this.setState({
-        selectedPlayerNumber: playerNumber,
-        showPlayerAdvancementModal: true
+        advancementPlayerNumber: playerNumber,
+        showPlayerAdvancementModal: true,
       });
     }
   }
@@ -201,19 +201,19 @@ class Team extends Component {
     }
   }
 
-  toggleSelectedPlayerChar = (char) => {
+  toggleCharAdvancement = (char) => {
     // Improve or reset a characteristic of the selected player
-    let player = this.getSelectedPlayer();
-    if (this.playerCharMayBeImproved(player, char)) {
+    let player = this.getAdvancementPlayer();
+    if (this.playerCharCanBeImproved(player, char)) {
       player[char + "Mod"] += 1;
     } else {
       player[char + "Mod"] = 0;
     }
-    this.setSelectedPlayer(player);
+    this.setAdvancementPlayer(player);
   }
 
-  playerCharMayBeImproved = (player, char) => {
-    // Determine if a player characteristic may be improved
+  playerCharCanBeImproved = (player, char) => {
+    // Determine if the player characteristic can be improved
     return !(
       player[char + "Mod"] === 2 ||
       (char === "ma" && player.ma + player.maMod === 9) ||
@@ -224,9 +224,9 @@ class Team extends Component {
     );
   }
 
-  addSelectedPlayerSkill = (skill, category) => {
+  addSkillAdvancement = (skill, category) => {
     // Add skill to selected player
-    let player = this.getSelectedPlayer();
+    let player = this.getAdvancementPlayer();
     if (player.primaryAccess.includes(category)) {
       player.primarySkills.push(skill);
       player.primarySkills.sort();
@@ -234,15 +234,15 @@ class Team extends Component {
       player.secondarySkills.push(skill);
       player.secondarySkills.sort();
     }
-    this.setSelectedPlayer(player);
+    this.setAdvancementPlayer(player);
   }
 
-  removeSelectedPlayerSkill = (skill) => {
+  removeSkillAdvancement = (skill) => {
     // Remove skill from selected player
-    let player = this.getSelectedPlayer();
+    let player = this.getAdvancementPlayer();
     player.primarySkills = player.primarySkills.filter((s) => s !== skill);
     player.secondarySkills = player.secondarySkills.filter((s) => s !== skill);
-    this.setSelectedPlayer(player);
+    this.setAdvancementPlayer(player);
   }
 
   getPlayerValue = (player) => {
@@ -537,17 +537,17 @@ class Team extends Component {
         >
           <Modal.Header closeButton>
             <Modal.Title id="contained-modal-title-vcenter">
-              Player Customisation
+              Player Advancement
             </Modal.Title>
           </Modal.Header>
           <Modal.Body>
 
-            <PlayerCustom
-              getSelectedPlayer={this.getSelectedPlayer}
+            <PlayerAdvancement
+              getAdvancementPlayer={this.getAdvancementPlayer}
               renderPlayerChar={this.renderPlayerChar}
-              toggleSelectedPlayerChar={this.toggleSelectedPlayerChar}
-              addSelectedPlayerSkill={this.addSelectedPlayerSkill}
-              removeSelectedPlayerSkill={this.removeSelectedPlayerSkill}
+              toggleCharAdvancement={this.toggleCharAdvancement}
+              addSkillAdvancement={this.addSkillAdvancement}
+              removeSkillAdvancement={this.removeSkillAdvancement}
             />
 
           </Modal.Body>

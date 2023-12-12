@@ -4,11 +4,11 @@ import Table from "react-bootstrap/Table";
 import {skills} from "../data";
 
 
-class PlayerCustom extends Component {
+class PlayerAdvancement extends Component {
 
   renderSkill = (skill, category) => {
     // Render a skill in the skill advancement table
-    let player = this.props.getSelectedPlayer();
+    let player = this.props.getAdvancementPlayer();
     if (player) {
       if (player.skills.includes(skill)) {
         // Selected player has the skill as a starting skill
@@ -18,10 +18,10 @@ class PlayerCustom extends Component {
         return <span className="text-muted">{skill}</span>;
       } else if (player.primarySkills.includes(skill) || player.secondarySkills.includes(skill)) {
         // Selected player has already added the skill
-        return <span className="skill-selected" onClick={() => this.props.removeSelectedPlayerSkill(skill)}>{skill}</span>;
+        return <span className="skill-selected" onClick={() => this.props.removeSkillAdvancement(skill)}>{skill}</span>;
       } else {
         // Skill is available
-        return <span className="skill-available" onClick={() => this.props.addSelectedPlayerSkill(skill, category)}>{skill}</span>;
+        return <span className="skill-available" onClick={() => this.props.addSkillAdvancement(skill, category)}>{skill}</span>;
       }
     }
   }
@@ -39,9 +39,9 @@ class PlayerCustom extends Component {
           </thead>
           <tbody>
             <tr>
-              <td>{this.props.getSelectedPlayer() && this.props.getSelectedPlayer().positionName}</td>
-              <td>{this.props.getSelectedPlayer() && this.props.getSelectedPlayer().primaryAccess}</td>
-              <td>{this.props.getSelectedPlayer() && this.props.getSelectedPlayer().secondaryAccess}</td>
+              <td>{this.props.getAdvancementPlayer() && this.props.getAdvancementPlayer().positionName}</td>
+              <td>{this.props.getAdvancementPlayer() && this.props.getAdvancementPlayer().primaryAccess}</td>
+              <td>{this.props.getAdvancementPlayer() && this.props.getAdvancementPlayer().secondaryAccess}</td>
             </tr>
           </tbody>
         </Table>
@@ -58,20 +58,20 @@ class PlayerCustom extends Component {
           </thead>
           <tbody>
             <tr>
-              <td className="cursor-pointer" onClick={() => this.props.toggleSelectedPlayerChar("ma")}>
-                {this.props.getSelectedPlayer() && this.props.renderPlayerChar(this.props.getSelectedPlayer(), "ma")}
+              <td className="cursor-pointer" onClick={() => this.props.toggleCharAdvancement("ma")}>
+                {this.props.getAdvancementPlayer() && this.props.renderPlayerChar(this.props.getAdvancementPlayer(), "ma")}
               </td>
-              <td className="cursor-pointer" onClick={() => this.props.toggleSelectedPlayerChar("st")}>
-                {this.props.getSelectedPlayer() && this.props.renderPlayerChar(this.props.getSelectedPlayer(), "st")}
+              <td className="cursor-pointer" onClick={() => this.props.toggleCharAdvancement("st")}>
+                {this.props.getAdvancementPlayer() && this.props.renderPlayerChar(this.props.getAdvancementPlayer(), "st")}
               </td>
-              <td className="cursor-pointer" onClick={() => this.props.toggleSelectedPlayerChar("ag")}>
-                {this.props.getSelectedPlayer() && this.props.renderPlayerChar(this.props.getSelectedPlayer(), "ag")}
+              <td className="cursor-pointer" onClick={() => this.props.toggleCharAdvancement("ag")}>
+                {this.props.getAdvancementPlayer() && this.props.renderPlayerChar(this.props.getAdvancementPlayer(), "ag")}
               </td>
-              <td className="cursor-pointer" onClick={() => this.props.toggleSelectedPlayerChar("pa")}>
-                {this.props.getSelectedPlayer() && this.props.renderPlayerChar(this.props.getSelectedPlayer(), "pa")}
+              <td className="cursor-pointer" onClick={() => this.props.toggleCharAdvancement("pa")}>
+                {this.props.getAdvancementPlayer() && this.props.renderPlayerChar(this.props.getAdvancementPlayer(), "pa")}
               </td>
-              <td className="cursor-pointer" onClick={() => this.props.toggleSelectedPlayerChar("av")}>
-                {this.props.getSelectedPlayer() && this.props.renderPlayerChar(this.props.getSelectedPlayer(), "av")}
+              <td className="cursor-pointer" onClick={() => this.props.toggleCharAdvancement("av")}>
+                {this.props.getAdvancementPlayer() && this.props.renderPlayerChar(this.props.getAdvancementPlayer(), "av")}
               </td>
             </tr>
           </tbody>
@@ -108,4 +108,4 @@ class PlayerCustom extends Component {
 }
 
 
-export default PlayerCustom;
+export default PlayerAdvancement;
