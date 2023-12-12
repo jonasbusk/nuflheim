@@ -1,8 +1,8 @@
 {
   "files": {
-    "main.css": "/nuflheim/static/css/main.e2354eb9.chunk.css",
-    "main.js": "/nuflheim/static/js/main.1a54de28.chunk.js",
-    "main.js.map": "/nuflheim/static/js/main.1a54de28.chunk.js.map",
+    "main.css": "/nuflheim/static/css/main.c042b4b8.chunk.css",
+    "main.js": "/nuflheim/static/js/main.e6590626.chunk.js",
+    "main.js.map": "/nuflheim/static/js/main.e6590626.chunk.js.map",
     "runtime-main.js": "/nuflheim/static/js/runtime-main.36d6641a.js",
     "runtime-main.js.map": "/nuflheim/static/js/runtime-main.36d6641a.js.map",
     "static/css/2.081f420c.chunk.css": "/nuflheim/static/css/2.081f420c.chunk.css",
@@ -10,14 +10,14 @@
     "static/js/2.9925863f.chunk.js.map": "/nuflheim/static/js/2.9925863f.chunk.js.map",
     "index.html": "/nuflheim/index.html",
     "static/css/2.081f420c.chunk.css.map": "/nuflheim/static/css/2.081f420c.chunk.css.map",
-    "static/css/main.e2354eb9.chunk.css.map": "/nuflheim/static/css/main.e2354eb9.chunk.css.map",
+    "static/css/main.c042b4b8.chunk.css.map": "/nuflheim/static/css/main.c042b4b8.chunk.css.map",
     "static/js/2.9925863f.chunk.js.LICENSE.txt": "/nuflheim/static/js/2.9925863f.chunk.js.LICENSE.txt"
   },
   "entrypoints": [
     "static/js/runtime-main.36d6641a.js",
     "static/css/2.081f420c.chunk.css",
     "static/js/2.9925863f.chunk.js",
-    "static/css/main.e2354eb9.chunk.css",
-    "static/js/main.1a54de28.chunk.js"
+    "static/css/main.c042b4b8.chunk.css",
+    "static/js/main.e6590626.chunk.js"
   ]
 }
