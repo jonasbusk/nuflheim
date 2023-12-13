@@ -330,7 +330,6 @@ class Team extends Component {
   render() {
     return (
       <Container>
-
         <Tabs defaultActiveKey="team">
           <Tab eventKey="team" title="Team">
             <Row>
@@ -406,11 +405,51 @@ class Team extends Component {
                 </Table>
               </Col>
             </Row>
-          </Tab>
-          <Tab eventKey="budget" title="Budget">
             <Row>
-              <Col md="6">
-                <Table borderless size="sm" className="margin-zero budget-table">
+              <Col>
+                <PlayerTable
+                  roster={this.state.roster}
+                  players={this.state.players}
+                  availableStarPlayers={this.state.availableStarPlayers}
+                  setPlayer={this.setPlayer}
+                  setPlayerName={this.setPlayerName}
+                  renderPlayerChar={this.renderPlayerChar}
+                  getPlayerValue={this.getPlayerValue}
+                  formatCost={this.formatCost}
+                  togglePlayerAdvancementModal={this.togglePlayerAdvancementModal}
+                  swapPlayerNumber={this.state.swapPlayerNumber}
+                  togglePlayerSwap={this.togglePlayerSwap}
+                />
+              </Col>
+            </Row>
+            <Row>
+              <Col className="text-center">
+                <CreatePDF
+                  name={this.state.name}
+                  rosterName={this.state.roster.name}
+                  coach={this.state.coach}
+                  treasury={this.getTreasury()}
+                  teamValue={this.getTeamValue()}
+                  reRolls={this.state.reRolls}
+                  costOfReRolls={this.getCostOfReRolls()}
+                  assistantCoaches={this.state.assistantCoaches}
+                  costOfAssistantCoaches={this.state.costOfAssistantCoaches}
+                  cheerleaders={this.state.cheerleaders}
+                  costOfCheerleaders={this.state.costOfCheerleaders}
+                  dedicatedFans={this.state.dedicatedFans}
+                  costOfDedicatedFans={this.state.costOfDedicatedFans}
+                  apothecary={this.state.apothecary}
+                  costOfApothecary={this.state.costOfApothecary}
+                  players={this.state.players}
+                  getPlayerValue={this.getPlayerValue}
+                />
+              </Col>
+            </Row>
+          </Tab>
+          <Tab eventKey="settings" title="Settings">
+            <Row>
+              <Col md="8">
+                <Table borderless size="sm" className="margin-zero settings-table">
                   <tbody>
                     <tr>
                       <td>Rules presets:</td>
@@ -420,6 +459,11 @@ class Team extends Component {
                       </td>
                       <td></td>
                     </tr>
+                  </tbody>
+                </Table>
+                <hr />
+                <Table borderless size="sm" className="margin-zero settings-table">
+                  <tbody>
                     <tr>
                       <td>Team draft budget:</td>
                       <td><Form.Control type="number" size="sm" className="text-right" value={this.state.budget.toString()} onChange={(e) => this.setState({budget: e.target.value && Math.min(Math.max(parseInt(e.target.value) || 0, 0), Number.MAX_SAFE_INTEGER)})} /></td>
@@ -452,9 +496,8 @@ class Team extends Component {
                     </tr>
                   </tbody>
                 </Table>
-              </Col>
-              <Col md="6">
-                <Table borderless size="sm" className="margin-zero budget-table">
+                <hr />
+                <Table borderless size="sm" className="margin-zero settings-table">
                   <tbody>
                     <tr>
                       <td>Player advancements cost gold:</td>
@@ -462,7 +505,7 @@ class Team extends Component {
                       <td></td>
                     </tr>
                     <tr>
-                      <td>Customise cost of player advancements:</td>
+                      <td>Custom player advancement costs:</td>
                       <td><Form.Check inline type="checkbox" defaultChecked={this.state.customisePlayerAdvancementCosts} onChange={(e) => this.toggleCustomisePlayerAdvancementCosts()} /></td>
                       <td></td>
                     </tr>
@@ -507,49 +550,6 @@ class Team extends Component {
             </Row>
           </Tab>
         </Tabs>
-
-        <Row>
-          <Col>
-            <PlayerTable
-              roster={this.state.roster}
-              players={this.state.players}
-              availableStarPlayers={this.state.availableStarPlayers}
-              setPlayer={this.setPlayer}
-              setPlayerName={this.setPlayerName}
-              renderPlayerChar={this.renderPlayerChar}
-              getPlayerValue={this.getPlayerValue}
-              formatCost={this.formatCost}
-              togglePlayerAdvancementModal={this.togglePlayerAdvancementModal}
-              swapPlayerNumber={this.state.swapPlayerNumber}
-              togglePlayerSwap={this.togglePlayerSwap}
-            />
-          </Col>
-        </Row>
-
-        <Row>
-          <Col className="text-center">
-            <CreatePDF
-              name={this.state.name}
-              rosterName={this.state.roster.name}
-              coach={this.state.coach}
-              treasury={this.getTreasury()}
-              teamValue={this.getTeamValue()}
-              reRolls={this.state.reRolls}
-              costOfReRolls={this.getCostOfReRolls()}
-              assistantCoaches={this.state.assistantCoaches}
-              costOfAssistantCoaches={this.state.costOfAssistantCoaches}
-              cheerleaders={this.state.cheerleaders}
-              costOfCheerleaders={this.state.costOfCheerleaders}
-              dedicatedFans={this.state.dedicatedFans}
-              costOfDedicatedFans={this.state.costOfDedicatedFans}
-              apothecary={this.state.apothecary}
-              costOfApothecary={this.state.costOfApothecary}
-              players={this.state.players}
-              getPlayerValue={this.getPlayerValue}
-            />
-          </Col>
-        </Row>
-
         <Modal
           show={this.state.showPlayerAdvancementModal}
           onHide={() => this.setState({showPlayerAdvancementModal: false})}
@@ -564,7 +564,6 @@ class Team extends Component {
             </Modal.Title>
           </Modal.Header>
           <Modal.Body>
-
             <PlayerAdvancement
               getAdvancementPlayer={this.getAdvancementPlayer}
               renderPlayerChar={this.renderPlayerChar}
@@ -572,10 +571,8 @@ class Team extends Component {
               addSkillAdvancement={this.addSkillAdvancement}
               removeSkillAdvancement={this.removeSkillAdvancement}
             />
-
           </Modal.Body>
         </Modal>
-
       </Container>
     );
   }

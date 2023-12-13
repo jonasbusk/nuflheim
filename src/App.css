@@ -92,11 +92,15 @@ footer a:hover {
   width: 105px;
 }
 
-.budget-table td:nth-child(3) {
+.settings-table td:nth-child(2) {
+  width: 160px;
+}
+
+.settings-table td:nth-child(3) {
   width: 40px;
 }
 
-.budget-table button.btn-sm {
+.settings-table button.btn-sm {
   height: calc(1.1em + .5rem + 2px);
   padding: 0rem .5rem;
   font-size: .8rem;
