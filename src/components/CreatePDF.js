@@ -83,6 +83,11 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     borderBottom: 1,
   },
+  tableRowUnderlineLight: {
+    flexDirection: "row",
+    borderBottom: 1,
+    borderColor: "#eee",
+  },
   tableData: {
     padding: 2,
   },
@@ -155,6 +160,31 @@ const styles = StyleSheet.create({
     padding: 2,
     textAlign: "right",
   },
+  inducement1: {
+    width: "80.9%",
+    padding: 2,
+    textAlign: "left",
+  },
+  inducement2: {
+    width: "1.55%",
+    padding: 2,
+    textAlign: "right",
+  },
+  inducement3: {
+    width: "1.55%",
+    padding: 2,
+    textAlign: "center",
+  },
+  inducement4: {
+    width: "8%",
+    padding: 2,
+    textAlign: "right",
+  },
+  inducement5: {
+    width: "8%",
+    padding: 2,
+    textAlign: "right",
+  },
 });
 
 
@@ -168,11 +198,11 @@ const TeamDocument = (props) => (
 
           <View style={styles.column}>
             <View style={styles.table}>
-              <View style={styles.tableRow}><Text style={styles.info11}>Team Name:</Text><Text style={styles.info12}>{props.name}</Text></View>
-              <View style={styles.tableRow}><Text style={styles.info11}>Coach:</Text><Text style={styles.info12}>{props.coach}</Text></View>
-              <View style={styles.tableRow}><Text style={styles.info11}>Roster:</Text><Text style={styles.info12}>{props.rosterName}</Text></View>
-              <View style={styles.tableRow}><Text style={styles.info11}>Treasury:</Text><Text style={styles.info12}>{formatCost(props.treasury)}</Text></View>
-              <View style={styles.tableRow}><Text style={styles.info11}>Team Value:</Text><Text style={styles.info12}>{formatCost(props.teamValue)}</Text></View>
+              <View style={styles.tableRowUnderlineLight}><Text style={styles.info11}>Team Name:</Text><Text style={styles.info12}>{props.name}</Text></View>
+              <View style={styles.tableRowUnderlineLight}><Text style={styles.info11}>Coach:</Text><Text style={styles.info12}>{props.coach}</Text></View>
+              <View style={styles.tableRowUnderlineLight}><Text style={styles.info11}>Roster:</Text><Text style={styles.info12}>{props.rosterName}</Text></View>
+              <View style={styles.tableRowUnderlineLight}><Text style={styles.info11}>Treasury:</Text><Text style={styles.info12}>{formatCost(props.treasury)}</Text></View>
+              <View style={styles.tableRowUnderlineLight}><Text style={styles.info11}>Team Value:</Text><Text style={styles.info12}>{formatCost(props.teamValue)}</Text></View>
             </View>
           </View>
 
@@ -182,11 +212,11 @@ const TeamDocument = (props) => (
 
           <View style={styles.column}>
             <View style={styles.table}>
-              <View style={styles.tableRow}><Text style={styles.info31}>Team Re-rolls:</Text><Text style={styles.info32}>{props.reRolls}</Text><Text style={styles.info33}>x</Text><Text style={styles.info34}>{formatCost(props.costOfReRolls)}</Text><Text style={styles.info35}>{formatCost(props.reRolls * props.costOfReRolls)}</Text></View>
-              <View style={styles.tableRow}><Text style={styles.info31}>Assistant Coaches:</Text><Text style={styles.info32}>{props.assistantCoaches}</Text><Text style={styles.info33}>x</Text><Text style={styles.info34}>{formatCost(props.costOfAssistantCoaches)}</Text><Text style={styles.info35}>{formatCost(props.assistantCoaches * props.costOfAssistantCoaches)}</Text></View>
-              <View style={styles.tableRow}><Text style={styles.info31}>Cheerleaders:</Text><Text style={styles.info32}>{props.cheerleaders}</Text><Text style={styles.info33}>x</Text><Text style={styles.info34}>{formatCost(props.costOfCheerleaders)}</Text><Text style={styles.info35}>{formatCost(props.cheerleaders * props.costOfCheerleaders)}</Text></View>
-              <View style={styles.tableRow}><Text style={styles.info31}>Dedicated Fans:</Text><Text style={styles.info32}>{props.dedicatedFans}</Text><Text style={styles.info33}>x</Text><Text style={styles.info34}>{formatCost(props.costOfDedicatedFans)}</Text><Text style={styles.info35}>{formatCost(props.dedicatedFans * props.costOfDedicatedFans)}</Text></View>
-              <View style={styles.tableRow}><Text style={styles.info31}>Apothecary:</Text><Text style={styles.info32}>{props.apothecary}</Text><Text style={styles.info33}>x</Text><Text style={styles.info34}>{formatCost(props.costOfApothecary)}</Text><Text style={styles.info35}>{formatCost(props.apothecary * props.costOfApothecary)}</Text></View>
+              <View style={styles.tableRowUnderlineLight}><Text style={styles.info31}>Team Re-rolls:</Text><Text style={styles.info32}>{props.reRolls}</Text><Text style={styles.info33}>x</Text><Text style={styles.info34}>{formatCost(props.costOfReRolls)}</Text><Text style={styles.info35}>{formatCost(props.reRolls * props.costOfReRolls)}</Text></View>
+              <View style={styles.tableRowUnderlineLight}><Text style={styles.info31}>Assistant Coaches:</Text><Text style={styles.info32}>{props.assistantCoaches}</Text><Text style={styles.info33}>x</Text><Text style={styles.info34}>{formatCost(props.costOfAssistantCoaches)}</Text><Text style={styles.info35}>{formatCost(props.assistantCoaches * props.costOfAssistantCoaches)}</Text></View>
+              <View style={styles.tableRowUnderlineLight}><Text style={styles.info31}>Cheerleaders:</Text><Text style={styles.info32}>{props.cheerleaders}</Text><Text style={styles.info33}>x</Text><Text style={styles.info34}>{formatCost(props.costOfCheerleaders)}</Text><Text style={styles.info35}>{formatCost(props.cheerleaders * props.costOfCheerleaders)}</Text></View>
+              <View style={styles.tableRowUnderlineLight}><Text style={styles.info31}>Dedicated Fans:</Text><Text style={styles.info32}>{props.dedicatedFans}</Text><Text style={styles.info33}>x</Text><Text style={styles.info34}>{formatCost(props.costOfDedicatedFans)}</Text><Text style={styles.info35}>{formatCost(props.dedicatedFans * props.costOfDedicatedFans)}</Text></View>
+              <View style={styles.tableRowUnderlineLight}><Text style={styles.info31}>Apothecary:</Text><Text style={styles.info32}>{props.apothecary}</Text><Text style={styles.info33}>x</Text><Text style={styles.info34}>{formatCost(props.costOfApothecary)}</Text><Text style={styles.info35}>{formatCost(props.apothecary * props.costOfApothecary)}</Text></View>
             </View>
           </View>
         </View>
@@ -208,7 +238,7 @@ const TeamDocument = (props) => (
                 <Text style={styles.playerValue}>Value</Text>
               </View>
               {props.players.map((player, i) => {
-                return <View style={styles.tableRow} key={i+1}>
+                return <View style={styles.tableRowUnderlineLight} key={i+1}>
                   <Text style={styles.playerNumber}>{i+1}</Text>
                   <Text style={styles.playerName}>{player.name}</Text>
                   <Text style={styles.playerPosition}>{player.positionName}</Text>
@@ -223,6 +253,23 @@ const TeamDocument = (props) => (
                 </View>;
               })}
             </View>
+          </View>
+        </View>
+
+        <View style={styles.row}>
+          <View style={styles.column}>
+            {/* <Text>Inducements</Text> */}
+            {props.inducements.map((inducement, i) => {
+              if (inducement.quantity > 0) {
+                return <View style={styles.tableRowUnderlineLight} key={i}>
+                  <Text style={styles.inducement1}>{inducement.name}</Text>
+                  <Text style={styles.inducement2}>{inducement.quantity}</Text>
+                  <Text style={styles.inducement3}>x</Text>
+                  <Text style={styles.inducement4}>{formatCost(inducement.cost)}</Text>
+                  <Text style={styles.inducement5}>{formatCost(inducement.quantity * inducement.cost)}</Text>
+                </View>;
+              }
+            })}
           </View>
         </View>
 

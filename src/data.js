@@ -738,4 +738,4 @@ const starPlayers = [
 ];
 
 
-export {rosters, skills, starPlayers};
+export {rosters, rosterSpecialRules, skills, starPlayers};

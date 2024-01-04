@@ -10,9 +10,10 @@ import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
 
-import {rosters, starPlayers} from "../data";
+import {rosters, rosterSpecialRules, starPlayers} from "../data";
 import PlayerTable from "./PlayerTable";
 import PlayerAdvancement from "./PlayerAdvancement";
+import Inducements from "./Inducements";
 import CreatePDF from "./CreatePDF";
 
 
@@ -40,6 +41,16 @@ const player = (name, positionNumber, positionName, ma, st, ag, pa, av, skills, 
     secondaryAccess: secondaryAccess,
     specialRules: specialRules,
     isStar: isStar,
+  };
+};
+
+
+const inducement = (name, quantity, max, cost) => {
+  return {
+    name: name,
+    quantity: quantity,
+    max: max,  // max quantity
+    cost: cost,
   };
 };
 
@@ -76,7 +87,8 @@ class Team extends Component {
       showPlayerAdvancementModal: false,
       advancementPlayerNumber: null,  // player selected for advancement, indexed 1-16
       swapPlayerNumber: null,  // player selected for swap, indexed 1-16
-      availableStarPlayers: this.getFilteredStarPlayers(rosters[0]),
+      availableStarPlayers: this.getAvailableStarPlayers(rosters[0]),
+      inducements: this.getAvailableInducements(rosters[0]),
     };
   }
 
@@ -90,7 +102,8 @@ class Team extends Component {
       cheerleaders: 0,
       apothecary: 0,
       players: new Array(16).fill(null).map((x) => player()),
-      availableStarPlayers: this.getFilteredStarPlayers(rosters[rosterIndex]),
+      availableStarPlayers: this.getAvailableStarPlayers(rosters[rosterIndex]),
+      inducements: this.getAvailableInducements(rosters[rosterIndex]),
     });
   }
 
@@ -292,6 +305,8 @@ class Team extends Component {
     // team re-rolls
     tv += this.state.reRolls * this.getCostOfReRolls();
     // (fans and treasury do not add to team value)
+    // inducements
+    tv += this.state.inducements.reduce((total, inducement) => {return total + inducement.quantity * inducement.cost;}, 0);
     return tv;
   }
 
@@ -321,10 +336,60 @@ class Team extends Component {
     });
   }
 
-  getFilteredStarPlayers = (roster) => {
+  getAvailableStarPlayers = (roster) => {
+    // Get list of available star players for the given roster
     return starPlayers.filter(starPlayer => {
       return starPlayer.playsFor.includes("Any team") || starPlayer.playsFor.some(r => roster.specialRules.includes(r));
     });
+  }
+
+  getAvailableInducements = (roster) => {
+    // Get list of available inducements for the given roster
+    var inducements = [];
+    inducements.push(inducement("Temp Agency Cheerleaders", 0, 4, 20000));
+    inducements.push(inducement("Part-time Assistant Coaches", 0, 3, 20000));
+    inducements.push(inducement("Weather Mage", 0, 1, 30000));
+    inducements.push(inducement("Bloodweiser Kegs", 0, 2, 50000));
+    inducements.push(inducement("Special Plays", 0, 5, 100000));
+    inducements.push(inducement("Extra Team Training", 0, 8, 100000));
+    if (roster.specialRules.includes(rosterSpecialRules.briberyAndCorruption)) {
+      inducements.push(inducement("Bribes", 0, 3, 50000));
+    } else {
+      inducements.push(inducement("Bribes", 0, 3, 100000));
+    }
+    if (roster.apothecaryAllowed) {
+      inducements.push(inducement("Wandering Apothecaries", 0, 2, 100000));
+    }
+    if (roster.specialRules.includes(rosterSpecialRules.sylvanianSpotlight)) {
+      inducements.push(inducement("Mortuary Assistant", 0, 1, 100000));
+    }
+    if (roster.specialRules.includes(rosterSpecialRules.favouredOfNurgle)) {
+      inducements.push(inducement("Plague Doctor", 0, 1, 100000));
+    }
+    if (roster.specialRules.includes(rosterSpecialRules.lowCostLinemen)) {
+      inducements.push(inducement("Riotous Rookies", 0, 1, 100000));
+    }
+    if (roster.specialRules.includes(rosterSpecialRules.halflingThimbleCup)) {
+      inducements.push(inducement("Halfling Master Chef", 0, 1, 100000));
+    } else {
+      inducements.push(inducement("Halfling Master Chef", 0, 1, 300000));
+    }
+    inducements.push(inducement("Josef Bugman", 0, 1, 100000));
+    inducements.push(inducement("Hireling Sports-Wizard", 0, 1, 150000));
+    if (roster.specialRules.includes(rosterSpecialRules.briberyAndCorruption)) {
+      inducements.push(inducement("Biased Referee", 0, 1, 80000));
+    } else {
+      inducements.push(inducement("Biased Referee", 0, 1, 120000));
+    }
+    return inducements;
+  }
+
+  setInducementQuantity = (i, quantity) => {
+    // Set the quantity of an inducement
+    // i is the index in the list of available inducements
+    let inducements = this.state.inducements;
+    inducements[i].quantity = quantity;
+    this.setState({inducements: inducements});
   }
 
   render() {
@@ -420,6 +485,11 @@ class Team extends Component {
                   swapPlayerNumber={this.state.swapPlayerNumber}
                   togglePlayerSwap={this.togglePlayerSwap}
                 />
+                <Inducements
+                  inducements={this.state.inducements}
+                  setInducementQuantity={this.setInducementQuantity}
+                  formatCost={this.formatCost}
+                />
               </Col>
             </Row>
             <Row>
@@ -442,6 +512,7 @@ class Team extends Component {
                   costOfApothecary={this.state.costOfApothecary}
                   players={this.state.players}
                   getPlayerValue={this.getPlayerValue}
+                  inducements={this.state.inducements}
                 />
               </Col>
             </Row>

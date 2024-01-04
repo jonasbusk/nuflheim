@@ -226,6 +226,46 @@ td.player-swap {
   background-color: orange;
 }
 
+.inducements-box {
+  border: 1px solid rgb(220, 226, 230);
+  background-color: white;
+  padding: 0 5px;
+  margin-bottom: 2em;
+}
+
+.inducements-box .btn-link {
+  color: orange;
+}
+
+.inducements-table {
+  border-bottom: 1px solid rgb(220, 226, 230);
+  font-size: .9rem;
+}
+
+.inducements-box .inducements-table tbody tr td {
+  padding: .2rem .3rem;
+}
+
+.inducements-table td:nth-child(2) {
+  text-align: right;
+  width: 60px;
+}
+
+.inducements-table td:nth-child(3) {
+  text-align: right;
+  width: 30px;
+}
+
+.inducements-table td:nth-child(4) {
+  text-align: right;
+  width: 100px;
+}
+
+.inducements-table td:nth-child(5) {
+  text-align: right;
+  width: 100px;
+}
+
 footer .row .col {
   text-align: center;
   padding: 50px;
