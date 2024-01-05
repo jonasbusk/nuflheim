@@ -4,22 +4,21 @@
   "private": true,
   "homepage": "https://jonasbusk.github.io/nuflheim/",
   "dependencies": {
-    "@react-pdf/renderer": "^2.0.21",
-    "@testing-library/jest-dom": "^5.11.9 ",
-    "@testing-library/react": "^11.2.3",
-    "@testing-library/user-event": "^12.6.0",
+    "@react-pdf/renderer": "3.1.14",
+    "@testing-library/jest-dom": "^6.2.0 ",
+    "@testing-library/react": "^14.1.2",
+    "@testing-library/user-event": "^14.5.2",
     "bootstrap": "^4.5.3",
-    "eslint": "^7.20.0",
     "file-saver": "^2.0.5",
     "gh-pages": "^3.1.0",
-    "npm": "^7.6.3",
-    "react": "^17.0.1",
+    "npm": "^10.2.5",
+    "react": "^18.2.0",
     "react-bootstrap": "^1.4.3",
-    "react-dom": "^17.0.1",
-    "react-ga4": "^2.0.0"
+    "react-dom": "^18.2.0",
+    "react-ga4": "^2.1.0"
   },
   "devDependencies": {
-    "react-scripts": "4.0.3"
+    "react-scripts": "^5.0.1"
   },
   "scripts": {
     "start": "react-scripts start",
@@ -28,19 +27,6 @@
     "eject": "react-scripts eject",
     "predeploy": "npm run build",
     "deploy": "gh-pages -d build"
-  },
-  "eslintConfig": {
-    "extends": "react-app",
-    "rules": {
-      "semi": [
-        "error",
-        "always"
-      ],
-      "quotes": [
-        "error",
-        "double"
-      ]
-    }
   },
   "browserslist": {
     "production": [
