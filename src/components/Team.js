@@ -369,7 +369,7 @@ class Team extends Component {
     if (roster.specialRules.includes(rosterSpecialRules.lowCostLinemen)) {
       inducements.push(inducement("Riotous Rookies", 0, 1, 100000));
     }
-    if (roster.specialRules.includes(rosterSpecialRules.halflingThimbleCup)) {
+    if (roster.name === "Halfling") {
       inducements.push(inducement("Halfling Master Chef", 0, 1, 100000));
     } else {
       inducements.push(inducement("Halfling Master Chef", 0, 1, 300000));
