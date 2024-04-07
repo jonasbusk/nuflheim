@@ -79,6 +79,7 @@ const skills = {
   hypnoticGaze: "Hypnotic Gaze",
   kickTeamMate: "Kick Team Mate",
   loner: (x) => "Loner (" + x + "+)",
+  myBall: "My Ball",
   noHands: "No Hands",
   pickMeUp: "Pick-me-up",
   plagueRidden: "Plague Ridden",
@@ -96,6 +97,7 @@ const skills = {
   titchy: "Titchy",
   timmmber: "Timmm-ber!",
   throwTeamMate: "Throw Team-mate",
+  trickster: "Trickster",
   unchannelledFury: "Unchannelled Fury",
 };
 
@@ -302,6 +304,20 @@ const rosters = [
     50000,
     2,
     [rosterSpecialRules.elvenKingdomsLeague],
+    true,
+  ),
+  roster(
+    "Gnome",
+    [
+      positional(16, "Lineman", 40000, 5, 2, 3, 4, 7, [skills.jumpUp, skills.rightStuff, skills.stunty, skills.wrestle], "A", "GS"),
+      positional(2, "Beastmaster", 55000, 5, 2, 3, 4, 8, [skills.guard, skills.jumpUp, skills.stunty, skills.wrestle], "A", "GS"),
+      positional(2, "Illusionist", 50000, 5, 2, 3, 3, 7, [skills.jumpUp, skills.stunty, skills.trickster, skills.wrestle], "AP", "G"),
+      positional(2, "Woodland Fox", 50000, 7, 2, 2, null, 6, [skills.dodge, skills.myBall, skills.sideStep, skills.stunty], "-", "A"),
+      positional(2, "Altern Forest Treeman", 120000, 2, 6, 5, 5, 11, [skills.mightyBlow(1), skills.standFirm, skills.strongArm, skills.takeRoot, skills.thickSkull, skills.throwTeamMate, skills.timmmber], "S", "AGP")
+    ],
+    50000,
+    3,
+    [rosterSpecialRules.halflingThimbleCup],
     true,
   ),
   roster(
