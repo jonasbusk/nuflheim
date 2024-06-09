@@ -659,6 +659,7 @@ const starPlayerSpecialRules = {
   blindRage: "Blind Rage",
   brutalBlock: "Brutal Block",
   burstOfSpeed: "Burst of Speed",
+  catchOfTheDay: "Catch of the Day",
   consummateProfessional: "Consummate Professional",
   crushingBlow: "Crushing Blow",
   excuseMeAreYouAZoat: "Excuse Me, Are You a Zoat?",  // TODO: should have double quotes
@@ -737,6 +738,7 @@ const starPlayers = [
   starPlayer("Nobbla Blackwart", 6, 2, 3, null, 8, [skills.block, skills.chainsaw, skills.dodge, skills.loner(4), skills.secretWeapon, skills.stunty], 120000, [rosterSpecialRules.badlandsBrawl, rosterSpecialRules.underworldChallenge], [starPlayerSpecialRules.kickEmWhileTheyreDown]),
   starPlayer("Puggy Baconbreath", 5, 3, 3, 4, 7, [skills.block, skills.dodge, skills.loner(3), skills.nervesOfSteel, skills.rightStuff, skills.stunty], 120000, [rosterSpecialRules.halflingThimbleCup, rosterSpecialRules.oldWorldClassic], [starPlayerSpecialRules.halflingLuck]),
   starPlayer("Ripper Bolgroth", 4, 6, 5, 4, 10, [skills.grab, skills.loner(4), skills.mightyBlow(1), skills.regeneration, skills.throwTeamMate], 250000, [rosterSpecialRules.badlandsBrawl, rosterSpecialRules.underworldChallenge], [starPlayerSpecialRules.thinkingMansTroll]),
+  starPlayer("Rodney Roachbait", 6, 2, 3, 4, 7, [skills.catch, skills.divingCatch, skills.jumpUp, skills.loner(4), skills.onTheBall, skills.sideStep, skills.stunty, skills.wrestle], 70000, [rosterSpecialRules.halflingThimbleCup], [starPlayerSpecialRules.catchOfTheDay]),
   starPlayer("Roxanna Darknail", 8, 3, 1, 4, 8, [skills.dodge, skills.frenzy, skills.jumpUp, skills.juggernaut, skills.leap, skills.loner(4)], 270000, [rosterSpecialRules.elvenKingdomsLeague], [starPlayerSpecialRules.burstOfSpeed]),
   starPlayer("Rumbelow Sheepskin", 6, 3, 3, null, 8, [skills.block, skills.horns, skills.juggernaut, skills.loner(4), skills.noHands, skills.tackle, skills.thickSkull], 170000, [rosterSpecialRules.halflingThimbleCup, rosterSpecialRules.oldWorldClassic, rosterSpecialRules.worldsEdgeSuperleague], [starPlayerSpecialRules.ram]),
   starPlayer("Scrappa Sorehead", 7, 2, 3, 5, 8, [skills.dirtyPlayer(1), skills.dodge, skills.loner(4), skills.pogoStick, skills.rightStuff, skills.sprint, skills.stunty, skills.sureFeet], 130000, [rosterSpecialRules.badlandsBrawl, rosterSpecialRules.underworldChallenge], [starPlayerSpecialRules.yoink]),
