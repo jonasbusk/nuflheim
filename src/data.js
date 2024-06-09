@@ -324,7 +324,7 @@ const rosters = [
     "Goblin",
     [
       positional(16, "Lineman", 40000, 6, 2, 3, 4, 8, [skills.dodge, skills.rightStuff, skills.stunty], "A", "GPS"),
-      positional(1, "Bomma", 45000, 6, 2, 3, 4, 8, [skills.bombardier, skills.dodge, skills.secretWeapon, skills.stunty], "A", "GPS"),
+      positional(1, "Bomma", 45000, 6, 2, 3, 4, 8, [skills.bombardier, skills.dodge, skills.secretWeapon, skills.stunty], "AP", "GS"),
       positional(1, "Looney", 40000, 6, 2, 3, null, 8, [skills.chainsaw, skills.secretWeapon, skills.stunty], "A", "GS"),
       positional(1, "Fanatic", 70000, 3, 7, 3, null, 8, [skills.ballAndChain, skills.noHands, skills.secretWeapon, skills.stunty], "S", "AG"),
       positional(1, "Pogoer", 75000, 7, 2, 3, 5, 8, [skills.dodge, skills.pogoStick, skills.stunty], "A", "GPS"),
@@ -595,7 +595,7 @@ const rosters = [
     "Underworld Denizens",
     [
       positional(12, "Underworld Goblin", 40000, 6, 2, 3, 4, 8, [skills.dodge, skills.rightStuff, skills.stunty], "AM", "GS"),
-      positional(6, "Underworld Snotling", 15000, 5, 1, 3, 5, 6, [skills.dodge, skills.rightStuff, skills.sideStep, skills.stunty, skills.swarming, skills.titchy], "AM", "G"),
+      positional(6, "Underworld Snotling", 15000, 5, 1, 3, 5, 6, [skills.dodge, skills.rightStuff, skills.sideStep, skills.stunty, skills.titchy], "AM", "G"),
       positional(3, "Skaven Clanrat", 50000, 7, 3, 3, 4, 8, [skills.animosity("Underworld Goblin Linemen")], "GM", "AS"),
       positional(1, "Skaven Thrower", 85000, 7, 3, 3, 2, 8, [skills.animosity("Underworld Goblin Linemen"), skills.pass, skills.sureHands], "GMP", "AS"),
       positional(1, "Gutter Runner", 85000, 9, 2, 2, 4, 8, [skills.animosity("Underworld Goblin Linemen"), skills.dodge], "AGM", "PS"),
