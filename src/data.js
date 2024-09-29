@@ -72,6 +72,7 @@ const skills = {
   bloodlust: (x) => "Bloodlust (" + x + "+)",
   bombardier: "Bombardier",
   boneHead: "Bone Head",
+  breatheFire: "Breathe Fire",
   chainsaw: "Chainsaw",
   decay: "Decay",
   drunkard: "Drunkard",
@@ -108,6 +109,7 @@ const rosterSpecialRules = {
   briberyAndCorruption: "Bribery and Corruption",
   elvenKingdomsLeague: "Elven Kingdoms League",
   favouredOf: "Favoured of...",
+  favouredOfHashut: "Favoured of Hashut",
   favouredOfNurgle: "Favoured of Nurgle",
   favouredOfKhorne: "Favoured of Khorne",
   halflingThimbleCup: "Halfling Thimble Cup",
@@ -182,7 +184,7 @@ const rosters = [
     true,
   ),
   roster(
-    "Amazon of legend",
+    "Amazon of Legend",
     [
       positional(16, "Linewoman", 50000, 6, 3, 3, 4, 8, [skills.dodge], "G", "AS"),
       positional(2, "Thrower", 75000, 6, 3, 3, 3, 8, [skills.dodge, skills.pass], "GP", "AS"),
@@ -223,9 +225,24 @@ const rosters = [
   roster(
     "Chaos Dwarf",
     [
-      positional(16, "Hobgoblin", 40000, 6, 3, 3, 4, 8, [], "G", "AS"),
-      positional(6, "Blocker", 70000, 4, 3, 4, 6, 10, [skills.block, skills.tackle, skills.thickSkull], "GS", "AM"),
-      positional(2, "Bull Centaur", 130000, 6, 4, 4, 6, 10, [skills.sprint, skills.sureFeet, skills.thickSkull], "GS", "A"),
+      positional(16, "Hobgoblin Lineman", 40000, 6, 3, 3, 4, 8, [], "G", "AS"),
+      positional(2, "Hobgoblin Sneaky Stabba", 70000, 6, 3, 3, 5, 8, [skills.shadowing, skills.stab], "G", "AS"),
+      positional(4, "Chaos Dwarf Blocker", 70000, 4, 3, 4, 6, 10, [skills.block, skills.ironHardSkin, skills.thickSkull], "GS", "AM"),
+      positional(2, "Chaos Dwarf Flamesmith", 80000, 5, 3, 4, 6, 10, [skills.brawler, skills.breatheFire, skills.disturbingPresence, skills.thickSkull], "GS", "AM"),
+      positional(2, "Bull Centaur Blitzer", 130000, 6, 4, 4, 6, 10, [skills.sprint, skills.sureFeet, skills.thickSkull], "GS", "AM"),
+      positional(1, "Minotaur", 150000, 5, 5, 4, null, 9, [skills.frenzy, skills.horns, skills.loner(4), skills.mightyBlow(1), skills.thickSkull, skills.unchannelledFury], "S", "AGM")
+    ],
+    70000,
+    1,
+    [rosterSpecialRules.badlandsBrawl, rosterSpecialRules.favouredOfHashut],
+    true,
+  ),
+  roster(
+    "Chaos Dwarf of Legend",
+    [
+      positional(16, "Hobgoblin Lineman", 40000, 6, 3, 3, 4, 8, [], "G", "AS"),
+      positional(6, "Chaos Dwarf Blocker", 70000, 4, 3, 4, 6, 10, [skills.block, skills.tackle, skills.thickSkull], "GS", "AM"),
+      positional(2, "Bull Centaur Blitzer", 130000, 6, 4, 4, 6, 10, [skills.sprint, skills.sureFeet, skills.thickSkull], "GS", "A"),
       positional(1, "Enslaved Minotaur", 150000, 5, 5, 4, null, 9, [skills.animalSavagery, skills.frenzy, skills.horns, skills.loner(4), skills.mightyBlow(1), skills.thickSkull], "S", "AGM")
     ],
     70000,
@@ -351,7 +368,7 @@ const rosters = [
     true,
   ),
   roster(
-    "High Elf",
+    "High Elf of Legend",
     [
       positional(16, "Lineman", 70000, 6, 3, 2, 4, 9, [], "AG", "PS"),
       positional(2, "Thrower", 100000, 6, 3, 2, 2, 9, [skills.cloudBurster, skills.pass, skills.safePass], "AGP", "S"),
@@ -448,7 +465,7 @@ const rosters = [
     true,
   ),
   roster(
-    "Norse of legend",
+    "Norse of Legend",
     [
       positional(12, "Lineman", 50000, 6, 3, 3, 4, 8, [skills.block], "G", "AS"),
       positional(2, "Thrower", 70000, 6, 3, 3, 3, 8, [skills.block, skills.pass], "GP", "AS"),
@@ -579,7 +596,7 @@ const rosters = [
     true,
   ),
   roster(
-    "Tomb Kings",
+    "Tomb Kings of Legend",
     [
       positional(16, "Skeleton", 40000, 5, 3, 4, 6, 8, [skills.regeneration, skills.thickSkull], "G", "AS"),
       positional(2, "Anointed Thrower", 70000, 6, 3, 4, 3, 8, [skills.pass, skills.regeneration, skills.sureHands, skills.thickSkull], "GP", "A"),
@@ -623,7 +640,7 @@ const rosters = [
     true,
   ),
   roster(
-    "Vampire of legend",
+    "Vampire of Legend",
     [
       positional(12, "Thrall", 40000, 6, 3, 3, 5, 8, [], "G", "AS"),
       positional(6, "Vampire", 110000, 6, 4, 2, 3, 9, [skills.animalSavagery, skills.hypnoticGaze, skills.regeneration], "AGS", "P")
@@ -697,9 +714,12 @@ const starPlayerSpecialRules = {
   swiftAsTheBreeze: "Swift as the Breeze",
   tastyMorsel: "Tasty Morsel",
   theBallista: "The Ballista",
+  thenIStartedBlastin: "Then I Started Blastin'!",
   thinkingMansTroll: "Thinking Man's Troll",
+  // toxinConnoisseur: "Toxin Connoisseur",
   twoForOne: "Two for One",
   treacherous: "Treacherous",
+  unstoppableMomentum: "Unstoppable Momentum",
   watchOut: "Watch Out!",
   whirlingDervish: "Whirling Dervish",
   wisdomOfTheWhiteDwarf: "Wisdom of the White Dwarf",
@@ -736,6 +756,7 @@ const starPlayers = [
   starPlayer("Grombrindal, the White Dwarf", 5, 3, 3, 4, 10, [skills.block, skills.dauntless, skills.loner(4), skills.mightyBlow(1), skills.standFirm, skills.thickSkull], 210000, [rosterSpecialRules.halflingThimbleCup, rosterSpecialRules.oldWorldClassic, rosterSpecialRules.lustrianSuperleague, rosterSpecialRules.worldsEdgeSuperleague], [starPlayerSpecialRules.wisdomOfTheWhiteDwarf]),
   starPlayer("Hakflem Skuttlespike", 9, 3, 2, 3, 8, [skills.dodge, skills.extraArms, skills.loner(4), skills.prehensileTail, skills.twoHeads], 210000, [rosterSpecialRules.favouredOf, rosterSpecialRules.underworldChallenge], [starPlayerSpecialRules.treacherous]),
   starPlayer("Helmut Wulf", 6, 3, 3, null, 9, [skills.chainsaw, skills.loner(4), skills.pro, skills.secretWeapon, skills.standFirm], 140000, [rosterSpecialRules.any], [starPlayerSpecialRules.oldPro]),
+  starPlayer("H'thark the Unstoppable", 6, 6, 4, 6, 10, [skills.block, skills.breakTackle, skills.defensive, skills.juggernaut, skills.loner(4), skills.sprint, skills.sureFeet, skills.thickSkull], 300000, [rosterSpecialRules.badlandsBrawl, rosterSpecialRules.favouredOfHashut], [starPlayerSpecialRules.unstoppableMomentum]),
   starPlayer("Ivan 'The Animal' Deathshroud", 6, 4, 4, 5, 9, [skills.block, skills.disturbingPresence, skills.juggernaut, skills.loner(4), skills.regeneration, skills.stripBall, skills.tackle], 190000, [rosterSpecialRules.sylvanianSpotlight], [starPlayerSpecialRules.dwarfenScourge]),
   starPlayer("Ivar Eriksson", 6, 4, 3, 4, 9, [skills.block, skills.guard, skills.loner(3), skills.tackle], 245000, [rosterSpecialRules.oldWorldClassic], [starPlayerSpecialRules.raidingParty]),
   starPlayer("Jordell Freshbreeze", 8, 3, 1, 3, 8, [skills.block, skills.divingCatch, skills.dodge, skills.leap, skills.loner(3), skills.sideStep], 250000, [rosterSpecialRules.elvenKingdomsLeague], [starPlayerSpecialRules.swiftAsTheBreeze]),
@@ -750,6 +771,7 @@ const starPlayers = [
   starPlayer("Morg 'n' Thorg", 6, 6, 3, 4, 11, [skills.block, skills.loner(4), skills.mightyBlow(2), skills.thickSkull, skills.throwTeamMate], 380000, [rosterSpecialRules.badlandsBrawl, rosterSpecialRules.elvenKingdomsLeague, rosterSpecialRules.halflingThimbleCup, rosterSpecialRules.lustrianSuperleague, rosterSpecialRules.oldWorldClassic, rosterSpecialRules.underworldChallenge, rosterSpecialRules.worldsEdgeSuperleague, rosterSpecialRules.favouredOf], [starPlayerSpecialRules.theBallista]),
   starPlayer("Nobbla Blackwart", 6, 2, 3, null, 8, [skills.block, skills.chainsaw, skills.dodge, skills.loner(4), skills.secretWeapon, skills.stunty], 120000, [rosterSpecialRules.badlandsBrawl, rosterSpecialRules.underworldChallenge], [starPlayerSpecialRules.kickEmWhileTheyreDown]),
   starPlayer("Puggy Baconbreath", 5, 3, 3, 4, 7, [skills.block, skills.dodge, skills.loner(3), skills.nervesOfSteel, skills.rightStuff, skills.stunty], 120000, [rosterSpecialRules.halflingThimbleCup, rosterSpecialRules.oldWorldClassic], [starPlayerSpecialRules.halflingLuck]),
+  // starPlayer("Rashnak Backstabber", 6, 3, 3, 5, 8, [skills.dodge, skills.loner(4), skills.sideStep, skills.sneakyGit, skills.stab], 130000, [rosterSpecialRules.badlandsBrawl, rosterSpecialRules.favouredOfHashut], [starPlayerSpecialRules.toxinConnoisseur]),
   starPlayer("Ripper Bolgroth", 4, 6, 5, 4, 10, [skills.grab, skills.loner(4), skills.mightyBlow(1), skills.regeneration, skills.throwTeamMate], 250000, [rosterSpecialRules.badlandsBrawl, rosterSpecialRules.underworldChallenge], [starPlayerSpecialRules.thinkingMansTroll]),
   starPlayer("Rodney Roachbait", 6, 2, 3, 4, 7, [skills.catch, skills.divingCatch, skills.jumpUp, skills.loner(4), skills.onTheBall, skills.sideStep, skills.stunty, skills.wrestle], 70000, [rosterSpecialRules.halflingThimbleCup], [starPlayerSpecialRules.catchOfTheDay]),
   starPlayer("Rowana Forestfoot", 6, 3, 3, 4, 8, [skills.dodge, skills.dumpOff, skills.guard, skills.horns, skills.jumpUp, skills.leap, skills.loner(4)], 160000, [rosterSpecialRules.halflingThimbleCup], [starPlayerSpecialRules.boundingLeap]),
@@ -767,6 +789,7 @@ const starPlayers = [
   starPlayer("Willow Rosebark", 5, 4, 3, 6, 9, [skills.dauntless, skills.loner(4), skills.sideStep, skills.thickSkull], 150000, [rosterSpecialRules.elvenKingdomsLeague], [starPlayerSpecialRules.indomitable]),
   starPlayer("Withergrasp Doubledrool", 6, 3, 4, 4, 9, [skills.loner(4), skills.prehensileTail, skills.tackle, skills.tentacles, skills.twoHeads, skills.wrestle], 170000, [rosterSpecialRules.favouredOf], [starPlayerSpecialRules.watchOut]),
   starPlayer("Zolcath the Zoat", 5, 5, 4, 5, 10, [skills.disturbingPresence, skills.juggernaut, skills.loner(4), skills.mightyBlow(1), skills.prehensileTail, skills.regeneration, skills.sureFeet], 230000, [rosterSpecialRules.lustrianSuperleague, rosterSpecialRules.elvenKingdomsLeague], [starPlayerSpecialRules.excuseMeAreYouAZoat]),
+  starPlayer("Zzharg Madeye", 4, 4, 4, 3, 10, [skills.cannoneer, skills.hailMaryPass, skills.loner(4), skills.nervesOfSteel, skills.secretWeapon, skills.sureHands, skills.thickSkull], 130000, [rosterSpecialRules.badlandsBrawl, rosterSpecialRules.favouredOfHashut], [starPlayerSpecialRules.thenIStartedBlastin]),
 ];
 
 
