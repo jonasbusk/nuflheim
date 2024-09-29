@@ -1,13 +1,13 @@
 {
   "files": {
     "main.css": "/nuflheim/static/css/main.5205bbe1.css",
-    "main.js": "/nuflheim/static/js/main.898d82eb.js",
+    "main.js": "/nuflheim/static/js/main.78fc3f8a.js",
     "index.html": "/nuflheim/index.html",
     "main.5205bbe1.css.map": "/nuflheim/static/css/main.5205bbe1.css.map",
-    "main.898d82eb.js.map": "/nuflheim/static/js/main.898d82eb.js.map"
+    "main.78fc3f8a.js.map": "/nuflheim/static/js/main.78fc3f8a.js.map"
   },
   "entrypoints": [
     "static/css/main.5205bbe1.css",
-    "static/js/main.898d82eb.js"
+    "static/js/main.78fc3f8a.js"
   ]
 }
